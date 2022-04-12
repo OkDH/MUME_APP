@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:mume/AppConfig.dart';
+import 'package:mume/config.dart';
 import 'package:retrofit/http.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl: kReleaseMode ? AppConfig.webViewUrl : AppConfig.testUrl)
+@RestApi(baseUrl: kReleaseMode ? Config.webViewUrl : Config.testUrl)
 abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 

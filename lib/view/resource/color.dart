@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ColorManager {
+class MyColor {
   static const Color primary = Color(_purple);
   static const Color onPrimary = Color(_white);
   static const Color background = Color(_grayLight);

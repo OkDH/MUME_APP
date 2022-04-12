@@ -1,20 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mume/AppConfig.dart';
+import 'package:mume/config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mume/View/PageAsk.dart';
-import 'package:mume/View/colors.dart';
+import 'package:mume/model/data_source/remote/api_client.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../api_client.dart';
 import 'PageAsk2.dart';
 
 class MyWebView extends StatefulWidget {
@@ -123,7 +119,7 @@ class MyWebViewState extends State<MyWebView> {
           children: [
             Expanded(
               child: WebView(
-                initialUrl: AppConfig.getWebViewUrl(),
+                initialUrl: Config.getWebViewUrl(),
                 javascriptMode: JavascriptMode.unrestricted,
                 javascriptChannels: {
                   _getFcmToken(), _goAskPageChannel()
@@ -213,7 +209,7 @@ class MyWebViewState extends State<MyWebView> {
 
   void _initAD() {
     _bannerAd = BannerAd(
-      adUnitId: AppConfig.getAdUnitId(),
+      adUnitId: Config.getAdUnitId(),
       size: AdSize.banner,
       request: const AdRequest(),
       listener: BannerAdListener(

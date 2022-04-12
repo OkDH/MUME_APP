@@ -5,10 +5,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/smtp_server.dart';
-import 'package:mume/View/colors.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:mailer/mailer.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mume/view/resource/color.dart';
 
 class PageAsk2 extends StatefulWidget {
   const PageAsk2({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class PageAsk2State extends State<PageAsk2> {
           context: context,
           removeTop: true,
           child: Container(
-            color: ColorManager.onPrimary,
+            color: MyColor.onPrimary,
             child: Scaffold(
               // bottomSheet: _bottomSheet(),
               resizeToAvoidBottomInset: true,
@@ -104,8 +104,8 @@ class PageAsk2State extends State<PageAsk2> {
                             child: TextButton(
                                 onPressed: () => _showSelectImageSourceSheet(context),
                                 child: _file == null
-                                    ? const Text("이미지 선택", style: TextStyle(color: ColorManager.accent, fontWeight: FontWeight.bold, fontSize: 18),)
-                                    : Text(_file!.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: ColorManager.textOnWhite, fontSize: 18,),)
+                                    ? const Text("이미지 선택", style: TextStyle(color: MyColor.accent, fontWeight: FontWeight.bold, fontSize: 18),)
+                                    : Text(_file!.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: MyColor.textOnWhite, fontSize: 18,),)
                             ),
                           ),
                         ),
@@ -133,10 +133,10 @@ class PageAsk2State extends State<PageAsk2> {
                         child: Container(
                           width: double.infinity,
                           height: double.infinity,
-                          color: ColorManager.onPrimary.withOpacity(0.5),
+                          color: MyColor.onPrimary.withOpacity(0.5),
                             child: const Center(
                               child: CircularProgressIndicator(
-                                color: ColorManager.primary,
+                                color: MyColor.primary,
                               ),
                             )
                           )
@@ -224,9 +224,9 @@ class PageAsk2State extends State<PageAsk2> {
                 offset: Offset(0.0, 0.75)
             )
           ],
-          color: ColorManager.onPrimary
+          color: MyColor.onPrimary
       ),
-      // color: ColorManager.onPrimary,
+      // color: MyColor.onPrimary,
       child: Row(
         children: [
           IconButton(
@@ -234,7 +234,7 @@ class PageAsk2State extends State<PageAsk2> {
               if(_isLoading) return;
               Navigator.pop(context);
             } ,
-            icon: const Icon(Icons.arrow_back, color: ColorManager.primary),
+            icon: const Icon(Icons.arrow_back, color: MyColor.primary),
             padding: const EdgeInsets.all(20),
           ),
           const Spacer(),
@@ -242,7 +242,7 @@ class PageAsk2State extends State<PageAsk2> {
             padding: const EdgeInsets.fromLTRB(0,0,14,0),
             child: TextButton(
               onPressed: _sendEmailSMTP,
-              child: const Text("보내기", style: TextStyle(color: ColorManager.primary, fontSize: 18, fontWeight: FontWeight.bold),),
+              child: const Text("보내기", style: TextStyle(color: MyColor.primary, fontSize: 18, fontWeight: FontWeight.bold),),
             ),
           )
         ],
@@ -270,7 +270,7 @@ class PageAsk2State extends State<PageAsk2> {
   }) {
     return Padding(
       padding: EdgeInsets.fromLTRB(paddingL, paddingT, paddingR, paddingB),
-      child: Text(text, style: TextStyle(fontSize: fontSize, color: ColorManager.textOnWhite, fontWeight: fontWeight),),
+      child: Text(text, style: TextStyle(fontSize: fontSize, color: MyColor.textOnWhite, fontWeight: fontWeight),),
     );
   }
 
@@ -295,28 +295,28 @@ class PageAsk2State extends State<PageAsk2> {
         maxLines: isExpanded ? null : 1,
         keyboardType: inputType,
         controller: controller,
-        cursorColor: ColorManager.primary,
+        cursorColor: MyColor.primary,
         decoration:  InputDecoration(
             contentPadding: EdgeInsets.fromLTRB(24, alignVertical == TextAlignVertical.top ? 24 : 0, 24, alignVertical == TextAlignVertical.top ? 24 : 0),
             hintText: hint,
-            hintStyle: TextStyle(color: ColorManager.textOnWhite.withOpacity(0.5)),
+            hintStyle: TextStyle(color: MyColor.textOnWhite.withOpacity(0.5)),
             errorStyle: const TextStyle(fontSize: 18.0),
             filled: true,
             fillColor: Colors.white,
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.only(topLeft: Radius.zero, topRight: Radius.zero, bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5), ),
-              borderSide: BorderSide(color: ColorManager.boxBorder,),
+              borderSide: BorderSide(color: MyColor.boxBorder,),
             ),
             focusedBorder:  OutlineInputBorder(
                 borderRadius: const BorderRadius.only(topLeft: Radius.zero, topRight: Radius.zero, bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5), ),
                 borderSide: BorderSide(
-                    color: ColorManager.primary.withOpacity(0.5), width: 3.0
+                    color: MyColor.primary.withOpacity(0.5), width: 3.0
                 )),
             border: const OutlineInputBorder(
                 borderRadius: BorderRadius.only(topLeft: Radius.zero, topRight: Radius.zero, bottomLeft: Radius.circular(5), bottomRight: Radius.circular(5), ),
-                borderSide: BorderSide(color: ColorManager.textOnWhite, width: 1.0))
+                borderSide: BorderSide(color: MyColor.textOnWhite, width: 1.0))
             ),
-        style: const TextStyle(color: ColorManager.textOnWhite),
+        style: const TextStyle(color: MyColor.textOnWhite),
         onChanged: (text) =>
           inputType == TextInputType.emailAddress
               ? _emailText = text
@@ -340,7 +340,7 @@ class PageAsk2State extends State<PageAsk2> {
             underline: DropdownButtonHideUnderline(child: Container()),
             items: _categories.map(
                     (value) => DropdownMenuItem(
-                  child: Text(value, style: const TextStyle(color: ColorManager.textOnWhite),),
+                  child: Text(value, style: const TextStyle(color: MyColor.textOnWhite),),
                   value: value,)
             ).toList(),
             onChanged: (value) => setState(() {
@@ -372,7 +372,7 @@ class PageAsk2State extends State<PageAsk2> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5.0),
             color: const Color(0xffffffff),
-            border: Border.all(width: 1.0, color: ColorManager.boxBorder),
+            border: Border.all(width: 1.0, color: MyColor.boxBorder),
           ),
           child: Center(child: Row(
             mainAxisSize: MainAxisSize.max,
@@ -382,7 +382,7 @@ class PageAsk2State extends State<PageAsk2> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: ColorManager.textOnWhite
+                    color: MyColor.textOnWhite
                 ),
               ),
             ],
@@ -406,7 +406,7 @@ class PageAsk2State extends State<PageAsk2> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           color: const Color(0xffffffff),
-          border: Border.all(width: 1.0, color: ColorManager.boxBorder),
+          border: Border.all(width: 1.0, color: MyColor.boxBorder),
           boxShadow: const [
             BoxShadow(
               color: Color(0x16000000),
@@ -427,7 +427,7 @@ class PageAsk2State extends State<PageAsk2> {
             topRight: Radius.circular(5.0),
           ),
           color: const Color(0xfff8f8fc),
-          border: Border.all(width: 1.0, color: ColorManager.boxBorder),
+          border: Border.all(width: 1.0, color: MyColor.boxBorder),
         ),
         child: Center(
           child: Row(
@@ -438,7 +438,7 @@ class PageAsk2State extends State<PageAsk2> {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: ColorManager.primary
+                    color: MyColor.primary
                 ),
               )
             ],
@@ -491,8 +491,8 @@ class PageAsk2State extends State<PageAsk2> {
           actionsPadding: EdgeInsets.zero,
           title: Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-            color: ColorManager.primary,
-              child: Text(title, style: const TextStyle(color: ColorManager.onPrimary),)
+            color: MyColor.primary,
+              child: Text(title, style: const TextStyle(color: MyColor.onPrimary),)
           ),
           content: SingleChildScrollView(
             child: ListBody(
@@ -511,12 +511,12 @@ class PageAsk2State extends State<PageAsk2> {
                 children: [
                   const Spacer(),
                   TextButton(
-                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(ColorManager.primaryButton), padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(12, 10, 12, 10))),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColor.primaryButton), padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(12, 10, 12, 10))),
                     onPressed: (){
                       func?.call();
                       Navigator.of(context).pop();
                     },
-                    child: const Text("Ok", style: TextStyle(color: ColorManager.onPrimary, fontSize: 20),),
+                    child: const Text("Ok", style: TextStyle(color: MyColor.onPrimary, fontSize: 20),),
                   ),
                 ],
               )

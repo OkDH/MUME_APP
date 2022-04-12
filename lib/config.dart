@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-class AppConfig {
+class Config {
   ///url
   static const webViewUrl = "http://mume.ocko.co.kr";
   // static const testUrl = "http://mume.ocko.co.kr:8088/dev";

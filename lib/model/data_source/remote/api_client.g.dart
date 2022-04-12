@@ -10,7 +10,7 @@ part of 'api_client.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= kReleaseMode ? AppConfig.webViewUrl : AppConfig.testUrl;
+    baseUrl ??= kReleaseMode ? Config.webViewUrl : Config.testUrl;
   }
 
   final Dio _dio;

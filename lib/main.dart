@@ -3,9 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:mume/View/PageAsk.dart';
-import 'View/PageAsk2.dart';
-import 'View/PageHome.dart';
+import 'package:mume/view/page/legacy/PageAsk2.dart';
+import 'package:mume/view/page/legacy/PageHome.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

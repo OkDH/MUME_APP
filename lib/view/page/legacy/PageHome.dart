@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
-import 'package:mume/View/MyWebView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'colors.dart';
+import 'package:mume/view/page/legacy/MyWebView.dart';
+import 'package:mume/view/resource/color.dart';
 
 class PageHome extends StatefulWidget {
   final String fcm;
@@ -24,7 +24,7 @@ class _PageHomeState extends State<PageHome> {
         removeTop: true,
         child: Container(
           padding: EdgeInsets.fromLTRB(0, MediaQuery.of(context).padding.top, 0, MediaQuery.of(context).padding.bottom),
-          color: ColorManager.onPrimary,
+          color: MyColor.onPrimary,
           child: Scaffold(
             body: Center(child: MyWebView(fcmToken: widget.fcm)),
           ),
