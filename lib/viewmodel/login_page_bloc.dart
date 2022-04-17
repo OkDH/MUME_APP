@@ -1,10 +1,9 @@
-import 'package:vocas_jp/model/dto/response.dart';
-import 'package:vocas_jp/model/dto/user.dart';
-import 'package:vocas_jp/model/enums/login_type.dart';
-import 'package:vocas_jp/model/repository/login_repository.dart';
-import 'package:vocas_jp/view/page/home/home_page.dart';
-import 'package:vocas_jp/viewModel/base_bloc.dart';
-import 'package:vocas_jp/viewModel/base_state.dart';
+import 'package:mume/enums/login_type.dart';
+import 'package:mume/model/dto/response.dart';
+import 'package:mume/model/dto/user.dart';
+import 'package:mume/model/repository/login_repository.dart';
+import 'package:mume/view/page/home_page.dart';
+import 'package:mume/viewmodel/base_bloc.dart';
 
 class LoginPageBloc extends BaseBloc{
   final LoginRepository _loginRepository;
@@ -27,11 +26,6 @@ class LoginPageBloc extends BaseBloc{
   }
 
   @override
-  onFailPageResult(Exception? error) {
-
-  }
-
-  @override
   onPageResult(Object? args) {
 
   }
@@ -41,8 +35,8 @@ class LoginPageBloc extends BaseBloc{
     _loginRepository.login(type)
         .then((response) => successValidation(response))
         .then((user) => saveSession(user))
-        .then((user) => emit(GoNextPage(routeName: HomePage.routeName, navigateType: NavigateType.popAndPush)))
-        .catchError((e) => emit(Fail(data: e)));
+        .then((user) => emit(NextPage(routeName: HomePage.routeName, navigateType: NavigateType.popAndPush)))
+        .catchError((e) => emit(ShowAlert()));
   }
 
   User successValidation(Response<User> rsp) {

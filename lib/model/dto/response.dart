@@ -1,5 +1,5 @@
-import 'package:vocas_jp/model/dto/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mume/model/dto/user.dart';
 
 part 'response.g.dart';
 

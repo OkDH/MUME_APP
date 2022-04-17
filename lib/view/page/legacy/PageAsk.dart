@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mailer/smtp_server.dart';
-// import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:mailer/mailer.dart';
-import 'package:mume/View/colors.dart';
+import 'package:mume/view/resource/color.dart';
 
 class PageAsk extends StatefulWidget {
   const PageAsk({Key? key}) : super(key: key);
@@ -42,7 +39,7 @@ class PageAskState extends State<PageAsk> {
         context: context,
         removeTop: true,
         child: Container(
-          color: ColorManager.onPrimary,
+          color: MyColor.onPrimary,
           child: Scaffold(
             resizeToAvoidBottomInset: true,
             body: Column(
@@ -60,14 +57,14 @@ class PageAskState extends State<PageAsk> {
                             offset: Offset(0.0, 0.75)
                         )
                       ],
-                      color: ColorManager.onPrimary
+                      color: MyColor.onPrimary
                   ),
-                  // color: ColorManager.onPrimary,
+                  // color: MyColor.onPrimary,
                   child: Row(
                     children: [
                       IconButton(
                         onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back, color: ColorManager.primary),
+                        icon: const Icon(Icons.arrow_back, color: MyColor.primary),
                         padding: const EdgeInsets.all(20),
                       )
                     ],
@@ -76,16 +73,16 @@ class PageAskState extends State<PageAsk> {
 
                 const Padding(
                   padding: EdgeInsets.fromLTRB(24, 40, 24, 40),
-                  child: Text("문의하기", style: TextStyle(fontSize: 26, color: ColorManager.textOnWhite),),
+                  child: Text("문의하기", style: TextStyle(fontSize: 26, color: MyColor.textOnWhite),),
                 ),
 
                 // Padding(
                 //   padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
                 //   child: Container(
                 //     decoration: BoxDecoration(
-                //       color: ColorManager.onPrimary,
+                //       color: MyColor.onPrimary,
                 //       borderRadius: BorderRadius.circular(10),
-                //       border: Border.all(color: ColorManager.textOnWhite.withOpacity(0.3)),
+                //       border: Border.all(color: MyColor.textOnWhite.withOpacity(0.3)),
                 //     ),
                 //     child: Column(children: [
                 //       const SizedBox(height: 18,),
@@ -94,14 +91,14 @@ class PageAskState extends State<PageAsk> {
                 //         mainAxisAlignment: MainAxisAlignment.center,
                 //         children: [
                 //         Text("카테고리 선택 후 ", style: TextStyle(
-                //             color: ColorManager.textOnWhite,
+                //             color: MyColor.textOnWhite,
                 //             fontSize: 16),),
                 //           Text("Next", style: TextStyle(
                 //             fontWeight: FontWeight.bold,
-                //               color: ColorManager.primary,
+                //               color: MyColor.primary,
                 //               fontSize: 16),),
                 //           Text(" 버튼을 눌러주세요.", style: TextStyle(
-                //               color: ColorManager.textOnWhite,
+                //               color: MyColor.textOnWhite,
                 //               fontSize: 16),),
                 //       ],),
                 //
@@ -109,7 +106,7 @@ class PageAskState extends State<PageAsk> {
                 //       Container(
                 //         width: double.infinity, height: 3,
                 //         decoration: const BoxDecoration(
-                //           color: ColorManager.primary,
+                //           color: MyColor.primary,
                 //           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(500), bottomRight: Radius.circular(500)),
                 //         )
                 //       )
@@ -119,7 +116,7 @@ class PageAskState extends State<PageAsk> {
 
                 const Padding(
                   padding: EdgeInsets.fromLTRB(24, 0, 24, 10),
-                  child: Text("카테고리", style: TextStyle(fontSize: 20, color: ColorManager.textOnWhite, fontWeight: FontWeight.bold),),
+                  child: Text("카테고리", style: TextStyle(fontSize: 20, color: MyColor.textOnWhite, fontWeight: FontWeight.bold),),
                 ),
 
                 Padding(
@@ -127,8 +124,8 @@ class PageAskState extends State<PageAsk> {
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: ColorManager.onPrimary,
-                      border: Border.all(color: ColorManager.textOnWhite.withOpacity(0.3), width: 1),
+                      color: MyColor.onPrimary,
+                      border: Border.all(color: MyColor.textOnWhite.withOpacity(0.3), width: 1),
                       borderRadius: BorderRadius.circular(10)
                     ),
                     child: Padding(
@@ -139,7 +136,7 @@ class PageAskState extends State<PageAsk> {
                         underline: DropdownButtonHideUnderline(child: Container()),
                         items: _categories.map(
                                 (value) => DropdownMenuItem(
-                                  child: Text(value, style: const TextStyle(color: ColorManager.textOnWhite),),
+                                  child: Text(value, style: const TextStyle(color: MyColor.textOnWhite),),
                                   value: value,)
                         ).toList(),
                         onChanged: (value) => setState(() {
@@ -152,7 +149,7 @@ class PageAskState extends State<PageAsk> {
 
                 const Padding(
                   padding: EdgeInsets.fromLTRB(24, 0, 24, 20),
-                  child: Text("수신 이메일", style: TextStyle(fontSize: 20, color: ColorManager.textOnWhite, fontWeight: FontWeight.bold),),
+                  child: Text("수신 이메일", style: TextStyle(fontSize: 20, color: MyColor.textOnWhite, fontWeight: FontWeight.bold),),
                 ),
                 Expanded(
                   child: Padding(
@@ -160,27 +157,27 @@ class PageAskState extends State<PageAsk> {
                     child: TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       // controller: textController,
-                      cursorColor: ColorManager.primary,
+                      cursorColor: MyColor.primary,
                       decoration:  InputDecoration(
                           hintText: "답변 받으실 이메일을 입력해주세요.",
-                          hintStyle: const TextStyle(color: ColorManager.textOnWhite),
+                          hintStyle: const TextStyle(color: MyColor.textOnWhite),
                           errorStyle: const TextStyle(fontSize: 18.0),
                           filled: true,
                           fillColor: Colors.white,
                           enabledBorder:  OutlineInputBorder(
                             borderRadius:  BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: ColorManager.textOnWhite.withOpacity(0.3),),
+                            borderSide: BorderSide(color: MyColor.textOnWhite.withOpacity(0.3),),
                           ),
                           focusedBorder:  OutlineInputBorder(
                               borderRadius:  BorderRadius.circular(10.0),
                               borderSide: BorderSide(
-                                  color: ColorManager.primary.withOpacity(0.5), width: 3.0
+                                  color: MyColor.primary.withOpacity(0.5), width: 3.0
                               )),
                           border: OutlineInputBorder(
                               borderRadius:  BorderRadius.circular(10.0),
                               borderSide: const BorderSide(
-                                  color: ColorManager.textOnWhite, width: 1.0))),
-                      style: TextStyle(color: ColorManager.textOnWhite.withOpacity(0.3)),
+                                  color: MyColor.textOnWhite, width: 1.0))),
+                      style: TextStyle(color: MyColor.textOnWhite.withOpacity(0.3)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return '필수 작성 항목입니다.';
@@ -193,7 +190,7 @@ class PageAskState extends State<PageAsk> {
 
                 const Padding(
                   padding: EdgeInsets.fromLTRB(24, 0, 24, 20),
-                  child: Text("내용", style: TextStyle(fontSize: 20, color: ColorManager.textOnWhite, fontWeight: FontWeight.bold),),
+                  child: Text("내용", style: TextStyle(fontSize: 20, color: MyColor.textOnWhite, fontWeight: FontWeight.bold),),
                 ),
                 Expanded(
                   child: Padding(
@@ -204,27 +201,27 @@ class PageAskState extends State<PageAsk> {
                       maxLines: null,
                       keyboardType: TextInputType.multiline,
                       controller: textController,
-                      cursorColor: ColorManager.primary,
+                      cursorColor: MyColor.primary,
                       decoration:  InputDecoration(
                           hintText: "내용을 입력해주세요.",
-                          hintStyle: const TextStyle(color: ColorManager.textOnWhite),
+                          hintStyle: const TextStyle(color: MyColor.textOnWhite),
                           errorStyle: const TextStyle(fontSize: 18.0),
                           filled: true,
                           fillColor: Colors.white,
                           enabledBorder:  OutlineInputBorder(
                             borderRadius:  BorderRadius.circular(10.0),
-                            borderSide: BorderSide(color: ColorManager.textOnWhite.withOpacity(0.3),),
+                            borderSide: BorderSide(color: MyColor.textOnWhite.withOpacity(0.3),),
                           ),
                           focusedBorder:  OutlineInputBorder(
                               borderRadius:  BorderRadius.circular(10.0),
                               borderSide: BorderSide(
-                                  color: ColorManager.primary.withOpacity(0.5), width: 3.0
+                                  color: MyColor.primary.withOpacity(0.5), width: 3.0
                               )),
                           border: OutlineInputBorder(
                               borderRadius:  BorderRadius.circular(10.0),
                               borderSide: const BorderSide(
-                                  color: ColorManager.textOnWhite, width: 1.0))),
-                      style: TextStyle(color: ColorManager.textOnWhite.withOpacity(0.3)),
+                                  color: MyColor.textOnWhite, width: 1.0))),
+                      style: TextStyle(color: MyColor.textOnWhite.withOpacity(0.3)),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return '필수 작성 항목입니다.';
@@ -240,12 +237,12 @@ class PageAskState extends State<PageAsk> {
 
                 const Padding(
                   padding: EdgeInsets.fromLTRB(24, 0, 24, 20),
-                  child: Text("이미지 첨부", style: TextStyle(fontSize: 20, color: ColorManager.textOnWhite, fontWeight: FontWeight.bold),),
+                  child: Text("이미지 첨부", style: TextStyle(fontSize: 20, color: MyColor.textOnWhite, fontWeight: FontWeight.bold),),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(24, 0, 24, 20),
                   child: Container(
-                    // color: ColorManager.onPrimary,
+                    // color: MyColor.onPrimary,
                     width: 100,
                     height: 100,
                     decoration: const BoxDecoration(
@@ -256,7 +253,7 @@ class PageAskState extends State<PageAsk> {
                               offset: Offset(0.0, 0.75)
                           )
                         ],
-                        color: ColorManager.onPrimary
+                        color: MyColor.onPrimary
                     ),
                     child: Center(
                       child: Icon(Icons.camera_alt),
@@ -273,9 +270,9 @@ class PageAskState extends State<PageAsk> {
                         // const Spacer(),
                         Expanded(
                           child: TextButton(
-                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(ColorManager.primaryButton), padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(12, 10, 12, 10))),
+                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(MyColor.primaryButton), padding: MaterialStateProperty.all(EdgeInsets.fromLTRB(12, 10, 12, 10))),
                               onPressed: _sendEmail,
-                              child: const Text("Next", style: TextStyle(color: ColorManager.onPrimary, fontSize: 20),),
+                              child: const Text("Next", style: TextStyle(color: MyColor.onPrimary, fontSize: 20),),
                           ),
                         ),
                       ],

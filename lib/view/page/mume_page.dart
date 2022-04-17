@@ -5,27 +5,28 @@ import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/feed_page_bloc.dart';
 import 'package:mume/viewmodel/main_page_bloc.dart';
+import 'package:mume/viewmodel/mume_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
 
-class FeedPage extends StatefulWidget {
-  const FeedPage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (FeedPage).toString();
+class MumePage extends StatefulWidget {
+  const MumePage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (MumePage).toString();
 
   @override
-  State<FeedPage> createState() => _FeedPageState();
+  State<MumePage> createState() => _MumePageState();
 }
 
-class _FeedPageState extends BasePageState<String, FeedPageBloc, FeedPage> {
+class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
 
   @override
-  Widget buildScreen(BuildContext context, Size windowSize) {
+  Widget buildPage(BuildContext context, Size windowSize) {
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(FeedPage.routeName)
+            Text(MumePage.routeName)
           ],
         ),
       ),

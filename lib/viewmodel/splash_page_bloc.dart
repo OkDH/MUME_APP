@@ -1,15 +1,12 @@
-import 'package:vocas_jp/view/page/home/home_page.dart';
-import 'package:vocas_jp/view/page/login/login_page.dart';
-import 'package:vocas_jp/viewModel/base_bloc.dart';
-import 'package:flutter/widgets.dart';
-import 'package:vocas_jp/viewModel/base_state.dart';
+import 'package:mume/view/page/home_page.dart';
+import 'package:mume/viewmodel/base_bloc.dart';
 
 class SplashPageBloc extends BaseBloc<Object>{
 
   @override
   onInitState() {
     Future.delayed(const Duration(milliseconds: 1500), (){
-      emit(GoNextPage(routeName: HomePage.routeName, navigateType: NavigateType.popAndPush));
+      emit(NextPage(routeName: HomePage.routeName, navigateType: NavigateType.popAndPush));
     });
   }
 
@@ -20,11 +17,6 @@ class SplashPageBloc extends BaseBloc<Object>{
 
   @override
   onReceivedArgument(arguments) {
-
-  }
-
-  @override
-  onFailPageResult(Exception? error) {
 
   }
 

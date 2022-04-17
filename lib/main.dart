@@ -1,27 +1,82 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mume/model/repository/login_repository.dart';
+import 'package:mume/view/page/home_page.dart';
 import 'package:mume/view/page/legacy/PageAsk2.dart';
 import 'package:mume/view/page/legacy/PageHome.dart';
+import 'package:mume/view/page/login_page.dart';
+import 'package:mume/view/page/more_page.dart';
+import 'package:mume/view/page/mume_page.dart';
+import 'package:mume/view/page/splash_page.dart';
+import 'package:mume/view/resource/color.dart';
+import 'package:mume/view/resource/sizes.dart';
+import 'package:mume/viewmodel/feed_page_bloc.dart';
+import 'package:mume/viewmodel/home_page_bloc.dart';
+import 'package:mume/viewmodel/login_page_bloc.dart';
+import 'package:mume/viewmodel/main_page_bloc.dart';
+import 'package:mume/viewmodel/more_page_bloc.dart';
+import 'package:mume/viewmodel/mume_page_bloc.dart';
+import 'package:mume/viewmodel/splash_page_bloc.dart';
+import 'package:mume/viewmodel/vr_page_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //TODO 광고 초기화 실패 시 수정 필요 로그 -> analytics event
   MobileAds.instance.initialize()
       .then((_) => debugPrint("ad init success"))
       .catchError((e) => debugPrint("error == ${e.toString()}"));
 
+  //TODO FirebaseMessaging 초기화 실패해도 앱은 실행될 수 있도록 수정 필요, 초기화 실패 시 analytics event 연동
   Firebase.initializeApp()
       .then((_) => FirebaseMessaging.instance.getToken())
-      .then((fcmToken) => runApp(MyApp(fcmToken ?? "")))
+      .then((fcmToken) => runApp(MyApp()))
       .catchError((e) => debugPrint("error == ${e.toString()}"));
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SplashPageBloc>(create: (BuildContext context) => SplashPageBloc(),),
+        BlocProvider<LoginPageBloc>(create: (BuildContext context) => LoginPageBloc(LoginRepository()),),
+        BlocProvider<HomePageBloc>(create: (BuildContext context) => HomePageBloc(),),
+
+        BlocProvider<MainPageBloc>(create: (BuildContext context) => MainPageBloc(),),
+        BlocProvider<FeedPageBloc>(create: (BuildContext context) => FeedPageBloc(),),
+        BlocProvider<MumePageBloc>(create: (BuildContext context) => MumePageBloc(),),
+        BlocProvider<VrPageBloc>(create: (BuildContext context) => VrPageBloc(),),
+        BlocProvider<MorePageBloc>(create: (BuildContext context) => MorePageBloc(),),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: MyColor.background,
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(fixedSize: const Size.fromHeight(Sizes.btnHeight)),
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const SplashPage(),
+        routes: {
+          SplashPage.routeName: (context) => const SplashPage(),
+          LoginPage.routeName: (context) => const LoginPage(),
+          HomePage.routeName: (context) => const HomePage(),
+        },
+      ),
+    );
+  }
+}
+
+//TODO 추후 legacy 삭제
+class MyAppLegacy extends StatelessWidget {
   final String fcmToken;
-  const MyApp(this.fcmToken, {Key? key}) : super(key: key);
+  const MyAppLegacy(this.fcmToken, {Key? key}) : super(key: key);
 
   @override
   StatelessElement createElement() {
@@ -34,7 +89,7 @@ class MyApp extends StatelessWidget {
       provisional: false,
       sound: true,
     ).then((setting) => debugPrint("FirebaseMessaging.instance.requestPermission fcm setting == ${setting.toString()}"))
-    .catchError((e) => debugPrint("FirebaseMessaging.instance.requestPermission error == ${e.toString()}"));
+        .catchError((e) => debugPrint("FirebaseMessaging.instance.requestPermission error == ${e.toString()}"));
 
     return super.createElement();
   }

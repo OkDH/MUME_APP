@@ -1,9 +1,9 @@
-class Images{
-  static const String _root = "images/";
+class Assets{
+  static const String _root = "assets/";
+  static const String _root_logo = "logo/";
   static const String _png = ".png";
   static const String _jpeg = ".jpeg";
 
-  static const String logoImg = "${_root}logo_img$_png";
-  static const String logoText = "${_root}logo_text$_png";
-  static const String background = "${_root}background$_png";
+  static const String logoPrimary = "${_root + _root_logo}logo_primary$_png";
+  static const String logoWhite = "${_root + _root_logo}logo_white$_png";
 }

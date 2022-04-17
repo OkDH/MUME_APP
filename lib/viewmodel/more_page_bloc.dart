@@ -1,7 +1,7 @@
 import 'package:mume/view/page/home_page.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
-class VrPageBloc extends BaseBloc<Object>{
+class MorePageBloc extends BaseBloc<Object>{
 
   @override
   onInitState() {

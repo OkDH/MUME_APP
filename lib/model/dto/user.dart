@@ -1,5 +1,5 @@
-import 'package:vocas_jp/model/enums/login_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mume/enums/login_type.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

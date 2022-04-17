@@ -1,7 +1,7 @@
 import 'package:mume/view/page/home_page.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
-class MainPageBloc extends BaseBloc<Object>{
+class FeedPageBloc extends BaseBloc<Object>{
 
   @override
   onInitState() {

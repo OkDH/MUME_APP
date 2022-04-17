@@ -5,19 +5,20 @@ import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/feed_page_bloc.dart';
 import 'package:mume/viewmodel/main_page_bloc.dart';
+import 'package:mume/viewmodel/more_page_bloc.dart';
 import 'package:mume/viewmodel/mume_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
 import 'package:mume/viewmodel/vr_page_bloc.dart';
 
-class VrPage extends StatefulWidget {
-  const VrPage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (VrPage).toString();
+class MorePage extends StatefulWidget {
+  const MorePage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (MorePage).toString();
 
   @override
-  State<VrPage> createState() => _VrPageState();
+  State<MorePage> createState() => _MorePageState();
 }
 
-class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
+class _MorePageState extends BasePageState<String, MorePageBloc, MorePage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
@@ -27,7 +28,7 @@ class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(VrPage.routeName)
+            Text(MorePage.routeName)
           ],
         ),
       ),

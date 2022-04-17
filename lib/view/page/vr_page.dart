@@ -7,16 +7,17 @@ import 'package:mume/viewmodel/feed_page_bloc.dart';
 import 'package:mume/viewmodel/main_page_bloc.dart';
 import 'package:mume/viewmodel/mume_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
+import 'package:mume/viewmodel/vr_page_bloc.dart';
 
-class MumePage extends StatefulWidget {
-  const MumePage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (MumePage).toString();
+class VrPage extends StatefulWidget {
+  const VrPage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (VrPage).toString();
 
   @override
-  State<MumePage> createState() => _MumePageState();
+  State<VrPage> createState() => _VrPageState();
 }
 
-class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
+class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
@@ -26,7 +27,7 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(MumePage.routeName)
+            Text(VrPage.routeName)
           ],
         ),
       ),
