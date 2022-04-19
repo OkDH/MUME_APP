@@ -28,10 +28,58 @@
 	<string>ca-app-pub-2618229544885366~2770131436</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+    
+    <!--  네이버 로그인   시작   -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>[UrlScheme]</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>naversearchapp</string>
+        <string>naversearchthirdlogin</string>
+    </array>
+    <key>naverServiceAppUrlScheme</key>
+    <string>[UrlScheme]</string>
+    <key>naverConsumerKey</key>
+    <string>[ConsumerKey]</string>
+    <key>naverConsumerSecret</key>
+    <string>[ConsumerSecret]</string>
+    <key>naverServiceAppName</key>
+    <string>[ServiceAppName]</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+        <!--  네이버 로그인을 위해 추가한 것이 아닌 기존에도 있던 것  -->
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+        
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>naver.com</key>
+            <dict>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+            </dict>
+            <key>naver.net</key>
+            <dict>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+        </dict>
+        <!--  네이버 로그인 2   종료   -->
+        
+       </dict>
 	</dict>
 	<key>NSBonjourServices</key>
 	<array>
