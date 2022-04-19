@@ -1,8 +1,8 @@
+import 'package:flutter/widgets.dart';
 import 'package:mume/enums/login_type.dart';
 import 'package:mume/model/dto/response.dart';
 import 'package:mume/model/dto/user.dart';
 import 'package:mume/model/repository/login_repository.dart';
-import 'package:mume/view/page/home_page.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
 class LoginPageBloc extends BaseBloc{
@@ -33,19 +33,22 @@ class LoginPageBloc extends BaseBloc{
   void clickLogin(LoginType type) {
     emit(Loading());
     _loginRepository.login(type)
-        .then((response) => successValidation(response))
-        .then((user) => saveSession(user))
-        .then((user) => emit(NextPage(routeName: HomePage.routeName, navigateType: NavigateType.popAndPush)))
-        .catchError((e) => emit(ShowAlert()));
+        .then((response) => _successValidation(response))
+        .then((user) => _saveSession(user))
+        .then((user) => emit(BackPage()))
+        .catchError((e) {
+            debugPrint("clickLogin error == ${e.toString()}");
+            emit(ShowAlert());
+        });
   }
 
-  User successValidation(Response<User> rsp) {
+  User _successValidation(Response<User> rsp) {
     if(rsp.resultData == null) throw Exception("resultData is null");
 
     return rsp.resultData!;
   }
 
-  User saveSession(User user) {
+  User _saveSession(User user) {
     //TODO save user
 
     return user;

@@ -1,7 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mume/view/componont/button.dart';
+import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
 class MyAlert extends StatelessWidget {
@@ -16,9 +16,21 @@ class MyAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(alert.title),
-      content: Center(
-        child: Text(alert.content),
-      ),
+      content: Text(alert.content),
+      actions: [
+        MyButton(
+          text: Strings.ok,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+        MyButton(
+          text: Strings.cancel,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        ),
+      ],
     );
   }
 }

@@ -56,8 +56,10 @@ dependencies:
   # login
   sign_in_with_apple: ^3.3.0
   google_sign_in: ^5.2.4
+  flutter_naver_login: ^1.4.0
 
-
+  # pair
+  tuple: ^2.0.0
 
 dev_dependencies:
   flutter_test:

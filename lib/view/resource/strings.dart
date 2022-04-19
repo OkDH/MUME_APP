@@ -16,4 +16,6 @@ class Strings {
   static const String pleaseLater = "잠시 후 다시 시도해주세요.";
   static const String ok = "확인";
   static const String cancel = "취소";
+
+  static const String login = "login";
 }

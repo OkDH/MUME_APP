@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mume/enums/navigate_type.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
@@ -89,7 +90,7 @@ class NextPage<A> extends BaseState{
 
   NextPage({
     required this.routeName,
-    this.navigateType,
+    this.navigateType = NavigateType.push,
     this.args,
   });
 
@@ -98,10 +99,7 @@ class NextPage<A> extends BaseState{
 }
 
 
-enum NavigateType {
-  push,
-  popAndPush,
-}
+
 
 class UrlLaunch extends BaseState{
   final String url;
@@ -110,4 +108,13 @@ class UrlLaunch extends BaseState{
 
   @override
   List<Object?> get props => [url];
+}
+
+class BackPage<A> extends BaseState{
+  final A? args;
+
+  BackPage({this.args});
+
+  @override
+  List<Object?> get props => [args];
 }

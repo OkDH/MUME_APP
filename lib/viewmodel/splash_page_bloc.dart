@@ -1,3 +1,4 @@
+import 'package:mume/enums/navigate_type.dart';
 import 'package:mume/view/page/home_page.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
