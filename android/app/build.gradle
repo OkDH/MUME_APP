@@ -84,8 +84,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:multidex:1.0.3'
 
-    //네이버 로그인
-    implementation("com.navercorp.nid:oauth:5.1.0") // jdk 11
+//    //네이버 로그인
+//    implementation("com.navercorp.nid:oauth:5.1.0") // jdk 11
 
 
 }

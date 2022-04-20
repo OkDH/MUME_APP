@@ -22,7 +22,7 @@ class _LoginPageState extends BasePageState<String, LoginPageBloc, LoginPage> {
       body: Column(
         children: [
           const Spacer(),
-          Center(child: Text("login page"),),
+          const Center(child: Text("login page"),),
           const Spacer(),
 
           Visibility(
@@ -31,13 +31,6 @@ class _LoginPageState extends BasePageState<String, LoginPageBloc, LoginPage> {
                 onPressed: () => bloc.clickLogin(LoginType.apple),
                 text: LoginType.apple.name.toUpperCase(),
             ),
-          ),
-
-          const SizedBox(height: 10,),
-
-          MyButton(
-            onPressed: () => bloc.clickLogin(LoginType.google),
-            text: LoginType.google.name.toUpperCase(),
           ),
 
           const SizedBox(height: 10,),

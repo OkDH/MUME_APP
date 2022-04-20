@@ -29,6 +29,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
 
 const _$LoginTypeEnumMap = {
   LoginType.apple: 'apple',
-  LoginType.google: 'google',
   LoginType.naver: 'naver',
+  // LoginType.google: 'google',
 };

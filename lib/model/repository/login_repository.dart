@@ -12,7 +12,10 @@ import 'package:tuple/tuple.dart';
 
 class LoginRepository extends BaseRepository{
   Future<Response<User>> login(LoginType type){
-    return _getPlatformId(type).then((loginTypeAndToken) => _requestLoginToServer(loginTypeAndToken));
+    return _getPlatformId(type).then((loginTypeAndToken) {
+      debugPrint("login _getPlatformId result == $loginTypeAndToken");
+      return _requestLoginToServer(loginTypeAndToken);
+    });
   }
 
   Future<Response<User>> autoLogin(LoginType type){
@@ -21,19 +24,25 @@ class LoginRepository extends BaseRepository{
 
   Future<Tuple2<LoginType, String>> _getPlatformId(LoginType type) {
     if(type == LoginType.apple){
-      return SignInWithApple.getAppleIDCredential(scopes: [AppleIDAuthorizationScopes.email,],)
-          .then((appleResult) => Tuple2(type, appleResult.identityToken!));
-
-    }else if(type == LoginType.google){
-      return GoogleSignIn(scopes: ["email"]).signIn()
-          .then((googleAccount) async => await googleAccount?.authentication)
-          .then((googleAuth) => Tuple2(type, googleAuth!.idToken!));
+      return SignInWithApple.getAppleIDCredential(scopes: [AppleIDAuthorizationScopes.email,],).then((appleResult) {
+          debugPrint("LoginType.apple result == $appleResult");
+          return Tuple2(type, appleResult.userIdentifier!);
+      });
 
     }else if(type == LoginType.naver){
-      return FlutterNaverLogin.logIn()
-          .then((result) => Tuple2(type, result.accessToken.accessToken));
+      return FlutterNaverLogin.logIn().then((result) {
+          debugPrint("LoginType.naver result == $result");
+          return Tuple2(type, result.account.id);
+      });
 
-    }else{
+    }
+    // else if(type == LoginType.google){
+    //   return GoogleSignIn(scopes: ["email"]).signIn()
+    //       .then((googleAccount) async => await googleAccount?.authentication)
+    //       .then((googleAuth) => Tuple2(type, googleAuth!.idToken!));
+    //
+    // }
+    else{
       throw Exception("LoginType에 없는 놈이 들어왔어");
     }
   }
