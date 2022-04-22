@@ -7,7 +7,7 @@ import 'package:mume/config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mume/model/data_source/remote/api_client.dart';
+import 'package:mume/model/data_source/remote/rest_client.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:url_launcher/url_launcher.dart';

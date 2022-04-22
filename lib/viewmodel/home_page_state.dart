@@ -8,12 +8,3 @@ class ChangePage extends BaseState{
   @override
   List<Object?> get props => [index];
 }
-
-class SwipeChangePage extends BaseState{
-  final int index;
-
-  SwipeChangePage(this.index);
-
-  @override
-  List<Object?> get props => [index];
-}

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mume/model/data_source/remote/api_client.dart';
+import 'package:mume/model/data_source/remote/rest_client.dart';
 
 class BaseRepository{
   late RestClient api;

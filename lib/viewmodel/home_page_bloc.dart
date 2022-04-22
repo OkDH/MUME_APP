@@ -25,11 +25,6 @@ class HomePageBloc extends BaseBloc{
 
   }
 
-  void swipePageChanged(int index) {
-    currentPageIndex = index;
-    emit(SwipeChangePage(currentPageIndex));
-  }
-
   void clickBottomMenuItem(int index){
     currentPageIndex = index;
     emit(ChangePage(currentPageIndex));

@@ -4,9 +4,9 @@ import 'package:flutter/foundation.dart';
 
 class Config {
   ///url
-  static const webViewUrl = "http://mume.ocko.co.kr";
-  // static const testUrl = "http://mume.ocko.co.kr:8088/dev";
-  static const testUrl = webViewUrl;
+  static const baseUrl = "http://mume.ocko.co.kr";
+  static const baseUrlTest = "http://mume.ocko.co.kr/dev";
+  static const apiUrl = (kReleaseMode ? baseUrl : baseUrlTest) + "/api";
 
   ///광고
   static const _adAndroid = "ca-app-pub-2618229544885366/3895510849";
@@ -16,9 +16,9 @@ class Config {
 
   static String getWebViewUrl(){
     if(kReleaseMode){
-      return webViewUrl;
+      return baseUrl;
     }else{
-      return testUrl;
+      return baseUrlTest;
     }
   }
 

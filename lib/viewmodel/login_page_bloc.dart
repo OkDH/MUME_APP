@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:mume/enums/login_type.dart';
-import 'package:mume/model/dto/response.dart';
 import 'package:mume/model/dto/user.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
+import 'package:retrofit/retrofit.dart';
 
 class LoginPageBloc extends BaseBloc{
   final LoginRepository _loginRepository;
@@ -42,10 +42,10 @@ class LoginPageBloc extends BaseBloc{
         });
   }
 
-  User _successValidation(Response<User> rsp) {
-    if(rsp.resultData == null) throw Exception("resultData is null");
+  User _successValidation(HttpResponse<User> rsp) {
+    if(rsp.data == null) throw Exception("resultData is null");
 
-    return rsp.resultData!;
+    return rsp.data;
   }
 
   User _saveSession(User user) {

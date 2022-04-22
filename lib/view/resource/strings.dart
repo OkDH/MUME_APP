@@ -18,4 +18,51 @@ class Strings {
   static const String cancel = "취소";
 
   static const String login = "login";
+
+  static const String dji = "DJI";
+  static const String ixic = "IXIC";
+  static const String gspc = "GSPC";
+  static const String sox = "SOX";
+  static const String ymf = "YMF";
+  static const String nqf = "NQF";
+  static const String esf = "ESF";
+  static const String rtyf = "RTYF";
+  static const String krwx = "KRWX";
+  static const String clf = "CLF";
+  static const String gcf = "GCF";
+  static const String sif = "SIF";
+  static const String tnx = "TNX";
+  static const String vix = "VIX";
+  static const String ks11 = "KS11";
+  static const String kq11 = "KQ11";
+  static const String cnss = "CNSS";
+  static const String n225 = "N225";
+  static const String stoxx = "STOXX";
+  static const String btckrw = "BTCKRW";
+
+  static const String drn = "DRN";
+  static const String tna = "TNA";
+  static const String midu = "MIDU";
+  static const String dusl = "DUSL";
+  static const String dpst = "DPST";
+  static const String retl = "RETL";
+  static const String udow = "UDOW";
+  static const String fngu = "FNGU";
+  static const String pill = "PILL";
+  static const String utsl = "UTSL";
+  static const String bnku = "BNKU";
+  static const String hibl = "HIBL";
+  static const String labu = "LABU";
+  static const String webl = "WEBL";
+  static const String nail = "NAIL";
+  static const String dfen = "DFEN";
+  static const String soxl = "SOXL";
+  static const String tpor = "TPOR";
+  static const String want = "WANT";
+  static const String fas = "FAS";
+  static const String tqqq = "TQQQ";
+  static const String cure = "CURE";
+  static const String tecl = "TECL";
+  static const String bulz = "BULZ";
+  static const String upro = "UPRO";
 }

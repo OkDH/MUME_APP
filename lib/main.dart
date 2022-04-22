@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mume/model/repository/login_repository.dart';
+import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/view/page/home_page.dart';
 import 'package:mume/view/page/legacy/PageAsk2.dart';
 import 'package:mume/view/page/legacy/PageHome.dart';
 import 'package:mume/view/page/login_page.dart';
-import 'package:mume/view/page/more_page.dart';
-import 'package:mume/view/page/mume_page.dart';
 import 'package:mume/view/page/splash_page.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<LoginPageBloc>(create: (BuildContext context) => LoginPageBloc(LoginRepository()),),
         BlocProvider<HomePageBloc>(create: (BuildContext context) => HomePageBloc(),),
 
-        BlocProvider<MainPageBloc>(create: (BuildContext context) => MainPageBloc(),),
+        BlocProvider<MainPageBloc>(create: (BuildContext context) => MainPageBloc(MarketIndexRepository()),),
         BlocProvider<FeedPageBloc>(create: (BuildContext context) => FeedPageBloc(),),
         BlocProvider<MumePageBloc>(create: (BuildContext context) => MumePageBloc(),),
         BlocProvider<VrPageBloc>(create: (BuildContext context) => VrPageBloc(),),
