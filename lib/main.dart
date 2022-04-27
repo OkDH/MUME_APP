@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:mume/model/repository/account_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/view/page/home_page.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
 
         BlocProvider<MainPageBloc>(create: (BuildContext context) => MainPageBloc(MarketIndexRepository()),),
         BlocProvider<FeedPageBloc>(create: (BuildContext context) => FeedPageBloc(),),
-        BlocProvider<MumePageBloc>(create: (BuildContext context) => MumePageBloc(),),
+        BlocProvider<MumePageBloc>(create: (BuildContext context) => MumePageBloc(AccountRepository()),),
         BlocProvider<VrPageBloc>(create: (BuildContext context) => VrPageBloc(),),
         BlocProvider<MorePageBloc>(create: (BuildContext context) => MorePageBloc(),),
       ],

@@ -114,6 +114,10 @@ abstract class BasePageState<A extends Object, B extends BaseBloc, T extends Sta
           .then((ok) => ok? state.url : throw Exception())
           .then((url) => launch(url))
           .catchError((e) => debugPrint("launch error == ${e.toString()}"));
+
+    }else if(state is BackPage){
+      Navigator.pop(context, state.args);
+
     }
   }
 

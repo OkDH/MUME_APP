@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mume/view/componont/button.dart';
+import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
@@ -24,10 +25,15 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(MumePage.routeName),
-            MyButton(
-                onPressed: () => bloc.clickLogin(),
-                text: Strings.login
-            )
+
+            RequireLoginWidget(
+                bloc: bloc,
+                intendLoginWidget: MyButton(
+                    onPressed: () => bloc.clickLogin(),
+                    text: Strings.login
+                ),
+                child: Text("로그인 성공!!")
+            ),
           ],
         ),
       ),

@@ -22,4 +22,9 @@ class FeedPageBloc extends BaseBloc<Object>{
   onDispose() {
 
   }
+
+  @override
+  Future<bool> showLoginView() {
+    return Future.value(false);
+  }
 }

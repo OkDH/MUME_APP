@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:mume/enums/login_type.dart';
+import 'package:mume/model/dto/oauth_token.dart';
 import 'package:mume/model/dto/user.dart';
 import 'package:mume/model/repository/base_repository.dart';
 import 'package:retrofit/retrofit.dart';
@@ -9,15 +10,15 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:tuple/tuple.dart';
 
 class LoginRepository extends BaseRepository{
-  Future<HttpResponse<User>> login(LoginType type){
+  Future<HttpResponse<OAuthToken>> signUpOrSignIn(LoginType type){
     return _getPlatformId(type).then((loginTypeAndToken) {
       debugPrint("login _getPlatformId result == $loginTypeAndToken");
       return _requestLoginToServer(loginTypeAndToken);
     });
   }
 
-  Future<HttpResponse<User>> autoLogin(LoginType type){
-    return Future.value(HttpResponse(User(), Response(requestOptions: RequestOptions(path: ''))));
+  Future<HttpResponse<OAuthToken>> autoLogin(LoginType type){
+    return Future.value(HttpResponse(OAuthToken(), Response(requestOptions: RequestOptions(path: ''))));
   }
 
   Future<Tuple2<LoginType, String>> _getPlatformId(LoginType type) {
@@ -41,29 +42,20 @@ class LoginRepository extends BaseRepository{
     //
     // }
     else{
-      throw Exception("LoginType에 없는 놈이 들어왔어");
+      throw Exception("LoginType 에 없는 놈이 들어왔어");
     }
   }
 
-  Future<HttpResponse<User>> _requestLoginToServer(Tuple2<LoginType, String> loginTypeAndToken) {
-    debugPrint("_requestLoginToServer call == $loginTypeAndToken");
-    return api.socialLogin(loginTypeAndToken.item2, loginTypeAndToken.item1.name.toUpperCase());
-
-
-    // return Future.delayed(const Duration(seconds: 2), (){
-    //   return HttpResponse(resultData: User());
-    // });
+  Future<HttpResponse<OAuthToken>> _requestLoginToServer(Tuple2<LoginType, String> loginTypeAndToken) async {
+    var result = await BaseRepository.api.socialLogin('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "idtest"}');
+    var access = result.response.headers["ACCESS_TOKEN"]?.first;
+    var refresh = result.response.headers["REFRESH_TOKEN"]?.first;
+    debugPrint("_requestLoginToServer result == access($access), refresh($refresh), result.response.headers(${result.response.headers}), result(${result.toString()})");
+    return HttpResponse(OAuthToken(accessToken: access, refreshToken: refresh), result.response);
   }
 
-// HttpResponse<User> firebaseUserToAppUser(
-//   fireAuth.UserCredential credential,
-//   LoginType loginType
-// ) {
-//   return HttpResponse(resultData: User(
-//     userId: credential.user?.uid,
-//     loginPlatform: loginType,
-//     createAt: credential.user?.metadata.creationTime,
-//     lastLoginAt: credential.user?.metadata.lastSignInTime
-//   ));
-// }
+  Future<bool> saveOAuthToken(OAuthToken token) async {
+    debugPrint("saveOAuthToken call == token($token)");
+    return sharedPref.setOAuthToken(token);
+  }
 }

@@ -25,6 +25,11 @@ class HomePageBloc extends BaseBloc{
 
   }
 
+  @override
+  Future<bool> showLoginView() {
+    return Future.value(false);
+  }
+
   void clickBottomMenuItem(int index){
     currentPageIndex = index;
     emit(ChangePage(currentPageIndex));

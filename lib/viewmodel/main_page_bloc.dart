@@ -27,6 +27,11 @@ class MainPageBloc extends BaseBloc<Object>{
 
   }
 
+  @override
+  Future<bool> showLoginView() {
+    return Future.value(false);
+  }
+
   void loadMarketIndex() {
     _repository.getStockMarketIndex()
         .then((rsp) {

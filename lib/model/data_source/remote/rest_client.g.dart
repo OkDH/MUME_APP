@@ -67,23 +67,17 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<HttpResponse<User>> socialLogin(userId, token) async {
+  Future<HttpResponse<void>> socialLogin(param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'social_id': userId,
-      r'social_type': token
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<User>>(
-            Options(method: 'POST', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/public/member/fcm-token',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = User.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
+    final _headers = <String, dynamic>{};
+    final _data = param;
+    final _result = await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/auth/check-social-m',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final httpResponse = HttpResponse(null, _result);
     return httpResponse;
   }
 

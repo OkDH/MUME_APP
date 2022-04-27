@@ -4,10 +4,10 @@ import 'package:retrofit/retrofit.dart';
 
 class MarketIndexRepository extends BaseRepository{
   Future<HttpResponse<StockMarketIndex>> getStockMarketIndex(){
-    return api.getStockMarketIndex();
+    return BaseRepository.api.getStockMarketIndex();
   }
 
   Future<HttpResponse<MumeStockMarketIndex>> getMumeStockMarketIndex(){
-    return api.getMumeStockMarketIndex();
+    return BaseRepository.api.getMumeStockMarketIndex();
   }
 }

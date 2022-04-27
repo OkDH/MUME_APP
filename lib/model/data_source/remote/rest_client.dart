@@ -21,8 +21,6 @@ abstract class RestClient {
   @POST("/public/member/fcm-token")
   Future<void> postTokens(@Body() Map<String, String> body);
 
-  @POST("/public/member/fcm-token") //todo 경로 수정
-  Future<HttpResponse<User>> socialLogin(
-      @Header("social_id") String userId,
-      @Header("social_type") String token,);
+  @POST("/auth/check-social-m")
+  Future<HttpResponse<void>> socialLogin(@Body() String param);
 }

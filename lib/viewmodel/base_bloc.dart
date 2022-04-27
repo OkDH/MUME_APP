@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mume/enums/navigate_type.dart';
+import 'package:mume/model/repository/base_repository.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
@@ -24,6 +25,8 @@ abstract class BaseBloc<A> extends Cubit<BaseState>{
 
   ///state ful widget 의 onDispose 실행 시
   onDispose();
+
+  Future<bool> showLoginView();
 }
 
 
@@ -112,9 +115,19 @@ class UrlLaunch extends BaseState{
 
 class BackPage<A> extends BaseState{
   final A? args;
+  final int _force = DateTime.now().second;
 
   BackPage({this.args});
 
   @override
-  List<Object?> get props => [args];
+  List<Object?> get props => [args, _force];
+}
+
+class SuccessSignIn extends BaseState{
+  final int _force = DateTime.now().second;
+
+  SuccessSignIn();
+
+  @override
+  List<Object?> get props => [_force];
 }
