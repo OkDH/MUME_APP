@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mume/enums/navigate_type.dart';
 import 'package:mume/model/repository/base_repository.dart';
+import 'package:mume/view/page/login_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
@@ -26,7 +27,13 @@ abstract class BaseBloc<A> extends Cubit<BaseState>{
   ///state ful widget 의 onDispose 실행 시
   onDispose();
 
+  ///로그인이 필요한 페이지에서 로그인 전/후 화면 여부 반환
   Future<bool> showLoginView();
+
+  /// 로그인이 필요한 화면에서 로그인 화면으로 이동할 때 사용하는 함수
+  clickLogin() {
+    emit(NextPage(routeName: LoginPage.routeName));
+  }
 }
 
 

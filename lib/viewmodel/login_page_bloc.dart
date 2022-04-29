@@ -36,7 +36,7 @@ class LoginPageBloc extends BaseBloc{
     return Future.value(false);
   }
 
-  void clickLogin(LoginType type) {
+  void clickSocialLogin(LoginType type) {
     emit(Loading());
     _loginRepository.signUpOrSignIn(type)
         .then((response) => _successValidation(response))

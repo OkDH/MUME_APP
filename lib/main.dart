@@ -28,13 +28,13 @@ void main() {
   //TODO 광고 초기화 실패 시 수정 필요 로그 -> analytics event
   MobileAds.instance.initialize()
       .then((_) => debugPrint("ad init success"))
-      .catchError((e) => debugPrint("error == ${e.toString()}"));
+      .catchError((e) => debugPrint("ad init error == ${e.toString()}"));
 
   //TODO FirebaseMessaging 초기화 실패해도 앱은 실행될 수 있도록 수정 필요, 초기화 실패 시 analytics event 연동
   Firebase.initializeApp()
       .then((_) => FirebaseMessaging.instance.getToken())
-      .then((fcmToken) => runApp(MyApp()))
-      .catchError((e) => debugPrint("error == ${e.toString()}"));
+      .catchError((e) => debugPrint("error == ${e.toString()}"))
+      .whenComplete(() => runApp(const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

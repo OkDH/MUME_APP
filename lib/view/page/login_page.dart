@@ -28,7 +28,7 @@ class _LoginPageState extends BasePageState<String, LoginPageBloc, LoginPage> {
           Visibility(
             visible: Platform.isIOS,
             child: MyButton(
-                onPressed: () => bloc.clickLogin(LoginType.apple),
+                onPressed: () => bloc.clickSocialLogin(LoginType.apple),
                 text: LoginType.apple.name.toUpperCase(),
             ),
           ),
@@ -36,7 +36,7 @@ class _LoginPageState extends BasePageState<String, LoginPageBloc, LoginPage> {
           const SizedBox(height: 10,),
 
           MyButton(
-            onPressed: () => bloc.clickLogin(LoginType.naver),
+            onPressed: () => bloc.clickSocialLogin(LoginType.naver),
             text: LoginType.naver.name.toUpperCase(),
           ),
           const Spacer(),

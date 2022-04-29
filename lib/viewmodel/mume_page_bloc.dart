@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:mume/model/repository/account_repository.dart';
-import 'package:mume/model/repository/base_repository.dart';
-import 'package:mume/view/page/home_page.dart';
 import 'package:mume/view/page/login_page.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
@@ -35,9 +33,5 @@ class MumePageBloc extends BaseBloc<Object>{
   Future<bool> showLoginView() {
     return _accountRepository.sharedPref.getOAuthToken()
         .then((token) => (token.accessToken ?? "").isNotEmpty);
-  }
-
-  clickLogin() {
-    emit(NextPage(routeName: LoginPage.routeName));
   }
 }

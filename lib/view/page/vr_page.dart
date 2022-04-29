@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mume/view/componont/button.dart';
+import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/assets.dart';
 import 'package:mume/view/resource/strings.dart';
@@ -27,7 +29,16 @@ class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(VrPage.routeName)
+            Text(VrPage.routeName),
+
+            RequireLoginWidget(
+                bloc: bloc,
+                intendLoginWidget: MyButton(
+                    onPressed: () => bloc.clickLogin(),
+                    text: Strings.login
+                ),
+                child: Text("로그인 성공!!")
+            ),
           ],
         ),
       ),
