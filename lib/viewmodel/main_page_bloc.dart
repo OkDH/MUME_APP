@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
+import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
-import 'package:mume/viewmodel/base_bloc.dart';
+import 'package:mume/viewmodel/login_page_bloc.dart';
 
-class MainPageBloc extends BaseBloc<Object>{
+class MainPageBloc extends LoginBloc<Object>{
   final MarketIndexRepository _repository;
 
-  MainPageBloc(this._repository);
+  MainPageBloc(
+      this._repository,
+      LoginRepository loginRepository
+  ) : super(loginRepository);
 
   @override
   onInitState() {

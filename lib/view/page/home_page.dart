@@ -4,8 +4,6 @@ import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/home_page_bloc.dart';
-import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/home_page_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

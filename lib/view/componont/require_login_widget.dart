@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:mume/viewmodel/base_bloc.dart';
+import 'package:mume/viewmodel/login_page_bloc.dart';
 
 class RequireLoginWidget extends StatelessWidget {
-  final BaseBloc bloc;
+  final LoginBloc bloc;
   final Widget intendLoginWidget;
   final Widget child;
 
