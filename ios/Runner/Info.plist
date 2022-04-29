@@ -20,18 +20,53 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kr.co.ocko.mume</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>mumeapp</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<string>NO</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-2618229544885366~2770131436</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>naversearchapp</string>
+		<string>naversearchthirdlogin</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>naver.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>naver.net</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+		</dict>
 	</dict>
 	<key>NSBonjourServices</key>
 	<array>
@@ -200,5 +235,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>naverConsumerKey</key>
+	<string>QyziMDfXfgFrKsHmyHIs</string>
+	<key>naverConsumerSecret</key>
+	<string>ZUgzqbmb_v</string>
+	<key>naverServiceAppName</key>
+	<string>MUME</string>
+	<key>naverServiceAppUrlScheme</key>
+	<string>mumeapp</string>
 </dict>
 </plist>

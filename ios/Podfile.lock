@@ -1,4 +1,10 @@
 PODS:
+  - AppAuth (1.5.0):
+    - AppAuth/Core (= 1.5.0)
+    - AppAuth/ExternalUserAgent (= 1.5.0)
+  - AppAuth/Core (1.5.0)
+  - AppAuth/ExternalUserAgent (1.5.0):
+    - AppAuth/Core
   - connectivity_plus (0.0.1):
     - Flutter
     - ReachabilitySwift
@@ -38,12 +44,18 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.6)
     - nanopb (~> 2.30908.0)
   - Flutter (1.0.0)
+  - flutter_naver_login (0.0.1):
+    - Flutter
+    - naveridlogin-sdk-ios (~> 4.1.0)
   - Google-Mobile-Ads-SDK (8.11.0):
     - GoogleAppMeasurement (< 9.0, >= 7.0)
     - GoogleUserMessagingPlatform (>= 1.1)
   - google_mobile_ads (0.0.1):
     - Flutter
     - Google-Mobile-Ads-SDK (= 8.11.0)
+  - google_sign_in_ios (0.0.1):
+    - Flutter
+    - GoogleSignIn (~> 5.0)
   - GoogleAppMeasurement (8.11.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.11.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.7)
@@ -68,6 +80,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleSignIn (5.0.2):
+    - AppAuth (~> 1.2)
+    - GTMAppAuth (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUserMessagingPlatform (2.0.0)
   - GoogleUtilities/AppDelegateSwizzler (7.7.0):
     - GoogleUtilities/Environment
@@ -88,6 +104,10 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - GTMAppAuth (1.2.3):
+    - AppAuth/Core (~> 1.4)
+    - GTMSessionFetcher/Core (~> 1.5)
+  - GTMSessionFetcher/Core (1.7.1)
   - image_picker (0.0.1):
     - Flutter
   - nanopb (2.30908.0):
@@ -95,8 +115,11 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - naveridlogin-sdk-ios (4.1.3)
   - PromisesObjC (2.0.0)
   - ReachabilitySwift (5.0.0)
+  - sign_in_with_apple (0.0.1):
+    - Flutter
   - url_launcher_ios (0.0.1):
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
@@ -107,13 +130,17 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
+  - flutter_naver_login (from `.symlinks/plugins/flutter_naver_login/ios`)
   - google_mobile_ads (from `.symlinks/plugins/google_mobile_ads/ios`)
+  - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - sign_in_with_apple (from `.symlinks/plugins/sign_in_with_apple/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - Firebase
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -122,9 +149,13 @@ SPEC REPOS:
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleSignIn
     - GoogleUserMessagingPlatform
     - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
     - nanopb
+    - naveridlogin-sdk-ios
     - PromisesObjC
     - ReachabilitySwift
 
@@ -137,16 +168,23 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_messaging/ios"
   Flutter:
     :path: Flutter
+  flutter_naver_login:
+    :path: ".symlinks/plugins/flutter_naver_login/ios"
   google_mobile_ads:
     :path: ".symlinks/plugins/google_mobile_ads/ios"
+  google_sign_in_ios:
+    :path: ".symlinks/plugins/google_sign_in_ios/ios"
   image_picker:
     :path: ".symlinks/plugins/image_picker/ios"
+  sign_in_with_apple:
+    :path: ".symlinks/plugins/sign_in_with_apple/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   webview_flutter_wkwebview:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
+  AppAuth: 80317d99ac7ff2801a2f18ff86b48cd315ed465d
   connectivity_plus: 413a8857dd5d9f1c399a39130850d02fe0feaf7e
   Firebase: 44213362f1dcc52555b935dc925ed35ac55f1b20
   firebase_core: 2ca2d6cc8a11693e701b37126afae4800be5dbac
@@ -156,16 +194,23 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 044eede8a049bce71c4541ee68d6e4364fcbe774
   FirebaseMessaging: b0aeba17332ee1ee610662b4d1e02a86db82f08f
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_naver_login: 1dbf6d21aae5235cdf76a28ac79cf6871899282f
   Google-Mobile-Ads-SDK: be2192b51b74d74a6ed70590c2e8275412f1b71e
   google_mobile_ads: a2f8b901601401bf7e691b4224d5992e9a37599a
+  google_sign_in_ios: ed71c0dbddfba8b1ea9aa210dbda695f46bf51bd
   GoogleAppMeasurement: aa3cb422fab2b05d2efac543a5720d1a85b9dea5
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
+  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUserMessagingPlatform: ab890ce5f6620f293a21b6bdd82e416a2c73aeca
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GTMAppAuth: 987526d41b07efb1bedda5e936fe0cb718a03113
+  GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
   image_picker: 9aa50e1d8cdacdbed739e925b7eea16d014367e6
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  naveridlogin-sdk-ios: b9d7c20677981177ed994ecb1c8c2b49f223277d
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  sign_in_with_apple: f3bf75217ea4c2c8b91823f225d70230119b8440
   url_launcher_ios: 02f1989d4e14e998335b02b67a7590fa34f971af
   webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
 

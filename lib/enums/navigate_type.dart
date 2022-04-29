@@ -1,0 +1,4 @@
+enum NavigateType {
+  push,
+  popAndPush,
+}
