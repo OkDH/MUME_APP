@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => LoginPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => HomePageBloc(),),
 
+        ///home bottomSheet
         BlocProvider(create: (BuildContext context) => MainPageBloc(MarketIndexRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => FeedPageBloc(),),
         BlocProvider(create: (BuildContext context) => MumePageBloc(AccountRepository(), loginRepo),),

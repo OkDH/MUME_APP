@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:mume/model/dto/oauth_token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

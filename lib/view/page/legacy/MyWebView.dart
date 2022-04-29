@@ -50,7 +50,7 @@ class MyWebViewState extends State<MyWebView> {
   void initState() {
     final dio = Dio();
     dio.options.headers["Content-Type"] = "application/json; charset=UTF-8";
-    _api = RestClient(dio);
+    _api = RestClient(dio, baseUrl: Config.apiUrl);
 
     _initAD();
 

@@ -10,13 +10,8 @@ import 'package:tuple/tuple.dart';
 
 class LoginRepository extends BaseRepository{
   Future<HttpResponse<OAuthToken>> signUpOrSignIn(LoginType type){
-    return _getPlatformId(type).then((loginTypeAndToken) {
-      return _requestLoginToServer(loginTypeAndToken);
-    });
-  }
-
-  Future<HttpResponse<OAuthToken>> autoLogin(LoginType type){
-    return Future.value(HttpResponse(OAuthToken(), Response(requestOptions: RequestOptions(path: ''))));
+    return _getPlatformId(type)
+        .then((loginTypeAndToken) => _requestLoginToServer(loginTypeAndToken));
   }
 
   Future<bool> saveOAuthToken(OAuthToken token) {
@@ -53,10 +48,8 @@ class LoginRepository extends BaseRepository{
   }
 
   Future<HttpResponse<OAuthToken>> _requestLoginToServer(Tuple2<LoginType, String> loginTypeAndToken) async {
-    var result = await BaseRepository.api.socialLogin('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "idtest"}');
-    var access = result.response.headers["ACCESS_TOKEN"]?.first;
-    var refresh = result.response.headers["REFRESH_TOKEN"]?.first;
-    debugPrint("_requestLoginToServer result == access($access), refresh($refresh), result.response.headers(${result.response.headers}), result(${result.toString()})");
-    return HttpResponse(OAuthToken(accessToken: access, refreshToken: refresh), result.response);
+    final result = await BaseRepository.api.generateToken('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "idtest"}');
+    final token = httpHeaderToOAuthToken(result.response.headers);
+    return HttpResponse(token, result.response);
   }
 }

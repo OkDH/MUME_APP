@@ -32,7 +32,7 @@ class MainPageBloc extends LoginBloc<Object>{
   }
 
   @override
-  Future<bool> showLoginView() {
+  Future<bool> isShowLoginView() {
     return Future.value(false);
   }
 

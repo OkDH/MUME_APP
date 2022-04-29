@@ -32,7 +32,16 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
                     onPressed: () => bloc.clickLogin(),
                     text: Strings.login
                 ),
-                child: Text("로그인 성공!!")
+                child: Column(
+                  children: [
+                    Text("로그인 성공!!"),
+
+                    MyButton(
+                        onPressed: () => bloc.testtest(),
+                        text: "asdfasdfasdf"
+                    )
+                  ],
+                )
             ),
           ],
         ),

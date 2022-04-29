@@ -32,4 +32,12 @@ class MumePageBloc extends LoginBloc<Object>{
   onDispose() {
 
   }
+
+  void testtest() {
+    _accountRepository.getMyAccountList()
+        .then((value) => null)
+        .catchError((e){
+          debugPrint("testtest error == $e");
+    });
+  }
 }
