@@ -3,7 +3,7 @@ import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/assets.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/main_page_bloc.dart';
+import 'package:mume/viewmodel/main/main_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
 
 class MainPage extends StatefulWidget {
