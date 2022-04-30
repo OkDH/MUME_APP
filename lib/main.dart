@@ -46,16 +46,22 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (BuildContext context) => SplashPageBloc(),),
-        BlocProvider(create: (BuildContext context) => LoginPageBloc(loginRepo),),
-        BlocProvider(create: (BuildContext context) => HomePageBloc(),),
-
         ///home bottomSheet
         BlocProvider(create: (BuildContext context) => MainPageBloc(MarketIndexRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => FeedPageBloc(),),
         BlocProvider(create: (BuildContext context) => MumePageBloc(AccountRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => VrPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => MorePageBloc(loginRepo),),
+
+
+        BlocProvider(create: (BuildContext context) => SplashPageBloc(),),
+        BlocProvider(create: (BuildContext context) => LoginPageBloc(loginRepo),),
+        BlocProvider(create: (BuildContext context) => HomePageBloc(
+          context.read<MumePageBloc>(),
+          context.read<VrPageBloc>(),
+          context.read<MorePageBloc>(),
+        ),),
+
       ],
       child: MaterialApp(
         theme: ThemeData(

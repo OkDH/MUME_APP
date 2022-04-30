@@ -31,4 +31,8 @@ abstract class RestClient {
   ///내 계좌 데이터
   @GET("/infinite/my-account")
   Future<HttpResponse<List<Account>>> getMyAccounts();
+
+  ///내 계좌 데이터
+  @GET("/health-check")
+  Future<HttpResponse<bool>> checkServerHealth();
 }

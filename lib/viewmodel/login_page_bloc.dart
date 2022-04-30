@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:mume/enums/login_state.dart';
 import 'package:mume/enums/login_type.dart';
 import 'package:mume/model/dto/oauth_token.dart';
 import 'package:mume/model/repository/login_repository.dart';
@@ -22,7 +23,13 @@ abstract class LoginBloc<T> extends BaseBloc<T>{
     emit(NextPage(routeName: LoginPage.routeName));
   }
 
-  OAuthToken _successValidation(HttpResponse<OAuthToken> rsp) {
+  clickLogOut(){
+    _loginRepository.clearUserData()
+        .then((isSuccess) => isSuccess ? emit(ChangeLoginState(LoginStateType.logout)) : throw Exception())
+        .catchError((e) => emit(ShowAlert()));
+  }
+
+  OAuthToken _successLoginValidation(HttpResponse<OAuthToken> rsp) {
     if((rsp.data.accessToken ?? "").isEmpty
         || (rsp.data.refreshToken ?? "").isEmpty) throw Exception("resultData is null");
 
@@ -70,13 +77,13 @@ class LoginPageBloc extends LoginBloc<Object>{
   void clickSocialLogin(LoginType type) {
     emit(Loading());
     _loginRepository.signUpOrSignIn(type)
-        .then((response) => _successValidation(response))
+        .then((response) => _successLoginValidation(response))
         .then((token) => _saveSession(token))
         .then((_) => _loginRepository.updateRestClientHeader())
-        .then((_) => emit(BackPage(args: SuccessSignIn())))
+        .then((_) => emit(BackPage(args: ChangeLoginState(LoginStateType.login))))
         .catchError((e) {
-      debugPrint("clickLogin error == ${e.toString()}");
-      emit(ShowAlert());
-    });
+            debugPrint("clickLogin error == ${e.toString()}");
+            emit(ShowAlert());
+        });
   }
 }

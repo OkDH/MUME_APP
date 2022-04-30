@@ -7,30 +7,30 @@ import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/feed_page_bloc.dart';
 import 'package:mume/viewmodel/main_page_bloc.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
 import 'package:mume/viewmodel/mume_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
 import 'package:mume/viewmodel/vr_page_bloc.dart';
 
-class MorePage extends StatefulWidget {
-  const MorePage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (MorePage).toString();
+class VrPage extends StatefulWidget {
+  const VrPage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (VrPage).toString();
 
   @override
-  State<MorePage> createState() => _MorePageState();
+  State<VrPage> createState() => _VrPageState();
 }
 
-class _MorePageState extends BasePageState<String, MorePageBloc, MorePage> {
+class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
+    debugPrint("buildPage VrPageBloc");
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(MorePage.routeName),
+            Text(VrPage.routeName),
 
             RequireLoginWidget(
                 bloc: bloc,

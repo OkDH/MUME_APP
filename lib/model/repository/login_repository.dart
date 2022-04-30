@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:mume/enums/login_type.dart';
@@ -16,6 +15,10 @@ class LoginRepository extends BaseRepository{
 
   Future<bool> saveOAuthToken(OAuthToken token) {
     return sharedPref.setOAuthToken(token);
+  }
+
+  Future<bool> clearUserData() {
+    return sharedPref.clear();
   }
 
   Future<OAuthToken> getOAuthToken() {
@@ -48,7 +51,7 @@ class LoginRepository extends BaseRepository{
   }
 
   Future<HttpResponse<OAuthToken>> _requestLoginToServer(Tuple2<LoginType, String> loginTypeAndToken) async {
-    final result = await BaseRepository.api.generateToken('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "idtest"}');
+    final result = await BaseRepository.api.generateToken('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "${loginTypeAndToken.item2}"}');
     final token = httpHeaderToOAuthToken(result.response.headers);
     return HttpResponse(token, result.response);
   }

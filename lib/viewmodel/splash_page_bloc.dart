@@ -25,9 +25,4 @@ class SplashPageBloc extends BaseBloc<Object>{
   onPageResult(Object? args) {
 
   }
-
-  @override
-  Future<bool> showLoginView() {
-    return Future.value(false);
-  }
 }

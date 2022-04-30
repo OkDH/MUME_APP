@@ -6,6 +6,7 @@ import 'package:mume/viewmodel/login_page_bloc.dart';
 
 class MumePageBloc extends LoginBloc<Object>{
   final AccountRepository _accountRepository;
+  List list = List.empty(growable: true);
 
   MumePageBloc(
     this._accountRepository,
@@ -24,8 +25,7 @@ class MumePageBloc extends LoginBloc<Object>{
 
   @override
   onPageResult(Object? args) {
-    debugPrint("onPageResult arge ($args)");
-    if(args is SuccessSignIn) emit(args);
+    if(args is ChangeLoginState) emit(args);
   }
 
   @override
@@ -35,7 +35,8 @@ class MumePageBloc extends LoginBloc<Object>{
 
   void testtest() {
     _accountRepository.getMyAccountList()
-        .then((value) => null)
+        .then((value) => list = value.data)
+        .then((_) => emit(ReBuildPage()))
         .catchError((e){
           debugPrint("testtest error == $e");
     });

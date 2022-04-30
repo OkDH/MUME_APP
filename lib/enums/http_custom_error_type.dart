@@ -1,13 +1,13 @@
 enum HttpCustomErrorType{
-  invalidToken,
-  expiredToken,
+  refreshToken,
+  accessToken,
 }
 
 extension ExHttpCustomErrorType on HttpCustomErrorType {
   int get statusCode {
     switch (this) {
-      case HttpCustomErrorType.invalidToken: return 415;
-      case HttpCustomErrorType.expiredToken: return 416;
+      case HttpCustomErrorType.refreshToken: return 403;
+      case HttpCustomErrorType.accessToken: return 401;
       default: return 0;
     }
   }

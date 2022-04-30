@@ -14,7 +14,12 @@ class SharedPref {
 
   Future<OAuthToken> getOAuthToken() {
     return SharedPreferences.getInstance()
-        .then((pref) => pref.getString(keyOAuthToken))
-        .then((jsonStringToken) => OAuthToken.fromJson(jsonDecode(jsonStringToken!)));
+        .then((pref) => pref.getString(keyOAuthToken) ?? '{"accessToken": "", "refreshToken":""}')
+        .then((jsonStringToken) => OAuthToken.fromJson(jsonDecode(jsonStringToken)));
+  }
+
+  Future<bool> clear(){
+    return SharedPreferences.getInstance()
+        .then((pref) => pref.clear());
   }
 }

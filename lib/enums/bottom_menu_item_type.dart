@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mume/view/page/feed_page.dart';
-import 'package:mume/view/page/main_page.dart';
-import 'package:mume/view/page/more_page.dart';
-import 'package:mume/view/page/mume_page.dart';
-import 'package:mume/view/page/vr_page.dart';
+import 'package:mume/view/page/feed/feed_page.dart';
+import 'package:mume/view/page/main/main_page.dart';
+import 'package:mume/view/page/more/more_page.dart';
+import 'package:mume/view/page/mume/mume_page.dart';
+import 'package:mume/view/page/vr/vr_page.dart';
 import 'package:mume/view/resource/assets.dart';
 import 'package:mume/view/resource/strings.dart';
 

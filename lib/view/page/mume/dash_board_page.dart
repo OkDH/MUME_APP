@@ -18,6 +18,7 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
+    debugPrint("buildPage MumePageBloc");
     return Scaffold(
       body: Center(
         child: Column(
@@ -38,8 +39,15 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
 
                     MyButton(
                         onPressed: () => bloc.testtest(),
-                        text: "asdfasdfasdf"
-                    )
+                        text: "내 계좌 가져오기"
+                    ),
+
+                    MyButton(
+                        onPressed: () => bloc.clickLogOut(),
+                        text: "로그아웃"
+                    ),
+
+                    Text("list size (${bloc.list.length})")
                   ],
                 )
             ),

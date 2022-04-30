@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mume/enums/login_state.dart';
 import 'package:mume/enums/navigate_type.dart';
 import 'package:mume/model/repository/base_repository.dart';
 import 'package:mume/view/page/login_page.dart';
@@ -10,7 +11,12 @@ import 'package:mume/viewmodel/base_bloc.dart';
 ///기본 비즈니스 로직, view 계층에서 동작하는 함수들 추상화
 ///========================================비즈니스 로직=====================================================
 abstract class BaseBloc<A> extends Cubit<BaseState>{
-  BaseBloc() : super(Init());
+  BaseBloc(): super(Init()){
+    BaseRepository.httpStateEmitter.stream.listen((event) {
+      emit(ChangeLoginState(LoginStateType.logout));
+      emit(ShowAlert(title: Strings.requiredLogin, content: Strings.msgRequiredLogin));
+    });
+  }
 
   ///실행되는 순서대로 함수 나열
   ///onInitState -> onReceivedArgument -> onPageResult(옵션) -> onDispose
@@ -26,6 +32,11 @@ abstract class BaseBloc<A> extends Cubit<BaseState>{
 
   ///state ful widget 의 onDispose 실행 시
   onDispose();
+
+  ///단순 페이지 재 빌드 setState 사용 안하기 위해서 정의했음.
+  rebuildPage(){
+    emit(ReBuildPage());
+  }
 }
 
 
@@ -100,9 +111,6 @@ class NextPage<A> extends BaseState{
   List<Object?> get props => [routeName, navigateType, args, ignoreSeconds];
 }
 
-
-
-
 class UrlLaunch extends BaseState{
   final String url;
 
@@ -122,11 +130,20 @@ class BackPage<A> extends BaseState{
   List<Object?> get props => [args, _force];
 }
 
-class SuccessSignIn extends BaseState{
+class ChangeLoginState extends BaseState{
   final int _force = DateTime.now().second;
+  final LoginStateType state;
 
-  SuccessSignIn();
+  ChangeLoginState(this.state);
 
   @override
-  List<Object?> get props => [_force];
+  List<Object?> get props => [_force, state];
+}
+
+class ReBuildPage extends BaseState{
+
+  ReBuildPage();
+
+  @override
+  List<Object?> get props => [];
 }
