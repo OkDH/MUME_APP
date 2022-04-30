@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:mume/viewmodel/base_bloc.dart';
+import 'package:mume/viewmodel/login_page_bloc.dart';
 
 class RequireLoginWidget extends StatelessWidget {
-  final BaseBloc bloc;
+  final LoginBloc bloc;
   final Widget intendLoginWidget;
   final Widget child;
 
@@ -16,7 +16,7 @@ class RequireLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
-        future: bloc.showLoginView(),
+        future: bloc.isShowLoginView(),
         builder: (context, snapshot) {
           debugPrint("RequireLoginWidget ${snapshot.data}");
           if(snapshot.data ?? false){

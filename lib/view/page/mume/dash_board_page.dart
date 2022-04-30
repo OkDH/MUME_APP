@@ -2,35 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:mume/view/componont/button.dart';
 import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
-import 'package:mume/view/resource/assets.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/feed_page_bloc.dart';
-import 'package:mume/viewmodel/main_page_bloc.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
 import 'package:mume/viewmodel/mume_page_bloc.dart';
-import 'package:mume/viewmodel/splash_page_bloc.dart';
-import 'package:mume/viewmodel/vr_page_bloc.dart';
 
-class MorePage extends StatefulWidget {
-  const MorePage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (MorePage).toString();
+class MumePage extends StatefulWidget {
+  const MumePage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (MumePage).toString();
 
   @override
-  State<MorePage> createState() => _MorePageState();
+  State<MumePage> createState() => _MumePageState();
 }
 
-class _MorePageState extends BasePageState<String, MorePageBloc, MorePage> {
+class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
+    debugPrint("buildPage MumePageBloc");
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(MorePage.routeName),
+            Text(MumePage.routeName),
 
             RequireLoginWidget(
                 bloc: bloc,
@@ -38,7 +33,23 @@ class _MorePageState extends BasePageState<String, MorePageBloc, MorePage> {
                     onPressed: () => bloc.clickLogin(),
                     text: Strings.login
                 ),
-                child: Text("로그인 성공!!")
+                child: Column(
+                  children: [
+                    Text("로그인 성공!!"),
+
+                    MyButton(
+                        onPressed: () => bloc.testtest(),
+                        text: "내 계좌 가져오기"
+                    ),
+
+                    MyButton(
+                        onPressed: () => bloc.clickLogOut(),
+                        text: "로그아웃"
+                    ),
+
+                    Text("list size (${bloc.list.length})")
+                  ],
+                )
             ),
           ],
         ),

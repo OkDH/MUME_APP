@@ -65,4 +65,7 @@ class Strings {
   static const String tecl = "TECL";
   static const String bulz = "BULZ";
   static const String upro = "UPRO";
+
+  static const String msgRequiredLogin = "로그인 유효기간이 만료되었습니다. 다시 로그인을 진행해주세요.";
+  static const String requiredLogin = "로그인 필요";
 }

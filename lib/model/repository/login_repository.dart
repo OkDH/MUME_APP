@@ -1,9 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_naver_login/flutter_naver_login.dart';
 import 'package:mume/enums/login_type.dart';
 import 'package:mume/model/dto/oauth_token.dart';
-import 'package:mume/model/dto/user.dart';
 import 'package:mume/model/repository/base_repository.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -11,14 +9,20 @@ import 'package:tuple/tuple.dart';
 
 class LoginRepository extends BaseRepository{
   Future<HttpResponse<OAuthToken>> signUpOrSignIn(LoginType type){
-    return _getPlatformId(type).then((loginTypeAndToken) {
-      debugPrint("login _getPlatformId result == $loginTypeAndToken");
-      return _requestLoginToServer(loginTypeAndToken);
-    });
+    return _getPlatformId(type)
+        .then((loginTypeAndToken) => _requestLoginToServer(loginTypeAndToken));
   }
 
-  Future<HttpResponse<OAuthToken>> autoLogin(LoginType type){
-    return Future.value(HttpResponse(OAuthToken(), Response(requestOptions: RequestOptions(path: ''))));
+  Future<bool> saveOAuthToken(OAuthToken token) {
+    return sharedPref.setOAuthToken(token);
+  }
+
+  Future<bool> clearUserData() {
+    return sharedPref.clear();
+  }
+
+  Future<OAuthToken> getOAuthToken() {
+    return sharedPref.getOAuthToken();
   }
 
   Future<Tuple2<LoginType, String>> _getPlatformId(LoginType type) {
@@ -47,15 +51,8 @@ class LoginRepository extends BaseRepository{
   }
 
   Future<HttpResponse<OAuthToken>> _requestLoginToServer(Tuple2<LoginType, String> loginTypeAndToken) async {
-    var result = await BaseRepository.api.socialLogin('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "idtest"}');
-    var access = result.response.headers["ACCESS_TOKEN"]?.first;
-    var refresh = result.response.headers["REFRESH_TOKEN"]?.first;
-    debugPrint("_requestLoginToServer result == access($access), refresh($refresh), result.response.headers(${result.response.headers}), result(${result.toString()})");
-    return HttpResponse(OAuthToken(accessToken: access, refreshToken: refresh), result.response);
-  }
-
-  Future<bool> saveOAuthToken(OAuthToken token) async {
-    debugPrint("saveOAuthToken call == token($token)");
-    return sharedPref.setOAuthToken(token);
+    final result = await BaseRepository.api.generateToken('{"socialType": "${loginTypeAndToken.item1.name.toUpperCase()}", "socialId": "${loginTypeAndToken.item2}"}');
+    final token = httpHeaderToOAuthToken(result.response.headers);
+    return HttpResponse(token, result.response);
   }
 }

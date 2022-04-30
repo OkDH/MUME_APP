@@ -9,9 +9,7 @@ part of 'rest_client.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 class _RestClient implements RestClient {
-  _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= 'http://mume.ocko.co.kr/dev/api';
-  }
+  _RestClient(this._dio, {this.baseUrl});
 
   final Dio _dio;
 
@@ -67,7 +65,7 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<HttpResponse<void>> socialLogin(param) async {
+  Future<HttpResponse<void>> generateToken(param) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -78,6 +76,57 @@ class _RestClient implements RestClient {
                 queryParameters: queryParameters, data: _data)
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final httpResponse = HttpResponse(null, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<void>> refreshToken(token) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'refresh_token': token};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<void>(_setStreamType<HttpResponse<void>>(
+        Options(method: 'POST', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/auth/refresh',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final httpResponse = HttpResponse(null, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<List<Account>>> getMyAccounts() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<HttpResponse<List<Account>>>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/infinite/my-account',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) => Account.fromJson(i as Map<String, dynamic>))
+        .toList();
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<bool>> checkServerHealth() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<bool>(_setStreamType<HttpResponse<bool>>(
+        Options(method: 'GET', headers: _headers, extra: _extra)
+            .compose(_dio.options, '/health-check',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = _result.data!;
+    final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
 

@@ -1,7 +1,9 @@
-import 'package:mume/view/page/home_page.dart';
+import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
+import 'package:mume/viewmodel/login_page_bloc.dart';
 
-class MorePageBloc extends BaseBloc<Object>{
+class MorePageBloc extends LoginBloc<Object>{
+  MorePageBloc(LoginRepository loginRepository) : super(loginRepository);
 
   @override
   onInitState() {
@@ -15,17 +17,11 @@ class MorePageBloc extends BaseBloc<Object>{
 
   @override
   onPageResult(Object? args) {
-
+    if(args is ChangeLoginState) emit(args);
   }
 
   @override
   onDispose() {
 
   }
-
-  @override
-  Future<bool> showLoginView() {
-    return Future.value(false);
-  }
-
 }

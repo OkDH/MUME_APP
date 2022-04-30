@@ -121,7 +121,7 @@ class __$OAuthTokenCopyWithImpl<$Res> extends _$OAuthTokenCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_OAuthToken implements _OAuthToken {
+class _$_OAuthToken with DiagnosticableTreeMixin implements _OAuthToken {
   _$_OAuthToken({this.accessToken, this.refreshToken});
 
   factory _$_OAuthToken.fromJson(Map<String, dynamic> json) =>
@@ -133,8 +133,17 @@ class _$_OAuthToken implements _OAuthToken {
   final String? refreshToken;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'OAuthToken(accessToken: $accessToken, refreshToken: $refreshToken)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'OAuthToken'))
+      ..add(DiagnosticsProperty('accessToken', accessToken))
+      ..add(DiagnosticsProperty('refreshToken', refreshToken));
   }
 
   @override

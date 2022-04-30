@@ -23,6 +23,7 @@ class _VrPageState extends BasePageState<String, VrPageBloc, VrPage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
+    debugPrint("buildPage VrPageBloc");
     return Scaffold(
       body: Center(
         child: Column(
