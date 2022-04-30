@@ -4,7 +4,7 @@ import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
+import 'package:mume/viewmodel/more/more_page_bloc.dart';
 
 class MorePage extends StatefulWidget {
   const MorePage({Key? key}) : super(key: key);

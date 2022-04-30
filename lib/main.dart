@@ -13,14 +13,18 @@ import 'package:mume/view/page/login_page.dart';
 import 'package:mume/view/page/splash_page.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
-import 'package:mume/viewmodel/feed_page_bloc.dart';
+import 'package:mume/viewmodel/feed/feed_page_bloc.dart';
 import 'package:mume/viewmodel/home_page_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
-import 'package:mume/viewmodel/main_page_bloc.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
-import 'package:mume/viewmodel/mume_page_bloc.dart';
+import 'package:mume/viewmodel/main/main_page_bloc.dart';
+import 'package:mume/viewmodel/more/more_page_bloc.dart';
+import 'package:mume/viewmodel/mume/account_page_bloc.dart';
+import 'package:mume/viewmodel/mume/dash_board_page_bloc.dart';
+import 'package:mume/viewmodel/mume/income_page_bloc.dart';
+import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
+import 'package:mume/viewmodel/mume/order_list_page_bloc.dart';
 import 'package:mume/viewmodel/splash_page_bloc.dart';
-import 'package:mume/viewmodel/vr_page_bloc.dart';
+import 'package:mume/viewmodel/vr/vr_page_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,13 +50,18 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        ///Mume sub page
+        BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
+        BlocProvider(create: (BuildContext context) => AccountPageBloc(),),
+        BlocProvider(create: (BuildContext context) => OrderListPageBloc(),),
+        BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
+
         ///home bottomSheet
         BlocProvider(create: (BuildContext context) => MainPageBloc(MarketIndexRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => FeedPageBloc(),),
         BlocProvider(create: (BuildContext context) => MumePageBloc(AccountRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => VrPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => MorePageBloc(loginRepo),),
-
 
         BlocProvider(create: (BuildContext context) => SplashPageBloc(),),
         BlocProvider(create: (BuildContext context) => LoginPageBloc(loginRepo),),

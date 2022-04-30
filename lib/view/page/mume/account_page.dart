@@ -1,32 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:mume/view/componont/button.dart';
-import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/mume/dash_board_page_bloc.dart';
-import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
+import 'package:mume/viewmodel/mume/account_page_bloc.dart';
 
-class DashBoardPage extends StatefulWidget {
-  const DashBoardPage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (DashBoardPage).toString();
+class AccountPage extends StatefulWidget {
+  const AccountPage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (AccountPage).toString();
 
   @override
-  State<DashBoardPage> createState() => _DashBoardPageState();
+  State<AccountPage> createState() => _AccountPageState();
 }
 
-class _DashBoardPageState extends BasePageState<String, DashBoardPageBloc, DashBoardPage> {
+class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
-    debugPrint("buildPage DashBoardPageBloc");
+    debugPrint("buildPage AccountPageBloc");
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(DashBoardPage.routeName),
+            Text(AccountPage.routeName),
           ],
         ),
       ),

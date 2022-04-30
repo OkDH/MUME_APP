@@ -6,9 +6,9 @@ import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/home_page_bloc.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
-import 'package:mume/viewmodel/mume_page_bloc.dart';
-import 'package:mume/viewmodel/vr_page_bloc.dart';
+import 'package:mume/viewmodel/more/more_page_bloc.dart';
+import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
+import 'package:mume/viewmodel/vr/vr_page_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

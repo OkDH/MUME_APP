@@ -1,56 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:mume/view/componont/button.dart';
-import 'package:mume/view/componont/require_login_widget.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
-import 'package:mume/viewmodel/mume_page_bloc.dart';
+import 'package:mume/viewmodel/mume/income_page_bloc.dart';
 
-class MumePage extends StatefulWidget {
-  const MumePage({Key? key}) : super(key: key);
-  static final routeName = Strings.slash + (MumePage).toString();
+class IncomePage extends StatefulWidget {
+  const IncomePage({Key? key}) : super(key: key);
+  static final routeName = Strings.slash + (IncomePage).toString();
 
   @override
-  State<MumePage> createState() => _MumePageState();
+  State<IncomePage> createState() => _IncomePageState();
 }
 
-class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> {
+class _IncomePageState extends BasePageState<String, IncomePageBloc, IncomePage> {
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
-    debugPrint("buildPage MumePageBloc");
+    debugPrint("buildPage IncomePageBloc");
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(MumePage.routeName),
-
-            RequireLoginWidget(
-                bloc: bloc,
-                intendLoginWidget: MyButton(
-                    onPressed: () => bloc.clickLogin(),
-                    text: Strings.login
-                ),
-                child: Column(
-                  children: [
-                    Text("로그인 성공!!"),
-
-                    MyButton(
-                        onPressed: () => bloc.testtest(),
-                        text: "내 계좌 가져오기"
-                    ),
-
-                    MyButton(
-                        onPressed: () => bloc.clickLogOut(),
-                        text: "로그아웃"
-                    ),
-
-                    Text("list size (${bloc.list.length})")
-                  ],
-                )
-            ),
+            Text(IncomePage.routeName),
           ],
         ),
       ),

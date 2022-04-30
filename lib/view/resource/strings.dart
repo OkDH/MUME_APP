@@ -68,4 +68,9 @@ class Strings {
 
   static const String msgRequiredLogin = "로그인 유효기간이 만료되었습니다. 다시 로그인을 진행해주세요.";
   static const String requiredLogin = "로그인 필요";
+
+  static const String dashBoard = "대시보드";
+  static const String account = "계좌현황";
+  static const String orderList = "주문리스트";
+  static const String income = "손익현황";
 }

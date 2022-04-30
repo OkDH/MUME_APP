@@ -4,9 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:mume/enums/bottom_menu_item_type.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/home_page_state.dart';
-import 'package:mume/viewmodel/more_page_bloc.dart';
-import 'package:mume/viewmodel/mume_page_bloc.dart';
-import 'package:mume/viewmodel/vr_page_bloc.dart';
+import 'package:mume/viewmodel/more/more_page_bloc.dart';
+import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
+import 'package:mume/viewmodel/vr/vr_page_bloc.dart';
 
 class HomePageBloc extends BaseBloc{
   late int currentPageIndex;
