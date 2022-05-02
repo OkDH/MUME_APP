@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:mume/main.dart';
+import 'package:mume/model/repository/splash_repository.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(splashRepository: SplashRepository(),));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -6,6 +6,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mume/model/repository/account_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
+import 'package:mume/model/repository/splash_repository.dart';
 import 'package:mume/view/page/home_page.dart';
 import 'package:mume/view/page/legacy/PageAsk2.dart';
 import 'package:mume/view/page/legacy/PageHome.dart';
@@ -27,6 +28,7 @@ import 'package:mume/viewmodel/splash_page_bloc.dart';
 import 'package:mume/viewmodel/vr/vr_page_bloc.dart';
 
 void main() {
+  final splash = SplashRepository();    //baseRepository.api 초기화 미리 하기위해서 여기서 생성
   WidgetsFlutterBinding.ensureInitialized();
 
   //TODO 광고 초기화 실패 시 수정 필요 로그 -> analytics event
@@ -38,11 +40,16 @@ void main() {
   Firebase.initializeApp()
       .then((_) => FirebaseMessaging.instance.getToken())
       .catchError((e) => debugPrint("error == ${e.toString()}"))
-      .whenComplete(() => runApp(const MyApp()));
+      .whenComplete(() => runApp(MyApp(splashRepository: splash,)));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final SplashRepository splashRepository;
+
+  const MyApp({
+      Key? key,
+      required this.splashRepository,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +70,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (BuildContext context) => VrPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => MorePageBloc(loginRepo),),
 
-        BlocProvider(create: (BuildContext context) => SplashPageBloc(),),
+        BlocProvider(create: (BuildContext context) => SplashPageBloc(splashRepository),),
         BlocProvider(create: (BuildContext context) => LoginPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => HomePageBloc(
           context.read<MumePageBloc>(),
           context.read<VrPageBloc>(),
           context.read<MorePageBloc>(),
         ),),
-
       ],
       child: MaterialApp(
         theme: ThemeData(

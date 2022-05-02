@@ -19,17 +19,22 @@ class MyAlert extends StatelessWidget {
       content: Text(alert.content),
       actions: [
         MyButton(
-          text: Strings.ok,
+          text: alert.btnPositiveText,
           onPressed: (){
-            Navigator.pop(context);
+            alert.btnPositiveEvent?.call();
+            Navigator.pop(context, alert.popArgs);
           },
         ),
-        MyButton(
-          text: Strings.cancel,
-          onPressed: (){
-            Navigator.pop(context);
-          },
-        ),
+
+        alert.useBtnPositiveOnly
+          ? Container()
+          : MyButton(
+            text: alert.btnNegativeText,
+            onPressed: (){
+              alert.btnNegativeEvent?.call();
+              Navigator.pop(context, alert.popArgs);
+            },
+          ),
       ],
     );
   }

@@ -73,4 +73,10 @@ class Strings {
   static const String account = "계좌현황";
   static const String orderList = "주문리스트";
   static const String income = "손익현황";
+
+  static const String checkServer = "서버 점검";
+
+  static const String msgCheckServer = "서버 점검을 진행중입니다. 잠시 후 다시 시도해주세요.";
+
+  static const String close = "닫기";
 }
