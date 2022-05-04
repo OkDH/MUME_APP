@@ -59,14 +59,14 @@ class MyApp extends StatelessWidget {
       providers: [
         ///Mume sub page
         BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
-        BlocProvider(create: (BuildContext context) => AccountPageBloc(),),
+        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => OrderListPageBloc(),),
         BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
 
         ///home bottomSheet
         BlocProvider(create: (BuildContext context) => MainPageBloc(MarketIndexRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => FeedPageBloc(),),
-        BlocProvider(create: (BuildContext context) => MumePageBloc(AccountRepository(), loginRepo),),
+        BlocProvider(create: (BuildContext context) => MumePageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => VrPageBloc(loginRepo),),
         BlocProvider(create: (BuildContext context) => MorePageBloc(loginRepo),),
 
