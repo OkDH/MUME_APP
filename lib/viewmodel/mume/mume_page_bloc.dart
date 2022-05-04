@@ -6,7 +6,12 @@ import 'package:mume/viewmodel/login_page_bloc.dart';
 
 class MumePageBloc extends LoginBloc<Object>{
   final AccountRepository _accountRepository;
-  List list = List.empty(growable: true);
+
+  // etf 리스트
+  List etfList = List.empty(growable: true);
+
+  // 내 계좌 리스트
+  List accountList = List.empty(growable: true);
 
   MumePageBloc(
     this._accountRepository,
@@ -15,7 +20,7 @@ class MumePageBloc extends LoginBloc<Object>{
 
   @override
   onInitState() {
-
+    getMyAccountList();
   }
 
   @override
@@ -33,12 +38,12 @@ class MumePageBloc extends LoginBloc<Object>{
 
   }
 
-  void testtest() {
+  void getMyAccountList() {
     _accountRepository.getMyAccountList()
-        .then((value) => list = value.data)
+        .then((value) => accountList = value.data)
         .then((_) => emit(ReBuildPage()))
         .catchError((e){
-          debugPrint("testtest error == $e");
+          debugPrint("getMyAccountList error == $e");
     });
   }
 }
