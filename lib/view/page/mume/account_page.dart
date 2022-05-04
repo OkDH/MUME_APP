@@ -24,6 +24,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(AccountPage.routeName),
+            Text("계좌 갯수 : " + bloc.accountList.length.toString()),
           ],
         ),
       ),

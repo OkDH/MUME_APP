@@ -13,9 +13,13 @@ abstract class RestClient {
   @GET("/stocks/market-index")
   Future<HttpResponse<StockMarketIndex>> getStockMarketIndex();
 
-  ///무매 종목의 시장 지수?
+  ///무매 종목
   @GET("/stocks/etfs")
   Future<HttpResponse<MumeStockMarketIndex>> getMumeStockMarketIndex();
+
+  ///무매 종목 기본 세팅(오늘자 데이터)
+  @GET("/api/stock/init")
+  Future<HttpResponse<MumeStockMarketIndex>> getStockInit();
 
   @POST("/public/member/fcm-token")
   Future<void> postTokens(@Body() Map<String, String> body);

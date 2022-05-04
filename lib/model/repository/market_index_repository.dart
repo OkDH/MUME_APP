@@ -10,4 +10,8 @@ class MarketIndexRepository extends BaseRepository{
   Future<HttpResponse<MumeStockMarketIndex>> getMumeStockMarketIndex(){
     return BaseRepository.api.getMumeStockMarketIndex();
   }
+
+  Future<HttpResponse<MumeStockMarketIndex>> getStockInit(){
+    return BaseRepository.api.getStockInit();
+  }
 }
