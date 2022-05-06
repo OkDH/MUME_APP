@@ -30,7 +30,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
               width:500.0,
               color:Colors.black,),
             Text("종목리스트"),
-            getStockListView(bloc.stockList),
+            //getStockListView(bloc.stockList),
           ],
         ),
       ),
