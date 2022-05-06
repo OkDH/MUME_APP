@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mume/model/repository/account_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
+import 'package:mume/model/dto/stock_market_index.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
 
@@ -19,7 +20,7 @@ class AccountPageBloc extends LoginBloc<Object> {
   
 
   // etf 리스트
-  List etfList = List.empty(growable: true);
+  MumeStockMarketIndex etfData = new MumeStockMarketIndex();
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
@@ -49,12 +50,12 @@ class AccountPageBloc extends LoginBloc<Object> {
   }
 
   void getStockInit() {
-    // _marketIndexRepository
-    //     .getStockInit()
-    //     .then((value) => etfList = value.)
-    //     .then((_) => emit(ReBuildPage()))
-    //     .catchError((e) {
-    //   debugPrint("getStockInit error == $e");
-    // });
+    _marketIndexRepository
+        .getStockInit()
+        .then((value) => etfData = value.data)
+        .then((_) => emit(ReBuildPage()))
+        .catchError((e) {
+      debugPrint("getStockInit error == $e");
+    });
   }
 }
