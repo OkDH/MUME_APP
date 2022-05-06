@@ -79,4 +79,5 @@ class Strings {
   static const String msgCheckServer = "서버 점검을 진행중입니다. 잠시 후 다시 시도해주세요.";
 
   static const String close = "닫기";
+  static const String goLogin = "로그인 하기";
 }

@@ -59,7 +59,9 @@ class BaseRepository{
           _requestRefreshFlow(dioError, handler);
 
         }else if(dioError.response?.statusCode == HttpCustomErrorType.refreshToken.statusCode){
-          httpStateEmitter.add(ChangeLoginState(LoginStateType.logout));
+          sharedPref.clear()
+            .then((value) => httpStateEmitter.add(RequiredLogin()))
+            .catchError((e) => debugPrint(""));
 
         }else throw Exception("ignore");  //catch 실행
       }catch(ignore){

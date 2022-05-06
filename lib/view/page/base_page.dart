@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mume/enums/login_state.dart';
 import 'package:mume/enums/navigate_type.dart';
 import 'package:mume/view/componont/alert.dart';
 import 'package:mume/view/componont/loading.dart';
+import 'package:mume/view/page/login_page.dart';
+import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -119,6 +120,17 @@ abstract class BasePageState<A extends Object, B extends BaseBloc, T extends Sta
     }else if(state is BackPage){
       Navigator.pop(context, state.args);
 
+    }else if(state is RequiredLogin){
+      showDialog(
+        context: context,
+        builder: (context) => MyAlert(ShowAlert(
+            title: Strings.requiredLogin,
+            content: Strings.msgRequiredLogin,
+            btnPositiveText: Strings.goLogin,
+            btnPositiveEvent: () => Navigator.pushNamed(context, LoginPage.routeName)
+        )),
+        barrierDismissible: true,
+      );
     }
   }
 
