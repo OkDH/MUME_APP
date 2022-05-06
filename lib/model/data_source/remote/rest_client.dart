@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:mume/model/dto/account.dart';
-import 'package:mume/model/dto/stock_market_index.dart';
+import 'package:mume/model/dto/mume/account.dart';
+import 'package:mume/model/dto/market_index.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';
@@ -11,15 +11,11 @@ abstract class RestClient {
 
   ///시장 지수
   @GET("/stocks/market-index")
-  Future<HttpResponse<StockMarketIndex>> getStockMarketIndex();
+  Future<HttpResponse<MarketIndex>> getMarketIndex();
 
   ///무매 종목
   @GET("/stocks/etfs")
   Future<HttpResponse<MumeStockMarketIndex>> getMumeStockMarketIndex();
-
-  ///무매 종목 기본 세팅(오늘자 데이터)
-  @GET("/stock/init")
-  Future<HttpResponse<MumeStockMarketIndex>> getStockInit();
 
   @POST("/public/member/fcm-token")
   Future<void> postTokens(@Body() Map<String, String> body);

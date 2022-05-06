@@ -37,7 +37,7 @@ class MainPageBloc extends LoginBloc<Object>{
   }
 
   void loadMarketIndex() {
-    _repository.getStockMarketIndex()
+    _repository.getMarketIndex()
         .then((rsp) {
           debugPrint("loadMarketIndex getStockMarketIndex success == ${rsp.response.statusCode}");
         }).catchError((e){

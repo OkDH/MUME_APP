@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'stock_market_index.dart';
+part of 'market_index.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,603 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Stock _$StockFromJson(Map<String, dynamic> json) {
-  return _Stock.fromJson(json);
+MarketIndex _$MarketIndexFromJson(Map<String, dynamic> json) {
+  return _MarketIndex.fromJson(json);
 }
 
 /// @nodoc
-class _$StockTearOff {
-  const _$StockTearOff();
+class _$MarketIndexTearOff {
+  const _$MarketIndexTearOff();
 
-  _Stock call(
-      {String? symbol,
-      String? stockDate,
-      double? priceHigh,
-      double? priceLow,
-      double? priceClose,
-      double? priceOpen,
-      double? prevClose,
-      double? chg,
-      double? chgp,
-      double? volume,
-      double? upAvg,
-      double? dwAvg,
-      double? rsi,
-      String? updateTime,
-      String? sector,
-      String? sectorName,
-      double? baseRsi,
-      bool? isWarn,
-      String? lastTradeTime,
-      double? gapRsi}) {
-    return _Stock(
-      symbol: symbol,
-      stockDate: stockDate,
-      priceHigh: priceHigh,
-      priceLow: priceLow,
-      priceClose: priceClose,
-      priceOpen: priceOpen,
-      prevClose: prevClose,
-      chg: chg,
-      chgp: chgp,
-      volume: volume,
-      upAvg: upAvg,
-      dwAvg: dwAvg,
-      rsi: rsi,
-      updateTime: updateTime,
-      sector: sector,
-      sectorName: sectorName,
-      baseRsi: baseRsi,
-      isWarn: isWarn,
-      lastTradeTime: lastTradeTime,
-      gapRsi: gapRsi,
-    );
-  }
-
-  Stock fromJson(Map<String, Object?> json) {
-    return Stock.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Stock = _$StockTearOff();
-
-/// @nodoc
-mixin _$Stock {
-  String? get symbol => throw _privateConstructorUsedError;
-  String? get stockDate => throw _privateConstructorUsedError;
-  double? get priceHigh => throw _privateConstructorUsedError;
-  double? get priceLow => throw _privateConstructorUsedError;
-  double? get priceClose => throw _privateConstructorUsedError;
-  double? get priceOpen => throw _privateConstructorUsedError;
-  double? get prevClose => throw _privateConstructorUsedError;
-  double? get chg => throw _privateConstructorUsedError;
-  double? get chgp => throw _privateConstructorUsedError;
-  double? get volume => throw _privateConstructorUsedError;
-  double? get upAvg => throw _privateConstructorUsedError;
-  double? get dwAvg => throw _privateConstructorUsedError;
-  double? get rsi => throw _privateConstructorUsedError;
-  String? get updateTime => throw _privateConstructorUsedError;
-  String? get sector => throw _privateConstructorUsedError;
-  String? get sectorName => throw _privateConstructorUsedError;
-  double? get baseRsi => throw _privateConstructorUsedError;
-  bool? get isWarn => throw _privateConstructorUsedError;
-  String? get lastTradeTime => throw _privateConstructorUsedError;
-  double? get gapRsi => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $StockCopyWith<Stock> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $StockCopyWith<$Res> {
-  factory $StockCopyWith(Stock value, $Res Function(Stock) then) =
-      _$StockCopyWithImpl<$Res>;
-  $Res call(
-      {String? symbol,
-      String? stockDate,
-      double? priceHigh,
-      double? priceLow,
-      double? priceClose,
-      double? priceOpen,
-      double? prevClose,
-      double? chg,
-      double? chgp,
-      double? volume,
-      double? upAvg,
-      double? dwAvg,
-      double? rsi,
-      String? updateTime,
-      String? sector,
-      String? sectorName,
-      double? baseRsi,
-      bool? isWarn,
-      String? lastTradeTime,
-      double? gapRsi});
-}
-
-/// @nodoc
-class _$StockCopyWithImpl<$Res> implements $StockCopyWith<$Res> {
-  _$StockCopyWithImpl(this._value, this._then);
-
-  final Stock _value;
-  // ignore: unused_field
-  final $Res Function(Stock) _then;
-
-  @override
-  $Res call({
-    Object? symbol = freezed,
-    Object? stockDate = freezed,
-    Object? priceHigh = freezed,
-    Object? priceLow = freezed,
-    Object? priceClose = freezed,
-    Object? priceOpen = freezed,
-    Object? prevClose = freezed,
-    Object? chg = freezed,
-    Object? chgp = freezed,
-    Object? volume = freezed,
-    Object? upAvg = freezed,
-    Object? dwAvg = freezed,
-    Object? rsi = freezed,
-    Object? updateTime = freezed,
-    Object? sector = freezed,
-    Object? sectorName = freezed,
-    Object? baseRsi = freezed,
-    Object? isWarn = freezed,
-    Object? lastTradeTime = freezed,
-    Object? gapRsi = freezed,
-  }) {
-    return _then(_value.copyWith(
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stockDate: stockDate == freezed
-          ? _value.stockDate
-          : stockDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      priceHigh: priceHigh == freezed
-          ? _value.priceHigh
-          : priceHigh // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceLow: priceLow == freezed
-          ? _value.priceLow
-          : priceLow // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceClose: priceClose == freezed
-          ? _value.priceClose
-          : priceClose // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceOpen: priceOpen == freezed
-          ? _value.priceOpen
-          : priceOpen // ignore: cast_nullable_to_non_nullable
-              as double?,
-      prevClose: prevClose == freezed
-          ? _value.prevClose
-          : prevClose // ignore: cast_nullable_to_non_nullable
-              as double?,
-      chg: chg == freezed
-          ? _value.chg
-          : chg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      chgp: chgp == freezed
-          ? _value.chgp
-          : chgp // ignore: cast_nullable_to_non_nullable
-              as double?,
-      volume: volume == freezed
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
-      upAvg: upAvg == freezed
-          ? _value.upAvg
-          : upAvg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      dwAvg: dwAvg == freezed
-          ? _value.dwAvg
-          : dwAvg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      rsi: rsi == freezed
-          ? _value.rsi
-          : rsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-      updateTime: updateTime == freezed
-          ? _value.updateTime
-          : updateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sector: sector == freezed
-          ? _value.sector
-          : sector // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sectorName: sectorName == freezed
-          ? _value.sectorName
-          : sectorName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      baseRsi: baseRsi == freezed
-          ? _value.baseRsi
-          : baseRsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isWarn: isWarn == freezed
-          ? _value.isWarn
-          : isWarn // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      lastTradeTime: lastTradeTime == freezed
-          ? _value.lastTradeTime
-          : lastTradeTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gapRsi: gapRsi == freezed
-          ? _value.gapRsi
-          : gapRsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$StockCopyWith<$Res> implements $StockCopyWith<$Res> {
-  factory _$StockCopyWith(_Stock value, $Res Function(_Stock) then) =
-      __$StockCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String? symbol,
-      String? stockDate,
-      double? priceHigh,
-      double? priceLow,
-      double? priceClose,
-      double? priceOpen,
-      double? prevClose,
-      double? chg,
-      double? chgp,
-      double? volume,
-      double? upAvg,
-      double? dwAvg,
-      double? rsi,
-      String? updateTime,
-      String? sector,
-      String? sectorName,
-      double? baseRsi,
-      bool? isWarn,
-      String? lastTradeTime,
-      double? gapRsi});
-}
-
-/// @nodoc
-class __$StockCopyWithImpl<$Res> extends _$StockCopyWithImpl<$Res>
-    implements _$StockCopyWith<$Res> {
-  __$StockCopyWithImpl(_Stock _value, $Res Function(_Stock) _then)
-      : super(_value, (v) => _then(v as _Stock));
-
-  @override
-  _Stock get _value => super._value as _Stock;
-
-  @override
-  $Res call({
-    Object? symbol = freezed,
-    Object? stockDate = freezed,
-    Object? priceHigh = freezed,
-    Object? priceLow = freezed,
-    Object? priceClose = freezed,
-    Object? priceOpen = freezed,
-    Object? prevClose = freezed,
-    Object? chg = freezed,
-    Object? chgp = freezed,
-    Object? volume = freezed,
-    Object? upAvg = freezed,
-    Object? dwAvg = freezed,
-    Object? rsi = freezed,
-    Object? updateTime = freezed,
-    Object? sector = freezed,
-    Object? sectorName = freezed,
-    Object? baseRsi = freezed,
-    Object? isWarn = freezed,
-    Object? lastTradeTime = freezed,
-    Object? gapRsi = freezed,
-  }) {
-    return _then(_Stock(
-      symbol: symbol == freezed
-          ? _value.symbol
-          : symbol // ignore: cast_nullable_to_non_nullable
-              as String?,
-      stockDate: stockDate == freezed
-          ? _value.stockDate
-          : stockDate // ignore: cast_nullable_to_non_nullable
-              as String?,
-      priceHigh: priceHigh == freezed
-          ? _value.priceHigh
-          : priceHigh // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceLow: priceLow == freezed
-          ? _value.priceLow
-          : priceLow // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceClose: priceClose == freezed
-          ? _value.priceClose
-          : priceClose // ignore: cast_nullable_to_non_nullable
-              as double?,
-      priceOpen: priceOpen == freezed
-          ? _value.priceOpen
-          : priceOpen // ignore: cast_nullable_to_non_nullable
-              as double?,
-      prevClose: prevClose == freezed
-          ? _value.prevClose
-          : prevClose // ignore: cast_nullable_to_non_nullable
-              as double?,
-      chg: chg == freezed
-          ? _value.chg
-          : chg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      chgp: chgp == freezed
-          ? _value.chgp
-          : chgp // ignore: cast_nullable_to_non_nullable
-              as double?,
-      volume: volume == freezed
-          ? _value.volume
-          : volume // ignore: cast_nullable_to_non_nullable
-              as double?,
-      upAvg: upAvg == freezed
-          ? _value.upAvg
-          : upAvg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      dwAvg: dwAvg == freezed
-          ? _value.dwAvg
-          : dwAvg // ignore: cast_nullable_to_non_nullable
-              as double?,
-      rsi: rsi == freezed
-          ? _value.rsi
-          : rsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-      updateTime: updateTime == freezed
-          ? _value.updateTime
-          : updateTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sector: sector == freezed
-          ? _value.sector
-          : sector // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sectorName: sectorName == freezed
-          ? _value.sectorName
-          : sectorName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      baseRsi: baseRsi == freezed
-          ? _value.baseRsi
-          : baseRsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-      isWarn: isWarn == freezed
-          ? _value.isWarn
-          : isWarn // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      lastTradeTime: lastTradeTime == freezed
-          ? _value.lastTradeTime
-          : lastTradeTime // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gapRsi: gapRsi == freezed
-          ? _value.gapRsi
-          : gapRsi // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$_Stock implements _Stock {
-  _$_Stock(
-      {this.symbol,
-      this.stockDate,
-      this.priceHigh,
-      this.priceLow,
-      this.priceClose,
-      this.priceOpen,
-      this.prevClose,
-      this.chg,
-      this.chgp,
-      this.volume,
-      this.upAvg,
-      this.dwAvg,
-      this.rsi,
-      this.updateTime,
-      this.sector,
-      this.sectorName,
-      this.baseRsi,
-      this.isWarn,
-      this.lastTradeTime,
-      this.gapRsi});
-
-  factory _$_Stock.fromJson(Map<String, dynamic> json) =>
-      _$$_StockFromJson(json);
-
-  @override
-  final String? symbol;
-  @override
-  final String? stockDate;
-  @override
-  final double? priceHigh;
-  @override
-  final double? priceLow;
-  @override
-  final double? priceClose;
-  @override
-  final double? priceOpen;
-  @override
-  final double? prevClose;
-  @override
-  final double? chg;
-  @override
-  final double? chgp;
-  @override
-  final double? volume;
-  @override
-  final double? upAvg;
-  @override
-  final double? dwAvg;
-  @override
-  final double? rsi;
-  @override
-  final String? updateTime;
-  @override
-  final String? sector;
-  @override
-  final String? sectorName;
-  @override
-  final double? baseRsi;
-  @override
-  final bool? isWarn;
-  @override
-  final String? lastTradeTime;
-  @override
-  final double? gapRsi;
-
-  @override
-  String toString() {
-    return 'Stock(symbol: $symbol, stockDate: $stockDate, priceHigh: $priceHigh, priceLow: $priceLow, priceClose: $priceClose, priceOpen: $priceOpen, prevClose: $prevClose, chg: $chg, chgp: $chgp, volume: $volume, upAvg: $upAvg, dwAvg: $dwAvg, rsi: $rsi, updateTime: $updateTime, sector: $sector, sectorName: $sectorName, baseRsi: $baseRsi, isWarn: $isWarn, lastTradeTime: $lastTradeTime, gapRsi: $gapRsi)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Stock &&
-            const DeepCollectionEquality().equals(other.symbol, symbol) &&
-            const DeepCollectionEquality().equals(other.stockDate, stockDate) &&
-            const DeepCollectionEquality().equals(other.priceHigh, priceHigh) &&
-            const DeepCollectionEquality().equals(other.priceLow, priceLow) &&
-            const DeepCollectionEquality()
-                .equals(other.priceClose, priceClose) &&
-            const DeepCollectionEquality().equals(other.priceOpen, priceOpen) &&
-            const DeepCollectionEquality().equals(other.prevClose, prevClose) &&
-            const DeepCollectionEquality().equals(other.chg, chg) &&
-            const DeepCollectionEquality().equals(other.chgp, chgp) &&
-            const DeepCollectionEquality().equals(other.volume, volume) &&
-            const DeepCollectionEquality().equals(other.upAvg, upAvg) &&
-            const DeepCollectionEquality().equals(other.dwAvg, dwAvg) &&
-            const DeepCollectionEquality().equals(other.rsi, rsi) &&
-            const DeepCollectionEquality()
-                .equals(other.updateTime, updateTime) &&
-            const DeepCollectionEquality().equals(other.sector, sector) &&
-            const DeepCollectionEquality()
-                .equals(other.sectorName, sectorName) &&
-            const DeepCollectionEquality().equals(other.baseRsi, baseRsi) &&
-            const DeepCollectionEquality().equals(other.isWarn, isWarn) &&
-            const DeepCollectionEquality()
-                .equals(other.lastTradeTime, lastTradeTime) &&
-            const DeepCollectionEquality().equals(other.gapRsi, gapRsi));
-  }
-
-  @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        const DeepCollectionEquality().hash(symbol),
-        const DeepCollectionEquality().hash(stockDate),
-        const DeepCollectionEquality().hash(priceHigh),
-        const DeepCollectionEquality().hash(priceLow),
-        const DeepCollectionEquality().hash(priceClose),
-        const DeepCollectionEquality().hash(priceOpen),
-        const DeepCollectionEquality().hash(prevClose),
-        const DeepCollectionEquality().hash(chg),
-        const DeepCollectionEquality().hash(chgp),
-        const DeepCollectionEquality().hash(volume),
-        const DeepCollectionEquality().hash(upAvg),
-        const DeepCollectionEquality().hash(dwAvg),
-        const DeepCollectionEquality().hash(rsi),
-        const DeepCollectionEquality().hash(updateTime),
-        const DeepCollectionEquality().hash(sector),
-        const DeepCollectionEquality().hash(sectorName),
-        const DeepCollectionEquality().hash(baseRsi),
-        const DeepCollectionEquality().hash(isWarn),
-        const DeepCollectionEquality().hash(lastTradeTime),
-        const DeepCollectionEquality().hash(gapRsi)
-      ]);
-
-  @JsonKey(ignore: true)
-  @override
-  _$StockCopyWith<_Stock> get copyWith =>
-      __$StockCopyWithImpl<_Stock>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_StockToJson(this);
-  }
-}
-
-abstract class _Stock implements Stock {
-  factory _Stock(
-      {String? symbol,
-      String? stockDate,
-      double? priceHigh,
-      double? priceLow,
-      double? priceClose,
-      double? priceOpen,
-      double? prevClose,
-      double? chg,
-      double? chgp,
-      double? volume,
-      double? upAvg,
-      double? dwAvg,
-      double? rsi,
-      String? updateTime,
-      String? sector,
-      String? sectorName,
-      double? baseRsi,
-      bool? isWarn,
-      String? lastTradeTime,
-      double? gapRsi}) = _$_Stock;
-
-  factory _Stock.fromJson(Map<String, dynamic> json) = _$_Stock.fromJson;
-
-  @override
-  String? get symbol;
-  @override
-  String? get stockDate;
-  @override
-  double? get priceHigh;
-  @override
-  double? get priceLow;
-  @override
-  double? get priceClose;
-  @override
-  double? get priceOpen;
-  @override
-  double? get prevClose;
-  @override
-  double? get chg;
-  @override
-  double? get chgp;
-  @override
-  double? get volume;
-  @override
-  double? get upAvg;
-  @override
-  double? get dwAvg;
-  @override
-  double? get rsi;
-  @override
-  String? get updateTime;
-  @override
-  String? get sector;
-  @override
-  String? get sectorName;
-  @override
-  double? get baseRsi;
-  @override
-  bool? get isWarn;
-  @override
-  String? get lastTradeTime;
-  @override
-  double? get gapRsi;
-  @override
-  @JsonKey(ignore: true)
-  _$StockCopyWith<_Stock> get copyWith => throw _privateConstructorUsedError;
-}
-
-StockMarketIndex _$StockMarketIndexFromJson(Map<String, dynamic> json) {
-  return _StockMarketIndex.fromJson(json);
-}
-
-/// @nodoc
-class _$StockMarketIndexTearOff {
-  const _$StockMarketIndexTearOff();
-
-  _StockMarketIndex call(
+  _MarketIndex call(
       {@JsonKey(name: Strings.dji) Stock? dji,
       @JsonKey(name: Strings.ixic) Stock? ixic,
       @JsonKey(name: Strings.gspc) Stock? gspc,
@@ -631,7 +43,7 @@ class _$StockMarketIndexTearOff {
       @JsonKey(name: Strings.n225) Stock? n225,
       @JsonKey(name: Strings.stoxx) Stock? stoxx,
       @JsonKey(name: Strings.btckrw) Stock? btckrw}) {
-    return _StockMarketIndex(
+    return _MarketIndex(
       dji: dji,
       ixic: ixic,
       gspc: gspc,
@@ -655,16 +67,16 @@ class _$StockMarketIndexTearOff {
     );
   }
 
-  StockMarketIndex fromJson(Map<String, Object?> json) {
-    return StockMarketIndex.fromJson(json);
+  MarketIndex fromJson(Map<String, Object?> json) {
+    return MarketIndex.fromJson(json);
   }
 }
 
 /// @nodoc
-const $StockMarketIndex = _$StockMarketIndexTearOff();
+const $MarketIndex = _$MarketIndexTearOff();
 
 /// @nodoc
-mixin _$StockMarketIndex {
+mixin _$MarketIndex {
   @JsonKey(name: Strings.dji)
   Stock? get dji => throw _privateConstructorUsedError;
   @JsonKey(name: Strings.ixic)
@@ -708,15 +120,15 @@ mixin _$StockMarketIndex {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $StockMarketIndexCopyWith<StockMarketIndex> get copyWith =>
+  $MarketIndexCopyWith<MarketIndex> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $StockMarketIndexCopyWith<$Res> {
-  factory $StockMarketIndexCopyWith(
-          StockMarketIndex value, $Res Function(StockMarketIndex) then) =
-      _$StockMarketIndexCopyWithImpl<$Res>;
+abstract class $MarketIndexCopyWith<$Res> {
+  factory $MarketIndexCopyWith(
+          MarketIndex value, $Res Function(MarketIndex) then) =
+      _$MarketIndexCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(name: Strings.dji) Stock? dji,
       @JsonKey(name: Strings.ixic) Stock? ixic,
@@ -762,13 +174,12 @@ abstract class $StockMarketIndexCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$StockMarketIndexCopyWithImpl<$Res>
-    implements $StockMarketIndexCopyWith<$Res> {
-  _$StockMarketIndexCopyWithImpl(this._value, this._then);
+class _$MarketIndexCopyWithImpl<$Res> implements $MarketIndexCopyWith<$Res> {
+  _$MarketIndexCopyWithImpl(this._value, this._then);
 
-  final StockMarketIndex _value;
+  final MarketIndex _value;
   // ignore: unused_field
-  final $Res Function(StockMarketIndex) _then;
+  final $Res Function(MarketIndex) _then;
 
   @override
   $Res call({
@@ -1099,11 +510,11 @@ class _$StockMarketIndexCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$StockMarketIndexCopyWith<$Res>
-    implements $StockMarketIndexCopyWith<$Res> {
-  factory _$StockMarketIndexCopyWith(
-          _StockMarketIndex value, $Res Function(_StockMarketIndex) then) =
-      __$StockMarketIndexCopyWithImpl<$Res>;
+abstract class _$MarketIndexCopyWith<$Res>
+    implements $MarketIndexCopyWith<$Res> {
+  factory _$MarketIndexCopyWith(
+          _MarketIndex value, $Res Function(_MarketIndex) then) =
+      __$MarketIndexCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: Strings.dji) Stock? dji,
@@ -1170,15 +581,14 @@ abstract class _$StockMarketIndexCopyWith<$Res>
 }
 
 /// @nodoc
-class __$StockMarketIndexCopyWithImpl<$Res>
-    extends _$StockMarketIndexCopyWithImpl<$Res>
-    implements _$StockMarketIndexCopyWith<$Res> {
-  __$StockMarketIndexCopyWithImpl(
-      _StockMarketIndex _value, $Res Function(_StockMarketIndex) _then)
-      : super(_value, (v) => _then(v as _StockMarketIndex));
+class __$MarketIndexCopyWithImpl<$Res> extends _$MarketIndexCopyWithImpl<$Res>
+    implements _$MarketIndexCopyWith<$Res> {
+  __$MarketIndexCopyWithImpl(
+      _MarketIndex _value, $Res Function(_MarketIndex) _then)
+      : super(_value, (v) => _then(v as _MarketIndex));
 
   @override
-  _StockMarketIndex get _value => super._value as _StockMarketIndex;
+  _MarketIndex get _value => super._value as _MarketIndex;
 
   @override
   $Res call({
@@ -1203,7 +613,7 @@ class __$StockMarketIndexCopyWithImpl<$Res>
     Object? stoxx = freezed,
     Object? btckrw = freezed,
   }) {
-    return _then(_StockMarketIndex(
+    return _then(_MarketIndex(
       dji: dji == freezed
           ? _value.dji
           : dji // ignore: cast_nullable_to_non_nullable
@@ -1290,8 +700,8 @@ class __$StockMarketIndexCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StockMarketIndex implements _StockMarketIndex {
-  _$_StockMarketIndex(
+class _$_MarketIndex implements _MarketIndex {
+  _$_MarketIndex(
       {@JsonKey(name: Strings.dji) this.dji,
       @JsonKey(name: Strings.ixic) this.ixic,
       @JsonKey(name: Strings.gspc) this.gspc,
@@ -1313,8 +723,8 @@ class _$_StockMarketIndex implements _StockMarketIndex {
       @JsonKey(name: Strings.stoxx) this.stoxx,
       @JsonKey(name: Strings.btckrw) this.btckrw});
 
-  factory _$_StockMarketIndex.fromJson(Map<String, dynamic> json) =>
-      _$$_StockMarketIndexFromJson(json);
+  factory _$_MarketIndex.fromJson(Map<String, dynamic> json) =>
+      _$$_MarketIndexFromJson(json);
 
   @override
   @JsonKey(name: Strings.dji)
@@ -1379,14 +789,14 @@ class _$_StockMarketIndex implements _StockMarketIndex {
 
   @override
   String toString() {
-    return 'StockMarketIndex(dji: $dji, ixic: $ixic, gspc: $gspc, sox: $sox, ymf: $ymf, nqf: $nqf, esf: $esf, rtyf: $rtyf, krwx: $krwx, clf: $clf, gcf: $gcf, sif: $sif, tnx: $tnx, vix: $vix, ks11: $ks11, kq11: $kq11, cnss: $cnss, n225: $n225, stoxx: $stoxx, btckrw: $btckrw)';
+    return 'MarketIndex(dji: $dji, ixic: $ixic, gspc: $gspc, sox: $sox, ymf: $ymf, nqf: $nqf, esf: $esf, rtyf: $rtyf, krwx: $krwx, clf: $clf, gcf: $gcf, sif: $sif, tnx: $tnx, vix: $vix, ks11: $ks11, kq11: $kq11, cnss: $cnss, n225: $n225, stoxx: $stoxx, btckrw: $btckrw)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _StockMarketIndex &&
+            other is _MarketIndex &&
             const DeepCollectionEquality().equals(other.dji, dji) &&
             const DeepCollectionEquality().equals(other.ixic, ixic) &&
             const DeepCollectionEquality().equals(other.gspc, gspc) &&
@@ -1436,17 +846,17 @@ class _$_StockMarketIndex implements _StockMarketIndex {
 
   @JsonKey(ignore: true)
   @override
-  _$StockMarketIndexCopyWith<_StockMarketIndex> get copyWith =>
-      __$StockMarketIndexCopyWithImpl<_StockMarketIndex>(this, _$identity);
+  _$MarketIndexCopyWith<_MarketIndex> get copyWith =>
+      __$MarketIndexCopyWithImpl<_MarketIndex>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StockMarketIndexToJson(this);
+    return _$$_MarketIndexToJson(this);
   }
 }
 
-abstract class _StockMarketIndex implements StockMarketIndex {
-  factory _StockMarketIndex(
+abstract class _MarketIndex implements MarketIndex {
+  factory _MarketIndex(
       {@JsonKey(name: Strings.dji) Stock? dji,
       @JsonKey(name: Strings.ixic) Stock? ixic,
       @JsonKey(name: Strings.gspc) Stock? gspc,
@@ -1466,10 +876,10 @@ abstract class _StockMarketIndex implements StockMarketIndex {
       @JsonKey(name: Strings.cnss) Stock? cnss,
       @JsonKey(name: Strings.n225) Stock? n225,
       @JsonKey(name: Strings.stoxx) Stock? stoxx,
-      @JsonKey(name: Strings.btckrw) Stock? btckrw}) = _$_StockMarketIndex;
+      @JsonKey(name: Strings.btckrw) Stock? btckrw}) = _$_MarketIndex;
 
-  factory _StockMarketIndex.fromJson(Map<String, dynamic> json) =
-      _$_StockMarketIndex.fromJson;
+  factory _MarketIndex.fromJson(Map<String, dynamic> json) =
+      _$_MarketIndex.fromJson;
 
   @override
   @JsonKey(name: Strings.dji)
@@ -1533,7 +943,7 @@ abstract class _StockMarketIndex implements StockMarketIndex {
   Stock? get btckrw;
   @override
   @JsonKey(ignore: true)
-  _$StockMarketIndexCopyWith<_StockMarketIndex> get copyWith =>
+  _$MarketIndexCopyWith<_MarketIndex> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

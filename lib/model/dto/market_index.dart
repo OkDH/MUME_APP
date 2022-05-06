@@ -1,41 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mume/enums/login_type.dart';
 import 'package:mume/view/resource/strings.dart';
+import 'package:mume/model/dto/stock.dart';
 
-part 'stock_market_index.freezed.dart';
-part 'stock_market_index.g.dart';
-
-@freezed
-class Stock with _$Stock {
-  factory Stock({
-    String? symbol,
-    String? stockDate,
-    double? priceHigh,
-    double? priceLow,
-    double? priceClose,
-    double? priceOpen,
-    double? prevClose,
-    double? chg,
-    double? chgp,
-    double? volume,
-    double? upAvg,
-    double? dwAvg,
-    double? rsi,
-    String? updateTime,
-    String? sector,
-    String? sectorName,
-    double? baseRsi,
-    bool? isWarn,
-    String? lastTradeTime,
-    double? gapRsi,
-  }) = _Stock;
-
-  factory Stock.fromJson(Map<String, dynamic> json) => _$StockFromJson(json);
-}
+part 'market_index.freezed.dart';
+part 'market_index.g.dart';
 
 @freezed
-class StockMarketIndex with _$StockMarketIndex {
-  factory StockMarketIndex({
+class MarketIndex with _$MarketIndex {
+  factory MarketIndex({
     @JsonKey(name: Strings.dji) Stock? dji,
     @JsonKey(name: Strings.ixic) Stock? ixic,
     @JsonKey(name: Strings.gspc) Stock? gspc,
@@ -56,9 +28,9 @@ class StockMarketIndex with _$StockMarketIndex {
     @JsonKey(name: Strings.n225) Stock? n225,
     @JsonKey(name: Strings.stoxx) Stock? stoxx,
     @JsonKey(name: Strings.btckrw) Stock? btckrw,
-  }) = _StockMarketIndex;
+  }) = _MarketIndex;
 
-  factory StockMarketIndex.fromJson(Map<String, dynamic> json) => _$StockMarketIndexFromJson(json);
+  factory MarketIndex.fromJson(Map<String, dynamic> json) => _$MarketIndexFromJson(json);
 }
 
 @freezed

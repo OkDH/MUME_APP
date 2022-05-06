@@ -16,18 +16,18 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<StockMarketIndex>> getStockMarketIndex() async {
+  Future<HttpResponse<MarketIndex>> getMarketIndex() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<StockMarketIndex>>(
+        _setStreamType<HttpResponse<MarketIndex>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/stocks/market-index',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = StockMarketIndex.fromJson(_result.data!);
+    final value = MarketIndex.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }
@@ -42,23 +42,6 @@ class _RestClient implements RestClient {
         _setStreamType<HttpResponse<MumeStockMarketIndex>>(
             Options(method: 'GET', headers: _headers, extra: _extra)
                 .compose(_dio.options, '/stocks/etfs',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = MumeStockMarketIndex.fromJson(_result.data!);
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
-  Future<HttpResponse<MumeStockMarketIndex>> getStockInit() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<MumeStockMarketIndex>>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
-                .compose(_dio.options, '/stock/init',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = MumeStockMarketIndex.fromJson(_result.data!);
