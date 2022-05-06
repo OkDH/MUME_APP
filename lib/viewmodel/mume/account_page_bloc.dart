@@ -87,15 +87,15 @@ class AccountPageBloc extends LoginBloc<Object> {
    
     // 무한매수 상태 필터
     query["infiniteState"] = List.empty(growable: true);
-    filter["infiniteState"].forEach((k, v) => query["infiniteState"].push(k));
+    filter["infiniteState"].forEach((k, v) => query["infiniteState"].add(k));
 
     // 무한매수/TLP 필터
     query["infiniteType"] = List.empty(growable: true);
-    filter["infiniteType"].forEach((k, v) => query["infiniteType"].push(k));
+    filter["infiniteType"].forEach((k, v) => query["infiniteType"].add(k));
 
     // 무한매수 버전 필터
     query["infiniteVersion"] = List.empty(growable: true);
-    filter["infiniteVersion"].forEach((k, v) => query["infiniteVersion"].push(k));
+    filter["infiniteVersion"].forEach((k, v) => query["infiniteVersion"].add(k));
 
     // 정렬
 		query["orderBy"] = filter["order"]["value"];
