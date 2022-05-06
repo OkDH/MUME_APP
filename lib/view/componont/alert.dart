@@ -21,8 +21,8 @@ class MyAlert extends StatelessWidget {
         MyButton(
           text: alert.btnPositiveText,
           onPressed: (){
-            alert.btnPositiveEvent?.call();
             Navigator.pop(context, alert.popArgs);
+            alert.btnPositiveEvent?.call();
           },
         ),
 
