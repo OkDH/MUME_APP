@@ -1,21 +1,26 @@
 import 'package:flutter/foundation.dart';
-import 'package:mume/model/repository/mume/account_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
-import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
+import 'package:mume/model/repository/mume/account_repository.dart';
+import 'package:mume/model/repository/mume/stock_repository.dart';
 
 class AccountPageBloc extends LoginBloc<Object> {
 
   final AccountRepository _accountRepository;
+  final StockRepository _stockRepository;
 
   AccountPageBloc(
     this._accountRepository,
+    this._stockRepository,
     LoginRepository loginRepository,
   ) : super(loginRepository);
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
+
+  // 계좌 내 종목 리스트
+  List stockList = List.empty(growable: true);
 
   // 계좌 내 종목 검색 쿼리
   Map<String, dynamic> query = {
@@ -101,7 +106,13 @@ class AccountPageBloc extends LoginBloc<Object> {
 		query["orderBy"] = filter["order"]["value"];
 
     // 조회
-    
+    _stockRepository
+        .getStocks(query)
+        .then((value) => stockList = value.data)
+        .then((_) => emit(ReBuildPage()))
+        .catchError((e) {
+      debugPrint("getStocks error == $e");
+    });
   }
 
 }

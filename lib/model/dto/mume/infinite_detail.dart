@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mume/model/dto/stock.dart';
+import 'package:mume/model/dto/mume/infinite_history.dart';
+import 'package:mume/model/dto/mume/stock_trade_info.dart';
+import 'package:mume/model/dto/mume/average_price_info.dart';
 
 part 'infinite_detail.freezed.dart';
 part 'infinite_detail.g.dart';
@@ -10,10 +13,15 @@ class InfiniteDetail with _$InfiniteDetail {
     // 해당 심볼 주가 정보
     Stock? stockDetail, 
     // 해당 심볼 주가 history
+    List<Stock>? stockList,
     // 매매 내역 리스트
+    List<InfiniteHistory>? historyList,
     // 매수 예약 정보 리스트
+    List<StockTradeInfo>? buyTradeInfoList,
     // 매도 예약 정보 리스트
+    List<StockTradeInfo>? sellTradeInfoList,
     // 평단가 변화 리스트
+    List<AveragePriceInfo>? averagePriceList,
 
     // 종목 배정 시드
     double? seed,
@@ -27,7 +35,6 @@ class InfiniteDetail with _$InfiniteDetail {
     double? evalPrice,
     // 평단가
     double? averagePrice,
-    // 일별 평단가 리스트
     // 매입금액
     double? buyPrice,
     // 손익금

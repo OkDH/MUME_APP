@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:mume/model/dto/mume/account.dart';
-import 'package:mume/model/dto/market_index.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:mume/model/dto/market_index.dart';
+import 'package:mume/model/dto/mume/account.dart';
+import 'package:mume/model/dto/mume/infinite_detail.dart';
 
 part 'rest_client.g.dart';
 
@@ -28,11 +29,20 @@ abstract class RestClient {
   @POST("/auth/refresh")
   Future<HttpResponse<void>> refreshToken(@Header("refresh_token") String token);
 
+  ///서버 상태 체크
+  @GET("/health-check")
+  Future<HttpResponse<bool>> checkServerHealth();
+
+  // mume 관련 -------
+
   ///내 계좌 데이터
   @GET("/infinite/my-account")
   Future<HttpResponse<List<Account>>> getMyAccounts();
 
-  ///내 계좌 데이터
-  @GET("/health-check")
-  Future<HttpResponse<bool>> checkServerHealth();
+  ///계좌 내 종목 조회
+  @POST("/infinite/stocks")
+  Future<HttpResponse<List<InfiniteDetail>>> getStocks(@Body() Map<String, dynamic> params);
+
+  // ----------------
+
 }

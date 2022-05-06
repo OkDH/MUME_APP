@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mume/model/repository/mume/account_repository.dart';
+import 'package:mume/model/repository/mume/stock_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/model/repository/splash_repository.dart';
@@ -59,7 +60,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ///Mume sub page
         BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
-        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), loginRepo),),
+        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), StockRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => OrderListPageBloc(),),
         BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
 

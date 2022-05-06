@@ -24,6 +24,11 @@ class _$InfiniteDetailTearOff {
 
   _InfiniteDetail call(
       {Stock? stockDetail,
+      List<Stock>? stockList,
+      List<InfiniteHistory>? historyList,
+      List<StockTradeInfo>? buyTradeInfoList,
+      List<StockTradeInfo>? sellTradeInfoList,
+      List<AveragePriceInfo>? averagePriceList,
       double? seed,
       int? holdingQuantity,
       int? realFeesPer,
@@ -36,6 +41,11 @@ class _$InfiniteDetailTearOff {
       double? progressPer}) {
     return _InfiniteDetail(
       stockDetail: stockDetail,
+      stockList: stockList,
+      historyList: historyList,
+      buyTradeInfoList: buyTradeInfoList,
+      sellTradeInfoList: sellTradeInfoList,
+      averagePriceList: averagePriceList,
       seed: seed,
       holdingQuantity: holdingQuantity,
       realFeesPer: realFeesPer,
@@ -62,11 +72,15 @@ mixin _$InfiniteDetail {
 // 해당 심볼 주가 정보
   Stock? get stockDetail =>
       throw _privateConstructorUsedError; // 해당 심볼 주가 history
-// 매매 내역 리스트
-// 매수 예약 정보 리스트
-// 매도 예약 정보 리스트
-// 평단가 변화 리스트
-// 종목 배정 시드
+  List<Stock>? get stockList => throw _privateConstructorUsedError; // 매매 내역 리스트
+  List<InfiniteHistory>? get historyList =>
+      throw _privateConstructorUsedError; // 매수 예약 정보 리스트
+  List<StockTradeInfo>? get buyTradeInfoList =>
+      throw _privateConstructorUsedError; // 매도 예약 정보 리스트
+  List<StockTradeInfo>? get sellTradeInfoList =>
+      throw _privateConstructorUsedError; // 평단가 변화 리스트
+  List<AveragePriceInfo>? get averagePriceList =>
+      throw _privateConstructorUsedError; // 종목 배정 시드
   double? get seed => throw _privateConstructorUsedError; // 수량
   int? get holdingQuantity =>
       throw _privateConstructorUsedError; // 계산용 수수료율 (수수료율 * 0.01)
@@ -74,8 +88,7 @@ mixin _$InfiniteDetail {
   double? get oneBuySeed =>
       throw _privateConstructorUsedError; // 평가금액 : 종가 * 보유수량
   double? get evalPrice => throw _privateConstructorUsedError; // 평단가
-  double? get averagePrice => throw _privateConstructorUsedError; // 일별 평단가 리스트
-// 매입금액
+  double? get averagePrice => throw _privateConstructorUsedError; // 매입금액
   double? get buyPrice => throw _privateConstructorUsedError; // 손익금
   double? get income => throw _privateConstructorUsedError; // 손익률
   double? get incomePer => throw _privateConstructorUsedError; // 진행률
@@ -94,6 +107,11 @@ abstract class $InfiniteDetailCopyWith<$Res> {
       _$InfiniteDetailCopyWithImpl<$Res>;
   $Res call(
       {Stock? stockDetail,
+      List<Stock>? stockList,
+      List<InfiniteHistory>? historyList,
+      List<StockTradeInfo>? buyTradeInfoList,
+      List<StockTradeInfo>? sellTradeInfoList,
+      List<AveragePriceInfo>? averagePriceList,
       double? seed,
       int? holdingQuantity,
       int? realFeesPer,
@@ -120,6 +138,11 @@ class _$InfiniteDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stockDetail = freezed,
+    Object? stockList = freezed,
+    Object? historyList = freezed,
+    Object? buyTradeInfoList = freezed,
+    Object? sellTradeInfoList = freezed,
+    Object? averagePriceList = freezed,
     Object? seed = freezed,
     Object? holdingQuantity = freezed,
     Object? realFeesPer = freezed,
@@ -136,6 +159,26 @@ class _$InfiniteDetailCopyWithImpl<$Res>
           ? _value.stockDetail
           : stockDetail // ignore: cast_nullable_to_non_nullable
               as Stock?,
+      stockList: stockList == freezed
+          ? _value.stockList
+          : stockList // ignore: cast_nullable_to_non_nullable
+              as List<Stock>?,
+      historyList: historyList == freezed
+          ? _value.historyList
+          : historyList // ignore: cast_nullable_to_non_nullable
+              as List<InfiniteHistory>?,
+      buyTradeInfoList: buyTradeInfoList == freezed
+          ? _value.buyTradeInfoList
+          : buyTradeInfoList // ignore: cast_nullable_to_non_nullable
+              as List<StockTradeInfo>?,
+      sellTradeInfoList: sellTradeInfoList == freezed
+          ? _value.sellTradeInfoList
+          : sellTradeInfoList // ignore: cast_nullable_to_non_nullable
+              as List<StockTradeInfo>?,
+      averagePriceList: averagePriceList == freezed
+          ? _value.averagePriceList
+          : averagePriceList // ignore: cast_nullable_to_non_nullable
+              as List<AveragePriceInfo>?,
       seed: seed == freezed
           ? _value.seed
           : seed // ignore: cast_nullable_to_non_nullable
@@ -200,6 +243,11 @@ abstract class _$InfiniteDetailCopyWith<$Res>
   @override
   $Res call(
       {Stock? stockDetail,
+      List<Stock>? stockList,
+      List<InfiniteHistory>? historyList,
+      List<StockTradeInfo>? buyTradeInfoList,
+      List<StockTradeInfo>? sellTradeInfoList,
+      List<AveragePriceInfo>? averagePriceList,
       double? seed,
       int? holdingQuantity,
       int? realFeesPer,
@@ -229,6 +277,11 @@ class __$InfiniteDetailCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stockDetail = freezed,
+    Object? stockList = freezed,
+    Object? historyList = freezed,
+    Object? buyTradeInfoList = freezed,
+    Object? sellTradeInfoList = freezed,
+    Object? averagePriceList = freezed,
     Object? seed = freezed,
     Object? holdingQuantity = freezed,
     Object? realFeesPer = freezed,
@@ -245,6 +298,26 @@ class __$InfiniteDetailCopyWithImpl<$Res>
           ? _value.stockDetail
           : stockDetail // ignore: cast_nullable_to_non_nullable
               as Stock?,
+      stockList: stockList == freezed
+          ? _value.stockList
+          : stockList // ignore: cast_nullable_to_non_nullable
+              as List<Stock>?,
+      historyList: historyList == freezed
+          ? _value.historyList
+          : historyList // ignore: cast_nullable_to_non_nullable
+              as List<InfiniteHistory>?,
+      buyTradeInfoList: buyTradeInfoList == freezed
+          ? _value.buyTradeInfoList
+          : buyTradeInfoList // ignore: cast_nullable_to_non_nullable
+              as List<StockTradeInfo>?,
+      sellTradeInfoList: sellTradeInfoList == freezed
+          ? _value.sellTradeInfoList
+          : sellTradeInfoList // ignore: cast_nullable_to_non_nullable
+              as List<StockTradeInfo>?,
+      averagePriceList: averagePriceList == freezed
+          ? _value.averagePriceList
+          : averagePriceList // ignore: cast_nullable_to_non_nullable
+              as List<AveragePriceInfo>?,
       seed: seed == freezed
           ? _value.seed
           : seed // ignore: cast_nullable_to_non_nullable
@@ -294,6 +367,11 @@ class __$InfiniteDetailCopyWithImpl<$Res>
 class _$_InfiniteDetail implements _InfiniteDetail {
   _$_InfiniteDetail(
       {this.stockDetail,
+      this.stockList,
+      this.historyList,
+      this.buyTradeInfoList,
+      this.sellTradeInfoList,
+      this.averagePriceList,
       this.seed,
       this.holdingQuantity,
       this.realFeesPer,
@@ -311,11 +389,16 @@ class _$_InfiniteDetail implements _InfiniteDetail {
   @override // 해당 심볼 주가 정보
   final Stock? stockDetail;
   @override // 해당 심볼 주가 history
-// 매매 내역 리스트
-// 매수 예약 정보 리스트
-// 매도 예약 정보 리스트
-// 평단가 변화 리스트
-// 종목 배정 시드
+  final List<Stock>? stockList;
+  @override // 매매 내역 리스트
+  final List<InfiniteHistory>? historyList;
+  @override // 매수 예약 정보 리스트
+  final List<StockTradeInfo>? buyTradeInfoList;
+  @override // 매도 예약 정보 리스트
+  final List<StockTradeInfo>? sellTradeInfoList;
+  @override // 평단가 변화 리스트
+  final List<AveragePriceInfo>? averagePriceList;
+  @override // 종목 배정 시드
   final double? seed;
   @override // 수량
   final int? holdingQuantity;
@@ -327,8 +410,7 @@ class _$_InfiniteDetail implements _InfiniteDetail {
   final double? evalPrice;
   @override // 평단가
   final double? averagePrice;
-  @override // 일별 평단가 리스트
-// 매입금액
+  @override // 매입금액
   final double? buyPrice;
   @override // 손익금
   final double? income;
@@ -339,7 +421,7 @@ class _$_InfiniteDetail implements _InfiniteDetail {
 
   @override
   String toString() {
-    return 'InfiniteDetail(stockDetail: $stockDetail, seed: $seed, holdingQuantity: $holdingQuantity, realFeesPer: $realFeesPer, oneBuySeed: $oneBuySeed, evalPrice: $evalPrice, averagePrice: $averagePrice, buyPrice: $buyPrice, income: $income, incomePer: $incomePer, progressPer: $progressPer)';
+    return 'InfiniteDetail(stockDetail: $stockDetail, stockList: $stockList, historyList: $historyList, buyTradeInfoList: $buyTradeInfoList, sellTradeInfoList: $sellTradeInfoList, averagePriceList: $averagePriceList, seed: $seed, holdingQuantity: $holdingQuantity, realFeesPer: $realFeesPer, oneBuySeed: $oneBuySeed, evalPrice: $evalPrice, averagePrice: $averagePrice, buyPrice: $buyPrice, income: $income, incomePer: $incomePer, progressPer: $progressPer)';
   }
 
   @override
@@ -349,6 +431,15 @@ class _$_InfiniteDetail implements _InfiniteDetail {
             other is _InfiniteDetail &&
             const DeepCollectionEquality()
                 .equals(other.stockDetail, stockDetail) &&
+            const DeepCollectionEquality().equals(other.stockList, stockList) &&
+            const DeepCollectionEquality()
+                .equals(other.historyList, historyList) &&
+            const DeepCollectionEquality()
+                .equals(other.buyTradeInfoList, buyTradeInfoList) &&
+            const DeepCollectionEquality()
+                .equals(other.sellTradeInfoList, sellTradeInfoList) &&
+            const DeepCollectionEquality()
+                .equals(other.averagePriceList, averagePriceList) &&
             const DeepCollectionEquality().equals(other.seed, seed) &&
             const DeepCollectionEquality()
                 .equals(other.holdingQuantity, holdingQuantity) &&
@@ -370,6 +461,11 @@ class _$_InfiniteDetail implements _InfiniteDetail {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(stockDetail),
+      const DeepCollectionEquality().hash(stockList),
+      const DeepCollectionEquality().hash(historyList),
+      const DeepCollectionEquality().hash(buyTradeInfoList),
+      const DeepCollectionEquality().hash(sellTradeInfoList),
+      const DeepCollectionEquality().hash(averagePriceList),
       const DeepCollectionEquality().hash(seed),
       const DeepCollectionEquality().hash(holdingQuantity),
       const DeepCollectionEquality().hash(realFeesPer),
@@ -395,6 +491,11 @@ class _$_InfiniteDetail implements _InfiniteDetail {
 abstract class _InfiniteDetail implements InfiniteDetail {
   factory _InfiniteDetail(
       {Stock? stockDetail,
+      List<Stock>? stockList,
+      List<InfiniteHistory>? historyList,
+      List<StockTradeInfo>? buyTradeInfoList,
+      List<StockTradeInfo>? sellTradeInfoList,
+      List<AveragePriceInfo>? averagePriceList,
       double? seed,
       int? holdingQuantity,
       int? realFeesPer,
@@ -412,11 +513,16 @@ abstract class _InfiniteDetail implements InfiniteDetail {
   @override // 해당 심볼 주가 정보
   Stock? get stockDetail;
   @override // 해당 심볼 주가 history
-// 매매 내역 리스트
-// 매수 예약 정보 리스트
-// 매도 예약 정보 리스트
-// 평단가 변화 리스트
-// 종목 배정 시드
+  List<Stock>? get stockList;
+  @override // 매매 내역 리스트
+  List<InfiniteHistory>? get historyList;
+  @override // 매수 예약 정보 리스트
+  List<StockTradeInfo>? get buyTradeInfoList;
+  @override // 매도 예약 정보 리스트
+  List<StockTradeInfo>? get sellTradeInfoList;
+  @override // 평단가 변화 리스트
+  List<AveragePriceInfo>? get averagePriceList;
+  @override // 종목 배정 시드
   double? get seed;
   @override // 수량
   int? get holdingQuantity;
@@ -428,8 +534,7 @@ abstract class _InfiniteDetail implements InfiniteDetail {
   double? get evalPrice;
   @override // 평단가
   double? get averagePrice;
-  @override // 일별 평단가 리스트
-// 매입금액
+  @override // 매입금액
   double? get buyPrice;
   @override // 손익금
   double? get income;
