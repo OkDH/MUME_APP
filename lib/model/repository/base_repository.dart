@@ -57,6 +57,9 @@ class BaseRepository{
       try{
         if(dioError.response?.statusCode == HttpCustomErrorType.accessToken.statusCode){
           _requestRefreshFlow(dioError, handler);
+          // sharedPref.clear()
+          //     .then((value) => httpStateEmitter.add(RequiredLogin()))
+          //     .catchError((e) => debugPrint(""));
 
         }else if(dioError.response?.statusCode == HttpCustomErrorType.refreshToken.statusCode){
           sharedPref.clear()
@@ -76,11 +79,15 @@ class BaseRepository{
     return OAuthToken(accessToken: access, refreshToken: refresh);
   }
 
-  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions, OAuthToken newToken) async {
+    var header = requestOptions.headers;
+    header["ACCESS_TOKEN"] = newToken.accessToken;
+
     final options = Options(
       method: requestOptions.method,
-      headers: requestOptions.headers,
+      headers: header,
     );
+
     return Dio().request<dynamic>(requestOptions.path,
         data: requestOptions.data,
         queryParameters: requestOptions.queryParameters,
@@ -89,12 +96,18 @@ class BaseRepository{
 
   void _requestRefreshFlow(DioError dioError, ErrorInterceptorHandler handler) {
     debugPrint("call _requestRefreshFlow");
-    sharedPref.getOAuthToken()
-        .then((legacyToken) => api.refreshToken(legacyToken.refreshToken ?? ""))
+    OAuthToken? token;
+
+    sharedPref.getOAuthToken().asStream()
+        .where((legacyToken) => legacyToken.refreshToken?.isNotEmpty ?? false).first
+        .then((legacyToken) => api.refreshToken(legacyToken.refreshToken!))
         .then((result) => httpHeaderToOAuthToken(result.response.headers))
-        .then((newToken) => sharedPref.setOAuthToken(newToken))
+        .then((newToken) {
+          token = newToken;
+          sharedPref.setOAuthToken(newToken);
+        })
         .then((_) => updateRestClientHeader())
-        .then((_) => _retry(dioError.requestOptions))
+        .then((_) => _retry(dioError.requestOptions, token!))
         .then((retryRsp) => handler.resolve(retryRsp))
         .catchError((e) => handler.reject(DioError(requestOptions: dioError.requestOptions, error: e)));
   }
