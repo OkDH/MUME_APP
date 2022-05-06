@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:mume/model/dto/market_index.dart';
 import 'package:mume/model/dto/mume/account.dart';
+import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
 
 part 'rest_client.g.dart';
@@ -40,8 +41,8 @@ abstract class RestClient {
   Future<HttpResponse<List<Account>>> getMyAccounts();
 
   ///계좌 내 종목들 현황 조회
-  // @POST("/infinite/stocks")
-  // Future<HttpResponse<List<InfiniteDetail>>> getMyAccountState(@Body() Map<String, dynamic> params);
+  @POST("/infinite/account/state")
+  Future<HttpResponse<StateMap>> getMyAccountState(@Body() Map<String, dynamic> params);
 
   ///계좌 내 종목 조회
   @POST("/infinite/stocks")

@@ -25,9 +25,25 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
           children: [
             Text(AccountPage.routeName),
             Text("계좌 갯수 : " + bloc.accountList.length.toString()),
+            Text("선택 된 계좌 : " + bloc.query["accountId"]),
+            Container( height:1.0,
+              width:500.0,
+              color:Colors.black,),
+            Text("종목리스트"),
+            getStockListView(bloc.stockList),
           ],
         ),
       ),
+    );
+  }
+
+  Widget getStockListView(List<dynamic> stockList){
+    return ListView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: stockList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Text("index : " + index.toString());
+      },
     );
   }
 

@@ -1,4 +1,6 @@
+import 'dart:collection';
 import 'package:flutter/foundation.dart';
+import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
@@ -18,6 +20,9 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
+
+  // 계좌 현황
+  StateMap accountState = new StateMap();
 
   // 계좌 내 종목 리스트
   List stockList = List.empty(growable: true);
@@ -86,7 +91,15 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   // 계좌 내 종목 현황 조회
   void getAccountState(){
-    
+    Map<String, dynamic> params = new HashMap<String, dynamic>();
+    params["accountId"] = query["accountId"];
+    _accountRepository
+        .getMyAccountState(params)
+        .then((value) => accountState = value.data)
+        .then((_) => emit(ReBuildPage()))
+        .catchError((e) {
+      debugPrint("getMyAccountList error == $e");
+    });
   }
 
   // 계좌 내 종목 가져오기
@@ -109,6 +122,8 @@ class AccountPageBloc extends LoginBloc<Object> {
 
     // 정렬
 		query["orderBy"] = filter["order"]["value"];
+
+    debugPrint("getStocks query == $query");
 
     // 조회
     _stockRepository
