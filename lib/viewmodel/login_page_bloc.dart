@@ -10,7 +10,7 @@ import 'package:retrofit/retrofit.dart';
 abstract class LoginBloc<T> extends BaseBloc<T>{
   final LoginRepository _loginRepository;
 
-  LoginBloc(this._loginRepository);
+  LoginBloc(this._loginRepository, {bool isParentView = false});
 
   ///로그인이 필요한 페이지에서 로그인 전/후 화면 여부 반환
   Future<bool> isShowLoginView() {
@@ -51,7 +51,7 @@ abstract class LoginBloc<T> extends BaseBloc<T>{
 class LoginPageBloc extends LoginBloc<Object>{
   final LoginRepository _loginRepository;
 
-  LoginPageBloc(this._loginRepository) : super(_loginRepository);
+  LoginPageBloc(this._loginRepository) : super(_loginRepository, isParentView: true);
 
   @override
   onDispose() {
