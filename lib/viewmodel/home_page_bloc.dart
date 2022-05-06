@@ -16,7 +16,7 @@ class HomePageBloc extends BaseBloc{
 
   late StreamSubscription<BaseState> _mumeStream, _vrStream, _moreStream;
 
-  HomePageBloc(this._mumePageBloc, this._vrPageBloc, this._morePageBloc);
+  HomePageBloc(this._mumePageBloc, this._vrPageBloc, this._morePageBloc) : super(isParentView: true);
 
   @override
   onInitState() {

@@ -8,7 +8,7 @@ import 'package:mume/viewmodel/base_bloc.dart';
 class SplashPageBloc extends BaseBloc<Object>{
   final SplashRepository _splashRepository;
 
-  SplashPageBloc(this._splashRepository);
+  SplashPageBloc(this._splashRepository): super(isParentView: true);
 
   @override
   onInitState() {

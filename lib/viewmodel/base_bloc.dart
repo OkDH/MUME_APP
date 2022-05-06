@@ -11,11 +11,15 @@ import 'package:mume/viewmodel/base_bloc.dart';
 ///기본 비즈니스 로직, view 계층에서 동작하는 함수들 추상화
 ///========================================비즈니스 로직=====================================================
 abstract class BaseBloc<A> extends Cubit<BaseState>{
-  BaseBloc(): super(Init()){
-    BaseRepository.httpStateEmitter.stream.listen((event) {
-      emit(ChangeLoginState(LoginStateType.logout));
-      emit(ShowAlert(title: Strings.requiredLogin, content: Strings.msgRequiredLogin));
-    });
+  BaseBloc({
+    bool isParentView = false
+  }): super(Init()){
+    if(isParentView){
+      BaseRepository.httpStateEmitter.stream.listen((event) {
+        emit(ChangeLoginState(LoginStateType.logout));
+        emit(ShowAlert(title: Strings.requiredLogin, content: Strings.msgRequiredLogin));
+      });
+    }
   }
 
   ///실행되는 순서대로 함수 나열
