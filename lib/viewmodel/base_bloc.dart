@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mume/enums/login_state.dart';
 import 'package:mume/enums/navigate_type.dart';
@@ -15,10 +16,7 @@ abstract class BaseBloc<A> extends Cubit<BaseState>{
     bool isParentView = false
   }): super(Init()){
     if(isParentView){
-      BaseRepository.httpStateEmitter.stream.listen((event) {
-        emit(ChangeLoginState(LoginStateType.logout));
-        emit(ShowAlert(title: Strings.requiredLogin, content: Strings.msgRequiredLogin));
-      });
+      initLoginStateListener();
     }
   }
 
@@ -40,6 +38,10 @@ abstract class BaseBloc<A> extends Cubit<BaseState>{
   ///단순 페이지 재 빌드 setState 사용 안하기 위해서 정의했음.
   rebuildPage(){
     emit(ReBuildPage());
+  }
+
+  void initLoginStateListener() {
+    BaseRepository.httpStateEmitter.stream.listen((state) => emit(state));
   }
 }
 
@@ -150,4 +152,13 @@ class ReBuildPage extends BaseState{
 
   @override
   List<Object?> get props => [];
+}
+
+class RequiredLogin extends BaseState{
+  final int _force = DateTime.now().second;
+
+  RequiredLogin();
+
+  @override
+  List<Object?> get props => [_force];
 }
