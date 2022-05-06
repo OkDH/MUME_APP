@@ -29,7 +29,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             Container( height:1.0,
               width:500.0,
               color:Colors.black,),
-            Text("종목리스트"),
+            Text("종목 갯수 : " + bloc.stockList.length.toString()),
             //getStockListView(bloc.stockList),
           ],
         ),
