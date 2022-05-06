@@ -39,6 +39,10 @@ abstract class RestClient {
   @GET("/infinite/my-account")
   Future<HttpResponse<List<Account>>> getMyAccounts();
 
+  ///계좌 내 종목들 현황 조회
+  // @POST("/infinite/stocks")
+  // Future<HttpResponse<List<InfiniteDetail>>> getMyAccountState(@Body() Map<String, dynamic> params);
+
   ///계좌 내 종목 조회
   @POST("/infinite/stocks")
   Future<HttpResponse<List<InfiniteDetail>>> getStocks(@Body() Map<String, dynamic> params);

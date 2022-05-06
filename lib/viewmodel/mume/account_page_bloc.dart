@@ -84,6 +84,11 @@ class AccountPageBloc extends LoginBloc<Object> {
     });
   }
 
+  // 계좌 내 종목 현황 조회
+  void getAccountState(){
+    
+  }
+
   // 계좌 내 종목 가져오기
   void getStocks(int offset){
      query["offset"] = offset;
