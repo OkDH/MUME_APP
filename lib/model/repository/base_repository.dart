@@ -57,9 +57,6 @@ class BaseRepository{
       try{
         if(dioError.response?.statusCode == HttpCustomErrorType.accessToken.statusCode){
           _requestRefreshFlow(dioError, handler);
-          // sharedPref.clear()
-          //     .then((value) => httpStateEmitter.add(RequiredLogin()))
-          //     .catchError((e) => debugPrint(""));
 
         }else if(dioError.response?.statusCode == HttpCustomErrorType.refreshToken.statusCode){
           sharedPref.clear()
@@ -104,7 +101,7 @@ class BaseRepository{
         .then((result) => httpHeaderToOAuthToken(result.response.headers))
         .then((newToken) {
           token = newToken;
-          sharedPref.setOAuthToken(newToken);
+          return sharedPref.setOAuthToken(newToken);
         })
         .then((_) => updateRestClientHeader())
         .then((_) => _retry(dioError.requestOptions, token!))

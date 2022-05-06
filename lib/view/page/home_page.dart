@@ -24,7 +24,7 @@ class _HomePageState extends BasePageState<String, HomePageBloc, HomePage> {
   void onChangeStateListener(BuildContext context, BaseState state, Size windowSize) {
     super.onChangeStateListener(context, state, windowSize);
 
-    if(state is ChangeLoginState){
+    if(state is ChangeLoginState || state is RequiredLogin){
       context.read<MumePageBloc>().rebuildPage();
       context.read<VrPageBloc>().rebuildPage();
       context.read<MorePageBloc>().rebuildPage();
