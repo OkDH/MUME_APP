@@ -37,8 +37,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             Container( height:1.0,
               width:500.0,
               color:Colors.black,),
-            Text("종목 갯수 : " + bloc.stockList.length.toString()),
-            //getStockListView(bloc.stockList),
+            getStockListView(bloc.stockList),
           ],
         ),
       ),
@@ -48,10 +47,16 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
   Widget getStockListView(List<dynamic> stockList){
     return ListView.builder(
       padding: const EdgeInsets.all(8),
+      shrinkWrap: true,
       itemCount: stockList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Text("index : " + index.toString());
+        return Card(
+            child: ListTile(
+              title:Text(stockList[index].symbol) ,
+            )
+          );
       },
+      
     );
   }
 
