@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 class Config {
   ///url
   static const baseUrl = "http://mume.ocko.co.kr";
-  // static const baseUrlTest = "http://192.168.0.23:8088/dev";
+  // static const baseUrlTest = "http://192.168.0.14:8088/dev";
   static const baseUrlTest = "http://mume.ocko.co.kr/dev";
   static const apiUrl = (kReleaseMode ? baseUrl : baseUrlTest) + "/api";
 

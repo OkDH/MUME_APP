@@ -10,6 +10,28 @@ part 'infinite_detail.g.dart';
 @freezed
 class InfiniteDetail with _$InfiniteDetail {
   factory InfiniteDetail({
+    int? memberId,
+    int? accountId,
+    int? infiniteId,
+    String? symbol,
+    int? divisions,
+    double? feesPer,
+    String? infiniteType,
+    String? infiniteState,
+    String? infiniteVersion,
+    String? startedDate,
+    String? registeredDate,
+    String? doneDate,
+    bool? isAutoTrade,
+    double? kskyjSeed,
+    double? kskyjAveragePrice,
+    double? kskyjBuyPrice,
+    int? kskyjHoldingQuantity,
+    String? kskyjUpdateDate,
+    bool? isKskyj,
+    double? totalBuyPrice,
+    double? totalSellPrice,
+
     // 해당 심볼 주가 정보
     Stock? stockDetail, 
     // 해당 심볼 주가 history
@@ -28,7 +50,7 @@ class InfiniteDetail with _$InfiniteDetail {
     // 수량
     int? holdingQuantity,
     // 계산용 수수료율 (수수료율 * 0.01)
-    int? realFeesPer,
+    double? realFeesPer,
     // 1회 매수 금액
     double? oneBuySeed,
     // 평가금액 : 종가 * 보유수량
