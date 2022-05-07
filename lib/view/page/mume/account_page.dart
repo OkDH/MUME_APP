@@ -3,6 +3,7 @@ import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
+import 'package:mume/model/dto/mume/state_map.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -26,6 +27,13 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             Text(AccountPage.routeName),
             Text("계좌 갯수 : " + bloc.accountList.length.toString()),
             Text("선택 된 계좌 : " + bloc.query["accountId"]),
+            Container( height:1.0,
+              width:500.0,
+              color:Colors.black,),
+            Text("투자 원금 : " + bloc.accountState.sumAccountSeed.toString()),
+            Text("배정 씨드 : " + bloc.accountState.sumInfiniteSeed.toString()),
+            Text("총 매수금액 : " + bloc.accountState.sumInfiniteBuyPrice.toString()),
+            Text("보유종목수 : " + bloc.accountState.ingInfiniteCount.toString()),
             Container( height:1.0,
               width:500.0,
               color:Colors.black,),

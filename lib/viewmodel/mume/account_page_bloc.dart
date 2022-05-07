@@ -66,6 +66,7 @@ class AccountPageBloc extends LoginBloc<Object> {
   @override
   onInitState() {
     getMyAccountList();
+    getAccountState();
     getStocks(0);
   }
 
@@ -98,7 +99,7 @@ class AccountPageBloc extends LoginBloc<Object> {
         .then((value) => accountState = value.data)
         .then((_) => emit(ReBuildPage()))
         .catchError((e) {
-      debugPrint("getMyAccountList error == $e");
+      debugPrint("getAccountState error == $e");
     });
   }
 
