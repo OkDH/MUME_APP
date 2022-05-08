@@ -22,7 +22,7 @@ class AccountPageBloc extends LoginBloc<Object> {
   List accountList = List.empty(growable: true);
 
   // 계좌 현황
-  StateMap accountState = new StateMap();
+  StateMap accountState = StateMap();
 
   // 계좌 내 종목 리스트
   List stockList = List.empty(growable: true);
@@ -66,7 +66,6 @@ class AccountPageBloc extends LoginBloc<Object> {
   @override
   onInitState() {
     getMyAccountList();
-    getAccountState();
     getStocks(0);
   }
 
@@ -92,7 +91,7 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   // 계좌 내 종목 현황 조회
   void getAccountState(){
-    Map<String, dynamic> params = new HashMap<String, dynamic>();
+    Map<String, dynamic> params = HashMap<String, dynamic>();
     params["accountId"] = query["accountId"];
     _accountRepository
         .getMyAccountState(params)
@@ -134,6 +133,8 @@ class AccountPageBloc extends LoginBloc<Object> {
         .catchError((e) {
       debugPrint("getStocks error == $e");
     });
+
+    getAccountState();
   }
 
 }

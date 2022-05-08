@@ -179,7 +179,20 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                   children: [
                     ElevatedButton(
                       child: const Text('검색'),
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        bloc.query["accountId"] = selectedAccount;
+                        isInfiniteState.asMap().forEach((i, v) { 
+                          bloc.filter["infiniteState"][i]["value"] = v;
+                        });
+                        isInfiniteType.asMap().forEach((i, v) { 
+                          bloc.filter["infiniteType"][i]["value"] = v;
+                        });
+                        isInfiniteVersion.asMap().forEach((i, v) { 
+                          bloc.filter["infiniteVersion"][i]["value"] = v;
+                        });
+                        bloc.getStocks(0);
+                        Navigator.pop(context);
+                      },
                     ),
                     ElevatedButton(
                       child: const Text('취소'),
