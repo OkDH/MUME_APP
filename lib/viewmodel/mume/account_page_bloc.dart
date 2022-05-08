@@ -40,22 +40,22 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   // 검색 필터
   Map<String, dynamic> filter = {
-		"infiniteState": {
-			"ing": { "name": "진행중", "value": true },
-			"stop": { "name": "매수중지", "value": true },
-			"done": { "name": "매도완료", "value": false },
-			"out": { "name": "원금소진", "value": true }
-		},
-		"infiniteType": {
-			"infinite": { "name": "INFINITE", "value": true },
-			"tlp": { "name": "TLP", "value": true }
-		},
-		"infiniteVersion": {
-			"v2_1": { "name": "v2.1", "value": true },
-			"v2_1_SH": { "name": "v2.1후반", "value": true },
-			"v2": { "name": "v2", "value": true },
-			"v1": { "name": "v1", "value": true }
-		},
+		"infiniteState": [
+			{ "name": "진행중", "value": true },
+			{ "name": "매수중지", "value": true },
+			{ "name": "매도완료", "value": false },
+			{ "name": "원금소진", "value": true }
+    ],
+		"infiniteType": [
+			{ "name": "INFINITE", "value": true },
+			{ "name": "TLP", "value": true }
+		],
+		"infiniteVersion": [
+			{ "name": "v2.1", "value": true },
+			{ "name": "v2.1후반", "value": true },
+			{ "name": "v2", "value": true },
+			{ "name": "v1", "value": true }
+    ],
 		"order": { "name": "registered", "value": "registered_date desc"},
 		"orderValue": {
 			"registered": { "name": "registered", "value": "registered_date desc"},
@@ -111,15 +111,15 @@ class AccountPageBloc extends LoginBloc<Object> {
    
     // 무한매수 상태 필터
     query["infiniteState"] = List.empty(growable: true);
-    filter["infiniteState"].forEach((k, v) => v["value"] ? query["infiniteState"].add(v["name"]) : "");
+    filter["infiniteState"].forEach((v) => v["value"] ? query["infiniteState"].add(v["name"]) : "");
 
     // 무한매수/TLP 필터
     query["infiniteType"] = List.empty(growable: true);
-    filter["infiniteType"].forEach((k, v) => v["value"] ? query["infiniteType"].add(v["name"]) : "");
+    filter["infiniteType"].forEach((v) => v["value"] ? query["infiniteType"].add(v["name"]) : "");
 
     // 무한매수 버전 필터
     query["infiniteVersion"] = List.empty(growable: true);
-    filter["infiniteVersion"].forEach((k, v) => v["value"] ? query["infiniteVersion"].add(v["name"]) : "");
+    filter["infiniteVersion"].forEach((v) => v["value"] ? query["infiniteVersion"].add(v["name"]) : "");
 
     // 정렬
 		query["orderBy"] = filter["order"]["value"];
