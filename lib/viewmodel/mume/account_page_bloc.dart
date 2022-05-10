@@ -57,10 +57,10 @@ class AccountPageBloc extends LoginBloc<Object> {
 			{ "name": "v1", "value": true }
     ],
 		"order": { "name": "registered", "value": "registered_date desc"},
-		"orderValue": {
-			"registered": { "name": "registered", "value": "registered_date desc"},
-			"symbol": { "name": "symbol", "value": "symbol asc"}
-		}
+		"orderValue": [
+      { "name": "최신순", "value": true, "orderQuery": "registered_date desc"},
+      { "name": "이름순", "value": false, "orderQuery": "symbol asc"}
+    ]
 	};
 
   @override
@@ -121,7 +121,8 @@ class AccountPageBloc extends LoginBloc<Object> {
     filter["infiniteVersion"].forEach((v) => v["value"] ? query["infiniteVersion"].add(v["name"]) : "");
 
     // 정렬
-		query["orderBy"] = filter["order"]["value"];
+		// query["orderBy"] = filter["order"]["value"];/
+    filter["orderValue"].forEach((v) => v["value"] ? query["orderBy"] = v["orderQuery"] : "");
 
     debugPrint("getStocks query == $query");
 

@@ -18,6 +18,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
 
   // 선택된 계좌 
   String selectedAccount = "ALL";
+
   // 필터 관련
   late List<bool> isInfiniteState;
   late List<bool> isInfiniteType;
@@ -37,9 +38,17 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             Container( height:1.0,
               width:500.0,
               color:Colors.black,),
-            ElevatedButton(
-              child: const Text("필터"),
-              onPressed: () {showFilterBottomSheet(context);},
+            Row(
+              children: [
+                ElevatedButton(
+                  child: const Text("추가"),
+                  onPressed: () {showFilterBottomSheet(context);},
+                ),
+                ElevatedButton(
+                  child: const Text("필터"),
+                  onPressed: () {showFilterBottomSheet(context);},
+                ),
+              ],
             ),
             Text("계좌 갯수 : " + bloc.accountList.length.toString()),
             Text("선택 된 계좌 : " + bloc.query["accountId"]),
@@ -77,7 +86,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
     );
   }
 
-  // filter bottom sheet
+  // 필터 bottom sheet
   void showFilterBottomSheet(BuildContext context){
 
     // 계좌 리스트
@@ -97,113 +106,171 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
     // 버전
     isInfiniteVersion = List.empty(growable: true);
     bloc.filter["infiniteVersion"].forEach((v) => isInfiniteVersion.add(v["value"]));
+    // 정렬
+    isOrderValue = List.empty(growable: true);
+    bloc.filter["orderValue"].forEach((v) => isOrderValue.add(v["value"]));
 
     showModalBottomSheet<void>(
       context: context, 
-      shape: const RoundedRectangleBorder( // <-- SEE HERE
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical( 
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (BuildContext context){
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return SizedBox(
+              height: 450,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    const Text("검색 조건", style: TextStyle(fontSize: 20)),
+                    const Text("계좌", style: TextStyle(fontSize: 16)),
+                    DropdownButton(
+                      value: selectedAccount,
+                      items: accountItemList, 
+                      onChanged: (value){
+                        setState(() {
+                          selectedAccount = value.toString();
+                        });
+                      }
+                    ),
+                    const Text("진행상태", style: TextStyle(fontSize: 16)),
+                    ToggleButtons(
+                      children: List.generate(bloc.filter["infiniteState"].length, 
+                        (index) {
+                        return Padding(
+                            padding: EdgeInsets.all(2),
+                            child: Text(bloc.filter["infiniteState"][index]["name"])
+                          );
+                        }
+                      ),
+                      onPressed: (int index) {
+                        setState(() {
+                          isInfiniteState[index] = !isInfiniteState[index];
+                        });
+                      },
+                      isSelected: isInfiniteState
+                    ),
+                    const Text("타입", style: TextStyle(fontSize: 16)),
+                    ToggleButtons(
+                      children: List.generate(bloc.filter["infiniteType"].length, 
+                        (index) {
+                        return Padding(
+                            padding: EdgeInsets.all(2),
+                            child: Text(bloc.filter["infiniteType"][index]["name"])
+                          );
+                        }
+                      ),
+                      onPressed: (int index) {
+                        setState(() {
+                          isInfiniteType[index] = !isInfiniteType[index];
+                        });
+                      },
+                      isSelected: isInfiniteType
+                    ),
+                    const Text("버전", style: TextStyle(fontSize: 16)),
+                    ToggleButtons(
+                      children: List.generate(bloc.filter["infiniteVersion"].length, 
+                        (index) {
+                        return Padding(
+                            padding: EdgeInsets.all(2),
+                            child: Text(bloc.filter["infiniteVersion"][index]["name"])
+                          );
+                        }
+                      ),
+                      onPressed: (int index) {
+                        setState(() {
+                          isInfiniteVersion[index] = !isInfiniteVersion[index];
+                        });
+                      },
+                      isSelected: isInfiniteVersion
+                    ),
+                    const Text("정렬", style: TextStyle(fontSize: 16)),
+                    ToggleButtons(
+                      children: List.generate(bloc.filter["orderValue"].length, 
+                        (index) {
+                        return Padding(
+                            padding: EdgeInsets.all(2),
+                            child: Text(bloc.filter["orderValue"][index]["name"])
+                          );
+                        }
+                      ),
+                      onPressed: (int index) {
+                        setState(() {
+                          for (int buttonIndex = 0; buttonIndex < isOrderValue.length; buttonIndex++) {
+                            if (buttonIndex == index) {
+                              isOrderValue[buttonIndex] = true;
+                            } else {
+                              isOrderValue[buttonIndex] = false;
+                            }
+                          }
+                        });
+                      },
+                      isSelected: isOrderValue
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          child: const Text('검색'),
+                          onPressed: () {
+                            bloc.query["accountId"] = selectedAccount;
+                            isInfiniteState.asMap().forEach((index, v) { 
+                              bloc.filter["infiniteState"][index]["value"] = v;
+                            });
+                            isInfiniteType.asMap().forEach((index, v) { 
+                              bloc.filter["infiniteType"][index]["value"] = v;
+                            });
+                            isInfiniteVersion.asMap().forEach((index, v) { 
+                              bloc.filter["infiniteVersion"][index]["value"] = v;
+                            });
+                            isOrderValue.asMap().forEach((index, v) { 
+                              bloc.filter["orderValue"][index]["value"] = v;
+                            });
+                            bloc.getStocks(0);
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ElevatedButton(
+                          child: const Text('취소'),
+                          onPressed: () => Navigator.pop(context),
+                        )
+                      ],
+                    )
+                  
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      }
+    );
+  }
+
+  // 추가 bottom sheet
+  void showAddBottomSheet(BuildContext context){
+    showModalBottomSheet<void>(
+      context: context, 
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder( 
         borderRadius: BorderRadius.vertical( 
           top: Radius.circular(25.0),
         ),
       ),
       builder: (BuildContext context){
         return SizedBox(
-          height: 600,
+          height: 500,
           child: Center(
             child: Column(
               children: <Widget>[
-                const Text("검색 조건", style: TextStyle(fontSize: 20)),
-                const Text("계좌", style: TextStyle(fontSize: 16)),
-                DropdownButton(
-                  value: selectedAccount,
-                  items: accountItemList, 
-                  onChanged: (value){
-                    setState(() {
-                      selectedAccount = value.toString();
-                    });
-                  }
-                ),
-                const Text("진행상태", style: TextStyle(fontSize: 16)),
-                ToggleButtons(
-                  children: List.generate(bloc.filter["infiniteState"].length, 
-                    (index) {
-                    return Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Text(bloc.filter["infiniteState"][index]["name"])
-                      );
-                    }
-                  ),
-                  onPressed: (int index) {
-                    setState(() {
-                      isInfiniteState[index] = !isInfiniteState[index];
-                    });
-                  },
-                  isSelected: isInfiniteState
-                ),
-                const Text("타입", style: TextStyle(fontSize: 16)),
-                ToggleButtons(
-                  children: List.generate(bloc.filter["infiniteType"].length, 
-                    (index) {
-                    return Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Text(bloc.filter["infiniteType"][index]["name"])
-                      );
-                    }
-                  ),
-                  onPressed: (int index) {
-                    setState(() {
-                      isInfiniteType[index] = !isInfiniteType[index];
-                    });
-                  },
-                  isSelected: isInfiniteType
-                ),
-                const Text("버전", style: TextStyle(fontSize: 16)),
-                ToggleButtons(
-                  children: List.generate(bloc.filter["infiniteVersion"].length, 
-                    (index) {
-                    return Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Text(bloc.filter["infiniteVersion"][index]["name"])
-                      );
-                    }
-                  ),
-                  onPressed: (int index) {
-                    setState(() {
-                      isInfiniteVersion[index] = !isInfiniteVersion[index];
-                    });
-                  },
-                  isSelected: isInfiniteVersion
-                ),
-                const Text("정렬", style: TextStyle(fontSize: 16)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      child: const Text('검색'),
-                      onPressed: () {
-                        bloc.query["accountId"] = selectedAccount;
-                        isInfiniteState.asMap().forEach((i, v) { 
-                          bloc.filter["infiniteState"][i]["value"] = v;
-                        });
-                        isInfiniteType.asMap().forEach((i, v) { 
-                          bloc.filter["infiniteType"][i]["value"] = v;
-                        });
-                        isInfiniteVersion.asMap().forEach((i, v) { 
-                          bloc.filter["infiniteVersion"][i]["value"] = v;
-                        });
-                        bloc.getStocks(0);
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ElevatedButton(
-                      child: const Text('취소'),
-                      onPressed: () => Navigator.pop(context),
-                    )
-                  ],
-                )
-               
-              ],
-            ),
-          ),
+                const Text("종목 추가", style: TextStyle(fontSize: 20)),
+              ]
+            )
+          )
         );
       }
     );
