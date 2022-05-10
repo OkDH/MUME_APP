@@ -42,7 +42,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
               children: [
                 ElevatedButton(
                   child: const Text("추가"),
-                  onPressed: () {showFilterBottomSheet(context);},
+                  onPressed: () {showStocksBottomSheet(context);},
                 ),
                 ElevatedButton(
                   child: const Text("필터"),
@@ -251,6 +251,45 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
     );
   }
 
+  // 추가 종목 리스트 bottom sheet
+  void showStocksBottomSheet(BuildContext context){
+
+    bloc.getEtfList();
+
+    showModalBottomSheet<void>(
+      context: context, 
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder( 
+        borderRadius: BorderRadius.vertical( 
+          top: Radius.circular(25.0),
+        ),
+      ),
+      builder: (BuildContext context){
+        return SizedBox(
+          height: 800,
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                const Text("종목 선택", style: TextStyle(fontSize: 20)),
+                ListView(
+                  padding: const EdgeInsets.all(8),
+                  shrinkWrap: true,
+                  children: [
+                    Card(
+                      child: ListTile(
+                        title:Text("TQQQ") ,
+                      )
+                    ),
+                  ],
+                ),
+              ]
+            )
+          )
+        );
+      }
+    );
+  }
+
   // 추가 bottom sheet
   void showAddBottomSheet(BuildContext context){
     showModalBottomSheet<void>(
@@ -268,6 +307,11 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             child: Column(
               children: <Widget>[
                 const Text("종목 추가", style: TextStyle(fontSize: 20)),
+                // 계좌
+                // 무한매수/TLP, 버전, 
+                // 배정원금, 원금분할, 
+                // 평단가, 수량, 
+                // 매수시작일, 자동기록 여부
               ]
             )
           )

@@ -1,9 +1,11 @@
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
+import 'package:mume/model/dto/market_index.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
+import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/model/repository/mume/account_repository.dart';
 import 'package:mume/model/repository/mume/stock_repository.dart';
 
@@ -11,12 +13,17 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   final AccountRepository _accountRepository;
   final StockRepository _stockRepository;
+  final MarketIndexRepository _marketIndexRepository;
 
   AccountPageBloc(
     this._accountRepository,
     this._stockRepository,
+    this._marketIndexRepository,
     LoginRepository loginRepository,
   ) : super(loginRepository);
+
+  // ETF 리스트
+  MumeStockMarketIndex mumeStockIndex = MumeStockMarketIndex();
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
@@ -136,6 +143,17 @@ class AccountPageBloc extends LoginBloc<Object> {
     });
 
     getAccountState();
+  }
+
+  // 무한매수 ETF 리스트 가져오기
+  void getEtfList(){
+    _marketIndexRepository.getMumeStockMarketIndex()
+      .then((value) => mumeStockIndex = value.data)
+      .then((_) => emit(ReBuildPage()))
+      .catchError((e) {
+        debugPrint("getEtfList error == $e");
+      }
+    );
   }
 
 }

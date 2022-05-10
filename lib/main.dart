@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ///Mume sub page
         BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
-        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), StockRepository(), loginRepo),),
+        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), StockRepository(), MarketIndexRepository(), loginRepo),),
         BlocProvider(create: (BuildContext context) => OrderListPageBloc(),),
         BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
 
