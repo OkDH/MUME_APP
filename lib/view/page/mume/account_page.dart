@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/account.dart';
 import 'package:mume/view/page/base_page.dart';
+import 'package:mume/view/page/mume/infinite_detail_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
@@ -79,7 +80,15 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
         return Card(
             child: ListTile(
               title:Text(bloc.stockList[index].symbol) ,
-            )
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context){
+                    return InfiniteDetailPage(infiniteDetail: bloc.stockList[index]);
+                  })
+                );
+              },
+            ),
           );
       },
       
@@ -318,6 +327,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
         );
       }
     );
+
   }
 
   @override
