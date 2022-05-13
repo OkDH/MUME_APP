@@ -64,6 +64,9 @@ dependencies:
   # local db
   shared_preferences: ^2.0.13
 
+  # badges
+  badges: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
