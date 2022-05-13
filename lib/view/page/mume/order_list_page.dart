@@ -27,6 +27,21 @@ class _OrderListPageState extends BasePageState<String, OrderListPageBloc, Order
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(OrderListPage.routeName),
+            Text("query ==> ${bloc.query.toString()}"),
+            Text("주문 내역 수 ==> ${bloc.stockList.length}"),
+            Expanded(
+              child: ListView.builder(
+                itemCount: bloc.stockList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("${index + 1}번째 주문\n${bloc.stockList[index].toJson().toString()}"),
+                    ),
+                  );
+                }
+              ),
+            ),
           ],
         ),
       ),
