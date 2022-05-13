@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         ///Mume sub page
         BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
         BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), StockRepository(), MarketIndexRepository(), loginRepo),),
-        BlocProvider(create: (BuildContext context) => OrderListPageBloc(),),
+        BlocProvider(create: (BuildContext context) => OrderListPageBloc(StockRepository()),),
         BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
 
         ///home bottomSheet
@@ -133,4 +133,8 @@ class MyAppLegacy extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
+}
+
+void logd(String msg){
+  debugPrint(msg);
 }
