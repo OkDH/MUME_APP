@@ -1,8 +1,20 @@
 class PrintFormatHelper {
 
-  // 임시
   static String appendPulMa(dynamic value){
-    value = value as double;
-    return value.toString();
+    String strValue = value.toStringAsFixed(2);
+    if(value > 0)
+      return "+" + strValue;
+    else if(value < 0)
+      return "-" + strValue.replaceAll("-", "");
+    return strValue;
+  }
+
+  static String appendUpDown(dynamic value){
+    String strValue = value.toStringAsFixed(2);
+    if(value > 0)
+      return "▲" + strValue;
+    else if(value < 0)
+      return "▼" + strValue.replaceAll("-", "");
+    return "-" + strValue;
   }
 }

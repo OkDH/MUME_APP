@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
+import 'package:mume/helper/print_format_helper.dart';
 
 class InfiniteDetailPage extends StatefulWidget {
 
@@ -153,7 +154,7 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.averagePrice!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + widget.infiniteDetail!.averagePrice!.toStringAsFixed(2), style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -179,11 +180,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.stockDetail!.priceClose!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + widget.infiniteDetail!.stockDetail!.priceClose!.toStringAsFixed(2), style: getValueTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.income!.toString() + "\$", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                       ],
                     ),
@@ -194,11 +195,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("(" + widget.infiniteDetail!.stockDetail!.chgp!.toString() + "%)", style: getSubTitleTextStyle())
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.stockDetail!.chgp!) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("(" + widget.infiniteDetail!.incomePer!.toString() + "%)", style: getSubTitleTextStyle())
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
@@ -297,11 +298,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.oneBuySeed!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + widget.infiniteDetail!.oneBuySeed!.toStringAsFixed(2), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.oneBuyQuantity!.toString() + "주", style: getValueTextStyle())
+                          child: Text(widget.infiniteDetail!.oneBuyQuantity!.toStringAsFixed(0) + "주", style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -340,11 +341,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.buyPrice!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + widget.infiniteDetail!.buyPrice!.toStringAsFixed(2), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.evalPrice!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + widget.infiniteDetail!.evalPrice!.toStringAsFixed(2), style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -370,11 +371,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.income!.toString() + "\$", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.incomePer!.toString() + "%", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!) + "%", style: getValueTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
@@ -476,12 +477,25 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
   }
 
   // 회색 작은 텍스트
-  TextStyle getSubTitleTextStyle(){
+  TextStyle getSubTitleTextStyle({dynamic value}){
+    if(value != null){
+      if(value >= 0)
+        return const TextStyle(color: Colors.red);
+      else 
+         return const TextStyle(color: Colors.blue);
+    }
     return const TextStyle(color: Colors.black54);
   }
 
   // 값 출력 텍스트
-  TextStyle getValueTextStyle(){
+  TextStyle getValueTextStyle({dynamic value}){
+    if(value != null){
+      if(value >= 0)
+        return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.red);
+      else 
+         return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.blue);
+    }
+
     return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
   }
 

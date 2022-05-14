@@ -91,7 +91,6 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             ),
           );
       },
-      
     );
   }
 
