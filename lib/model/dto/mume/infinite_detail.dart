@@ -53,6 +53,8 @@ class InfiniteDetail with _$InfiniteDetail {
     double? realFeesPer,
     // 1회 매수 금액
     double? oneBuySeed,
+    // 1회 매수량
+    double? oneBuyQuantity,
     // 평가금액 : 종가 * 보유수량
     double? evalPrice,
     // 평단가

@@ -54,6 +54,7 @@ class _$InfiniteDetailTearOff {
       int? holdingQuantity,
       double? realFeesPer,
       double? oneBuySeed,
+      double? oneBuyQuantity,
       double? evalPrice,
       double? averagePrice,
       double? buyPrice,
@@ -92,6 +93,7 @@ class _$InfiniteDetailTearOff {
       holdingQuantity: holdingQuantity,
       realFeesPer: realFeesPer,
       oneBuySeed: oneBuySeed,
+      oneBuyQuantity: oneBuyQuantity,
       evalPrice: evalPrice,
       averagePrice: averagePrice,
       buyPrice: buyPrice,
@@ -148,7 +150,8 @@ mixin _$InfiniteDetail {
   int? get holdingQuantity =>
       throw _privateConstructorUsedError; // 계산용 수수료율 (수수료율 * 0.01)
   double? get realFeesPer => throw _privateConstructorUsedError; // 1회 매수 금액
-  double? get oneBuySeed =>
+  double? get oneBuySeed => throw _privateConstructorUsedError; // 1회 매수량
+  double? get oneBuyQuantity =>
       throw _privateConstructorUsedError; // 평가금액 : 종가 * 보유수량
   double? get evalPrice => throw _privateConstructorUsedError; // 평단가
   double? get averagePrice => throw _privateConstructorUsedError; // 매입금액
@@ -200,6 +203,7 @@ abstract class $InfiniteDetailCopyWith<$Res> {
       int? holdingQuantity,
       double? realFeesPer,
       double? oneBuySeed,
+      double? oneBuyQuantity,
       double? evalPrice,
       double? averagePrice,
       double? buyPrice,
@@ -252,6 +256,7 @@ class _$InfiniteDetailCopyWithImpl<$Res>
     Object? holdingQuantity = freezed,
     Object? realFeesPer = freezed,
     Object? oneBuySeed = freezed,
+    Object? oneBuyQuantity = freezed,
     Object? evalPrice = freezed,
     Object? averagePrice = freezed,
     Object? buyPrice = freezed,
@@ -384,6 +389,10 @@ class _$InfiniteDetailCopyWithImpl<$Res>
           ? _value.oneBuySeed
           : oneBuySeed // ignore: cast_nullable_to_non_nullable
               as double?,
+      oneBuyQuantity: oneBuyQuantity == freezed
+          ? _value.oneBuyQuantity
+          : oneBuyQuantity // ignore: cast_nullable_to_non_nullable
+              as double?,
       evalPrice: evalPrice == freezed
           ? _value.evalPrice
           : evalPrice // ignore: cast_nullable_to_non_nullable
@@ -462,6 +471,7 @@ abstract class _$InfiniteDetailCopyWith<$Res>
       int? holdingQuantity,
       double? realFeesPer,
       double? oneBuySeed,
+      double? oneBuyQuantity,
       double? evalPrice,
       double? averagePrice,
       double? buyPrice,
@@ -517,6 +527,7 @@ class __$InfiniteDetailCopyWithImpl<$Res>
     Object? holdingQuantity = freezed,
     Object? realFeesPer = freezed,
     Object? oneBuySeed = freezed,
+    Object? oneBuyQuantity = freezed,
     Object? evalPrice = freezed,
     Object? averagePrice = freezed,
     Object? buyPrice = freezed,
@@ -649,6 +660,10 @@ class __$InfiniteDetailCopyWithImpl<$Res>
           ? _value.oneBuySeed
           : oneBuySeed // ignore: cast_nullable_to_non_nullable
               as double?,
+      oneBuyQuantity: oneBuyQuantity == freezed
+          ? _value.oneBuyQuantity
+          : oneBuyQuantity // ignore: cast_nullable_to_non_nullable
+              as double?,
       evalPrice: evalPrice == freezed
           ? _value.evalPrice
           : evalPrice // ignore: cast_nullable_to_non_nullable
@@ -712,6 +727,7 @@ class _$_InfiniteDetail implements _InfiniteDetail {
       this.holdingQuantity,
       this.realFeesPer,
       this.oneBuySeed,
+      this.oneBuyQuantity,
       this.evalPrice,
       this.averagePrice,
       this.buyPrice,
@@ -784,6 +800,8 @@ class _$_InfiniteDetail implements _InfiniteDetail {
   final double? realFeesPer;
   @override // 1회 매수 금액
   final double? oneBuySeed;
+  @override // 1회 매수량
+  final double? oneBuyQuantity;
   @override // 평가금액 : 종가 * 보유수량
   final double? evalPrice;
   @override // 평단가
@@ -799,7 +817,7 @@ class _$_InfiniteDetail implements _InfiniteDetail {
 
   @override
   String toString() {
-    return 'InfiniteDetail(memberId: $memberId, accountId: $accountId, infiniteId: $infiniteId, symbol: $symbol, divisions: $divisions, feesPer: $feesPer, infiniteType: $infiniteType, infiniteState: $infiniteState, infiniteVersion: $infiniteVersion, startedDate: $startedDate, registeredDate: $registeredDate, doneDate: $doneDate, isAutoTrade: $isAutoTrade, kskyjSeed: $kskyjSeed, kskyjAveragePrice: $kskyjAveragePrice, kskyjBuyPrice: $kskyjBuyPrice, kskyjHoldingQuantity: $kskyjHoldingQuantity, kskyjUpdateDate: $kskyjUpdateDate, isKskyj: $isKskyj, totalBuyPrice: $totalBuyPrice, totalSellPrice: $totalSellPrice, stockDetail: $stockDetail, stockList: $stockList, historyList: $historyList, buyTradeInfoList: $buyTradeInfoList, sellTradeInfoList: $sellTradeInfoList, averagePriceList: $averagePriceList, seed: $seed, holdingQuantity: $holdingQuantity, realFeesPer: $realFeesPer, oneBuySeed: $oneBuySeed, evalPrice: $evalPrice, averagePrice: $averagePrice, buyPrice: $buyPrice, income: $income, incomePer: $incomePer, progressPer: $progressPer)';
+    return 'InfiniteDetail(memberId: $memberId, accountId: $accountId, infiniteId: $infiniteId, symbol: $symbol, divisions: $divisions, feesPer: $feesPer, infiniteType: $infiniteType, infiniteState: $infiniteState, infiniteVersion: $infiniteVersion, startedDate: $startedDate, registeredDate: $registeredDate, doneDate: $doneDate, isAutoTrade: $isAutoTrade, kskyjSeed: $kskyjSeed, kskyjAveragePrice: $kskyjAveragePrice, kskyjBuyPrice: $kskyjBuyPrice, kskyjHoldingQuantity: $kskyjHoldingQuantity, kskyjUpdateDate: $kskyjUpdateDate, isKskyj: $isKskyj, totalBuyPrice: $totalBuyPrice, totalSellPrice: $totalSellPrice, stockDetail: $stockDetail, stockList: $stockList, historyList: $historyList, buyTradeInfoList: $buyTradeInfoList, sellTradeInfoList: $sellTradeInfoList, averagePriceList: $averagePriceList, seed: $seed, holdingQuantity: $holdingQuantity, realFeesPer: $realFeesPer, oneBuySeed: $oneBuySeed, oneBuyQuantity: $oneBuyQuantity, evalPrice: $evalPrice, averagePrice: $averagePrice, buyPrice: $buyPrice, income: $income, incomePer: $incomePer, progressPer: $progressPer)';
   }
 
   @override
@@ -859,6 +877,8 @@ class _$_InfiniteDetail implements _InfiniteDetail {
                 .equals(other.realFeesPer, realFeesPer) &&
             const DeepCollectionEquality()
                 .equals(other.oneBuySeed, oneBuySeed) &&
+            const DeepCollectionEquality()
+                .equals(other.oneBuyQuantity, oneBuyQuantity) &&
             const DeepCollectionEquality().equals(other.evalPrice, evalPrice) &&
             const DeepCollectionEquality()
                 .equals(other.averagePrice, averagePrice) &&
@@ -903,6 +923,7 @@ class _$_InfiniteDetail implements _InfiniteDetail {
         const DeepCollectionEquality().hash(holdingQuantity),
         const DeepCollectionEquality().hash(realFeesPer),
         const DeepCollectionEquality().hash(oneBuySeed),
+        const DeepCollectionEquality().hash(oneBuyQuantity),
         const DeepCollectionEquality().hash(evalPrice),
         const DeepCollectionEquality().hash(averagePrice),
         const DeepCollectionEquality().hash(buyPrice),
@@ -955,6 +976,7 @@ abstract class _InfiniteDetail implements InfiniteDetail {
       int? holdingQuantity,
       double? realFeesPer,
       double? oneBuySeed,
+      double? oneBuyQuantity,
       double? evalPrice,
       double? averagePrice,
       double? buyPrice,
@@ -1027,6 +1049,8 @@ abstract class _InfiniteDetail implements InfiniteDetail {
   double? get realFeesPer;
   @override // 1회 매수 금액
   double? get oneBuySeed;
+  @override // 1회 매수량
+  double? get oneBuyQuantity;
   @override // 평가금액 : 종가 * 보유수량
   double? get evalPrice;
   @override // 평단가
