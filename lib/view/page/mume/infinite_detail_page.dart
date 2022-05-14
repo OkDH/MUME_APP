@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
+import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
 
 class InfiniteDetailPage extends StatefulWidget {
@@ -384,7 +384,8 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
             ),
             getDivider(),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
+              height: 300,
+              padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
               child: Column(
                 children: [
                   Container(
@@ -409,13 +410,15 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       ],
                     ),
                   ),
-                  // TabBarView(
-                  //   controller: _buySellTabController,
-                  //   children: [
-                  //     Container(),
-                  //     Container()
-                  //   ],
-                  // ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _buySellTabController,
+                      children: [
+                        Text("1"),
+                        Text("2")
+                      ],
+                    ),
+                  ),
                 ]
               ),
             ),
