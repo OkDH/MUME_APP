@@ -147,11 +147,12 @@ class ChangeLoginState extends BaseState{
 }
 
 class ReBuildPage extends BaseState{
+  final int _force = DateTime.now().millisecond;
 
   ReBuildPage();
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [_force];
 }
 
 class RequiredLogin extends BaseState{
