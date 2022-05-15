@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
@@ -6,8 +7,9 @@ import 'package:mume/helper/print_format_helper.dart';
 class InfiniteDetailPage extends StatefulWidget {
 
   final InfiniteDetail? infiniteDetail;
+  final String? accountName;
 
-  InfiniteDetailPage({this.infiniteDetail});
+  InfiniteDetailPage({this.infiniteDetail, this.accountName});
 
   _InfiniteDetailState createState() => _InfiniteDetailState();
 }
@@ -74,7 +76,7 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                                   widget.infiniteDetail!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
                                 ),
                                 padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12),
                                 badgeContent: Text(widget.infiniteDetail!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
                               )
                             )
@@ -89,8 +91,8 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("진행률", style: TextStyle()),
-                        Text(widget.infiniteDetail!.progressPer!.toString() + "%", style: TextStyle())
+                        Text("진행률"),
+                        Text(widget.infiniteDetail!.progressPer!.toStringAsFixed(2) + "%", style: TextStyle(fontWeight: FontWeight.w600))
                       ],
                     ),
                   ),
@@ -99,8 +101,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(6),
                       child: LinearProgressIndicator(
-                        value: 0.5,
-                        minHeight: 16,
+                        value: widget.infiniteDetail!.progressPer!/100,
+                        backgroundColor: Colors.black12,
+                        color: (widget.infiniteDetail!.infiniteState! == "원금소진" || widget.infiniteDetail!.progressPer! >= 100) ? Colors.red :
+                                widget.infiniteDetail!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
+                        minHeight: 18,
                       ),
                     ),
                   ),
@@ -109,10 +114,36 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Container(
+                          margin: EdgeInsets.only(right: 5),
+                          child: Badge(
+                            toAnimate: false,
+                            shape: BadgeShape.square,
+                            badgeColor: Colors.green,
+                            elevation: 0,
+                            padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                            borderRadius: BorderRadius.circular(8),
+                            badgeContent: Text(widget.accountName!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                          )
+                        ),
+                        if(widget.infiniteDetail!.infiniteType! == "TLP")
+                           Container(
+                            margin: EdgeInsets.only(right: 5),
+                            child: Badge(
+                              toAnimate: false,
+                              shape: BadgeShape.square,
+                              badgeColor: Colors.orange,
+                              elevation: 0,
+                              padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                              borderRadius: BorderRadius.circular(8),
+                              badgeContent: Text(widget.infiniteDetail!.infiniteType!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                            )
+                          ),
+                        Container(
                           child: Badge(
                             toAnimate: false,
                             shape: BadgeShape.square,
                             badgeColor: Colors.lightBlue,
+                            elevation: 0,
                             padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
                             borderRadius: BorderRadius.circular(8),
                             badgeContent: Text(widget.infiniteDetail!.infiniteVersion!, style: TextStyle(fontSize: 12, color: Colors.white)),
@@ -385,7 +416,7 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
             ),
             getDivider(),
             Container(
-              height: 300,
+              height: 200,
               padding: const EdgeInsets.fromLTRB(20, 25, 20, 25),
               child: Column(
                 children: [
@@ -415,7 +446,24 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                     child: TabBarView(
                       controller: _buySellTabController,
                       children: [
-                        Text("1"),
+                        Container(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            //shrinkWrap: true,
+                            itemCount: widget.infiniteDetail!.buyTradeInfoList!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Card(
+                                  child: ListTile(
+                                    title:Text(widget.infiniteDetail!.historyList![index].tradeType!) ,
+                                    subtitle: Text(widget.infiniteDetail!.historyList![index].tradeDate!),
+                                    onTap: () {
+                                      // TODO : 매매내역 수정
+                                    },
+                                  ),
+                                );
+                            },
+                          ),
+                        ),
                         Text("2")
                       ],
                     ),

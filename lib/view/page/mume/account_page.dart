@@ -6,6 +6,7 @@ import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
+import 'package:badges/badges.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -30,15 +31,12 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
   Widget buildPage(BuildContext context, Size windowSize) {
     debugPrint("buildPage AccountPageBloc");
     return Scaffold(
+      backgroundColor: Color.fromARGB(136, 247, 247, 247),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text(AccountPage.routeName),
-            Container( height:1.0,
-              width:500.0,
-              color:Colors.black,),
             Row(
               children: [
                 ElevatedButton(
@@ -53,16 +51,35 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             ),
             Text("계좌 갯수 : " + bloc.accountList.length.toString()),
             Text("선택 된 계좌 : " + bloc.query["accountId"]),
-            Container( height:1.0,
-              width:500.0,
-              color:Colors.black,),
-            Text("투자 원금 : " + bloc.accountState.sumAccountSeed.toString()),
-            Text("배정 씨드 : " + bloc.accountState.sumInfiniteSeed.toString()),
-            Text("총 매수금액 : " + bloc.accountState.sumInfiniteBuyPrice.toString()),
-            Text("보유종목수 : " + bloc.accountState.ingInfiniteCount.toString()),
-            Container( height:1.0,
-              width:500.0,
-              color:Colors.black,),
+            Container(
+              margin: EdgeInsets.all(24),
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blue,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.6),
+                    spreadRadius: 0,
+                    blurRadius: 5.0,
+                    offset: Offset(0, 2), // changes position of shadow
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("계좌명", style: TextStyle(color: Colors.white),),
+                    ],
+                  ),
+                  Text("투자 원금 : " + bloc.accountState.sumAccountSeed!.toStringAsFixed(0), style: TextStyle(color: Colors.white),),
+                  Text("배정 씨드 : " + bloc.accountState.sumInfiniteSeed!.toStringAsFixed(0), style: TextStyle(color: Colors.white),),
+                  Text("총 매수금액 : " + bloc.accountState.sumInfiniteBuyPrice!.toStringAsFixed(2), style: TextStyle(color: Colors.white),),
+                  Text("보유종목수 : " + bloc.accountState.ingInfiniteCount.toString(), style: TextStyle(color: Colors.white),),
+                ],
+              ),
+            ),
             printStockListView(),
           ],
         ),
@@ -73,23 +90,129 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
   // 계좌 내 종목 리스트
   Widget printStockListView(){
     return ListView.builder(
-      padding: const EdgeInsets.all(8),
       shrinkWrap: true,
       itemCount: bloc.stockList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Card(
-            child: ListTile(
-              title:Text(bloc.stockList[index].symbol) ,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (BuildContext context){
-                    return InfiniteDetailPage(infiniteDetail: bloc.stockList[index]);
-                  })
-                );
-              },
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              fullscreenDialog: true,
+              builder: (BuildContext context){
+                return InfiniteDetailPage(infiniteDetail: bloc.stockList[index], accountName: bloc.accountNames[bloc.stockList[index].accountId]);
+              }
+            ));
+          },
+          child: Container(
+            margin: EdgeInsets.fromLTRB(24, 12, 24, 12),
+            padding: EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  spreadRadius: 0,
+                  blurRadius: 5.0,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
             ),
-          );
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(right: 5),
+                      child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16),),
+                    ),
+                    Badge(
+                      toAnimate: false,
+                      shape: BadgeShape.square,
+                      elevation: 0,
+                      badgeColor: (bloc.stockList[index]!.infiniteState! == "진행중" ? Colors.blue[700]! :
+                        bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
+                        bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
+                      ),
+                      padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                      borderRadius: BorderRadius.circular(12),
+                      badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                    )
+                  ],
+                ),
+                Container(width: 500, child: Divider(color: Colors.black26, thickness: 0.3)),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("진행률"),
+                      Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: TextStyle(fontWeight: FontWeight.w600))
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(bottom: 12),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: LinearProgressIndicator(
+                      value: bloc.stockList[index]!.progressPer!/100,
+                      backgroundColor: Colors.black12,
+                      color: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
+                              bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
+                      minHeight: 18,
+                    ),
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(right: 5),
+                        child: Badge(
+                          toAnimate: false,
+                          shape: BadgeShape.square,
+                          badgeColor: Colors.green,
+                          elevation: 0,
+                          padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          borderRadius: BorderRadius.circular(8),
+                          badgeContent: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                        )
+                      ),
+                      if(bloc.stockList[index]!.infiniteType! == "TLP")
+                          Container(
+                          margin: EdgeInsets.only(right: 5),
+                          child: Badge(
+                            toAnimate: false,
+                            shape: BadgeShape.square,
+                            badgeColor: Colors.orange,
+                            elevation: 0,
+                            padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                            borderRadius: BorderRadius.circular(8),
+                            badgeContent: Text(bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                          )
+                        ),
+                      Container(
+                        child: Badge(
+                          toAnimate: false,
+                          shape: BadgeShape.square,
+                          badgeColor: Colors.lightBlue,
+                          elevation: 0,
+                          padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          borderRadius: BorderRadius.circular(8),
+                          badgeContent: Text(bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                        )
+                      ),
+                    ]
+                  ),
+                ),
+                Container(width: 500, child: Divider(color: Colors.black26, thickness: 0.3)),
+              ],
+            ),
+            
+          )
+        );
       },
     );
   }

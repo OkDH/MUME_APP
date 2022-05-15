@@ -27,6 +27,7 @@ class AccountPageBloc extends LoginBloc<Object> {
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
+  Map<int, String> accountNames = {};
 
   // 계좌 현황
   StateMap accountState = StateMap();
@@ -89,7 +90,12 @@ class AccountPageBloc extends LoginBloc<Object> {
   void getMyAccountList() {
     _accountRepository
         .getMyAccountList()
-        .then((value) => accountList = value.data)
+        .then((value) {
+          accountList = value.data;
+          accountList.forEach((e) {
+            accountNames[e.accountId] = e.accountAlias;
+          });
+        })
         .then((_) => emit(ReBuildPage()))
         .catchError((e) {
       debugPrint("getMyAccountList error == $e");
