@@ -1,3 +1,5 @@
+
+
 import 'package:intl/intl.dart';
 
 class PrintFormatHelper {
@@ -27,15 +29,15 @@ class PrintFormatHelper {
   static NumberFormat _getNumberFormat({int? decimal}){
     String format = "#,##0";
     if(decimal == null)
-      return new NumberFormat(format);
+      return NumberFormat(format);
     else {
       if(decimal == 0)
-        return new NumberFormat(format);
+        return NumberFormat(format);
       else {
         format += ".";
         for(int i = 0; i < decimal; i++)
           format += "0";
-        return new NumberFormat(format);
+        return NumberFormat(format);
       }
     }
   }

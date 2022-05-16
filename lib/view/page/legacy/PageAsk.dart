@@ -2,8 +2,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/smtp_server.dart';
-import 'package:mailer/mailer.dart';
+// import 'package:mailer/smtp_server.dart';
+// import 'package:mailer/mailer.dart';
 import 'package:mume/view/resource/color.dart';
 
 class PageAsk extends StatefulWidget {
@@ -287,40 +287,40 @@ class PageAskState extends State<PageAsk> {
   }
 
   void _sendEmail() {
-    // const from = "ocko112@gmail.com";
-    const from = "myohoon95@gmail.com";
-    // final content = "";
-    //
-    // final Email email = Email(
-    //   body: content,
-    //   subject: '[MUME] ${_selectCategory}',
-    //   recipients: [from],
-    //   // attachmentPaths: ['/path/to/attachment.zip'],
-    //   isHTML: false,
-    // );
-    //
-    // FlutterEmailSender.send(email)
-    //     .then((_) => Navigator.pop(context))
-    //     .catchError((e) => debugPrint("main error == ${e.toString()}"));
-
-
-
-    String username = 'ocko.mume.mail@gmail.com';
-    String password = 'mume!@34';
-
-    final smtpServer = gmail(username, password);
-
-    final message = Message()
-      ..from = Address(username, 'Your name')
-      ..recipients.add(from)
-      ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
-      ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-      ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
-
-    send(message, smtpServer).then((rsp) =>{
-      rsp.toString(),
-      Navigator.pop(context)
-    })
-    .catchError((e) => debugPrint("main error == ${e.toString()}"));
+  //   // const from = "ocko112@gmail.com";
+  //   const from = "myohoon95@gmail.com";
+  //   // final content = "";
+  //   //
+  //   // final Email email = Email(
+  //   //   body: content,
+  //   //   subject: '[MUME] ${_selectCategory}',
+  //   //   recipients: [from],
+  //   //   // attachmentPaths: ['/path/to/attachment.zip'],
+  //   //   isHTML: false,
+  //   // );
+  //   //
+  //   // FlutterEmailSender.send(email)
+  //   //     .then((_) => Navigator.pop(context))
+  //   //     .catchError((e) => debugPrint("main error == ${e.toString()}"));
+  //
+  //
+  //
+  //   String username = 'ocko.mume.mail@gmail.com';
+  //   String password = 'mume!@34';
+  //
+  //   final smtpServer = gmail(username, password);
+  //
+  //   final message = Message()
+  //     ..from = Address(username, 'Your name')
+  //     ..recipients.add(from)
+  //     ..subject = 'Test Dart Mailer library :: 😀 :: ${DateTime.now()}'
+  //     ..text = 'This is the plain text.\nThis is line 2 of the text part.'
+  //     ..html = "<h1>Test</h1>\n<p>Hey! Here's some HTML content</p>";
+  //
+  //   send(message, smtpServer).then((rsp) =>{
+  //     rsp.toString(),
+  //     Navigator.pop(context)
+  //   })
+  //   .catchError((e) => debugPrint("main error == ${e.toString()}"));
   }
 }

@@ -28,12 +28,16 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
   late List<bool> isInfiniteVersion;
   late List<bool> isOrderValue;
 
+  //listview controller
+  final _scrollController = ScrollController();
+
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
     debugPrint("buildPage AccountPageBloc");
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 241, 238, 252),
       body: SingleChildScrollView (
+        controller: _scrollController,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -98,7 +102,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                         flex: 5,
                         child: Center(
                           child: Column(children: [
-                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumAccountSeed!), style: TextStyle(color: Colors.white)),
+                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumAccountSeed ?? 0.0), style: TextStyle(color: Colors.white)),
                           Text("투자원금", style: TextStyle(fontSize: 10, color: Colors.white)),
                         ]),
                         )
@@ -107,7 +111,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                         flex: 5,
                         child: Center(
                           child: Column(children: [
-                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteSeed!), style: TextStyle(color: Colors.white)),
+                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteSeed ?? 0.0), style: TextStyle(color: Colors.white)),
                           Text("배정씨드", style: TextStyle(fontSize: 10, color: Colors.white)),
                         ]),
                         )
@@ -116,7 +120,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                         flex: 5,
                         child: Center(
                           child: Column(children: [
-                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteBuyPrice!, decimal: 2), style: TextStyle(color: Colors.white)),
+                          Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteBuyPrice ?? 0.0, decimal: 2), style: TextStyle(color: Colors.white)),
                           Text("총 매수금액", style: TextStyle(fontSize: 10, color: Colors.white)),
                         ]),
                         )
@@ -125,7 +129,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                         flex: 5,
                         child: Center(
                           child: Column(children: [
-                          Text(PrintFormatHelper.comma(bloc.accountState.ingInfiniteCount!), style: TextStyle(color: Colors.white)),
+                          Text(PrintFormatHelper.comma(bloc.accountState.ingInfiniteCount ?? 0), style: TextStyle(color: Colors.white)),
                           Text("보유종목수", style: TextStyle(fontSize: 10, color: Colors.white)),
                         ]),
                         )
@@ -149,121 +153,127 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
 
   // 계좌 내 종목 리스트
   Widget printStockListView(){
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: bloc.stockList.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
-          margin: EdgeInsets.fromLTRB(28, 12, 28, 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
-                spreadRadius: 0,
-                blurRadius: 0.2,
-                offset: Offset(0, 0.5), // changes position of shadow
-              ),
-            ],
-          ),
-          child: InkWell(
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                fullscreenDialog: true,
-                builder: (BuildContext context){
-                  return InfiniteDetailPage(infiniteDetail: bloc.stockList[index], accountName: bloc.accountNames[bloc.stockList[index].accountId]);
-                }
-              ));
-            },
-            child: Container(
-              padding: EdgeInsets.all(16),
-              child : Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 5),
-                        child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16),),
-                      ),
-                      Container(
-                        child: Badge(
-                          toAnimate: false,
-                          shape: BadgeShape.square,
-                          elevation: 0,
-                          badgeColor: (bloc.stockList[index]!.infiniteState! == "진행중" ? Colors.blue[700]! :
-                            bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
-                            bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
-                          ),
-                          padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
-                          borderRadius: BorderRadius.circular(12),
-                          badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  //Container(width: 500, child: Divider(color: Colors.black26, thickness: 0.3)),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 12, 0, 8),
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                        width: 0.7,
-                        color: Colors.black12
-                      ),
-                    ),
-                    child: Column(
-                      children : [
-                        Row(
-                          children: [
-                            Container(
-                              child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 10)),
-                            ),
-                            if(bloc.stockList[index]!.infiniteType! == "TLP")
-                                Container(
-                                  child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 10)),
-                                ),
-                            Container(
-                              child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 10)),
-                            ),
-                          ],
-                        )
-                      ]
-                    )
-                  ),
-                  Container(
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
-                    child: Row(
+    return NotificationListener<OverscrollIndicatorNotification>(
+      onNotification: (overscroll){
+        overscroll.disallowIndicator();
+        return false;
+      },
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: bloc.stockList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            margin: EdgeInsets.fromLTRB(28, 12, 28, 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.8),
+                  spreadRadius: 0,
+                  blurRadius: 0.2,
+                  offset: Offset(0, 0.5), // changes position of shadow
+                ),
+              ],
+            ),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  fullscreenDialog: true,
+                  builder: (BuildContext context){
+                    return InfiniteDetailPage(infiniteDetail: bloc.stockList[index], accountName: bloc.accountNames[bloc.stockList[index].accountId]);
+                  }
+                ));
+              },
+              child: Container(
+                padding: EdgeInsets.all(16),
+                child : Column(
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("진행률"),
-                        Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: TextStyle(fontWeight: FontWeight.w600))
+                        Container(
+                          margin: EdgeInsets.only(right: 5),
+                          child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16),),
+                        ),
+                        Container(
+                          child: Badge(
+                            toAnimate: false,
+                            shape: BadgeShape.square,
+                            elevation: 0,
+                            badgeColor: (bloc.stockList[index]!.infiniteState! == "진행중" ? Colors.blue[700]! :
+                              bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
+                              bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
+                            ),
+                            padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                            borderRadius: BorderRadius.circular(12),
+                            badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  Container(
-                    // padding: EdgeInsets.only(bottom: 8),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(6),
-                      child: LinearProgressIndicator(
-                        value: bloc.stockList[index]!.progressPer!/100,
-                        backgroundColor: Colors.black12,
-                        color: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
-                                bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
-                        minHeight: 12,
+                    //Container(width: 500, child: Divider(color: Colors.black26, thickness: 0.3)),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 12, 0, 8),
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          width: 0.7,
+                          color: Colors.black12
+                        ),
+                      ),
+                      child: Column(
+                        children : [
+                          Row(
+                            children: [
+                              Container(
+                                child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 10)),
+                              ),
+                              if(bloc.stockList[index]!.infiniteType! == "TLP")
+                                  Container(
+                                    child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 10)),
+                                  ),
+                              Container(
+                                child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 10)),
+                              ),
+                            ],
+                          )
+                        ]
+                      )
+                    ),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("진행률"),
+                          Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: TextStyle(fontWeight: FontWeight.w600))
+                        ],
                       ),
                     ),
-                  ),
-                  
-                ],
-              ),
+                    Container(
+                      // padding: EdgeInsets.only(bottom: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: LinearProgressIndicator(
+                          value: bloc.stockList[index]!.progressPer!/100,
+                          backgroundColor: Colors.black12,
+                          color: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
+                                  bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
+                          minHeight: 12,
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              )
             )
-          )
-        );
-      }
+          );
+        }
+      ),
     );
   }
 
