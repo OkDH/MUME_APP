@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mailer/smtp_server.dart';
+// import 'package:mailer/smtp_server.dart';
 // import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:mailer/mailer.dart';
+// import 'package:mailer/mailer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mume/view/resource/color.dart';
 
@@ -154,63 +154,63 @@ class PageAsk2State extends State<PageAsk2> {
   }
 
   void _sendEmailSMTP() {
-    if(_isLoading) return;
-
-    try{
-      String postUser = 'ocko.mume.mail@gmail.com';
-      String password = 'mume!@34';
-      final smtpServer = gmail(postUser, password);
-      debugPrint("email == $_emailText, content == $_contentText, img == ${_file?.name}");
-
-      if(_emailText.isEmpty || !RegExp(_reg).hasMatch(_emailText)){
-        _showMyDialog(
-            title: "이메일",
-            desc: "이메일을 확인해주세요.",
-            func: () => _emailFocus.requestFocus()
-        );
-        return;
-      }
-
-      if(_contentText.isEmpty || _contentText.length < _contentMin){
-        _showMyDialog(
-            title: "내용",
-            desc: "내용을 확인해주세요.\n$_contentMin자 이상 작성해주세요.",
-            func: () => _contentFocus.requestFocus()
-        );
-        return;
-      }
-
-      final message = Message()
-        ..from = Address(postUser, _emailText)
-        ..recipients.add(postUser)
-        ..subject = '[MUME] 문의_${_selectCategory}'
-      // ..subject = '[MUME] 문의_${_selectCategory} - ${_contentText.length >= 10 ? _contentText.substring(0, 9) + "..." : _contentText}'
-        ..text = _contentText;
-
-      if(_file != null && _file!.path.isNotEmpty){
-        message.attachments = [FileAttachment(File(_file!.path))];
-      }
-
-      setState(() => _isLoading = true);
-      send(message, smtpServer).then((rsp) =>{
-        setState((){ _isLoading = false; }),
-        _showMyDialog(
-          title: "문의 완료",
-          desc: "성공적으로 전송하였습니다.",
-          func: () => Navigator.pop(context)
-        ),
-      }).catchError((e) {
-        debugPrint("main error == ${e.toString()}");
-        setState(() => _isLoading = false);
-      });
-    } on Exception catch (e){
-      _showMyDialog(
-          title: "오류",
-          desc: "잠시 후 다시 시도해주세요.");
-       debugPrint("error == " + e.toString());
-      debugPrint("main error == ${e.toString()}");
-      setState(() => _isLoading = false);
-    }
+    // if(_isLoading) return;
+    //
+    // try{
+    //   String postUser = 'ocko.mume.mail@gmail.com';
+    //   String password = 'mume!@34';
+    //   final smtpServer = gmail(postUser, password);
+    //   debugPrint("email == $_emailText, content == $_contentText, img == ${_file?.name}");
+    //
+    //   if(_emailText.isEmpty || !RegExp(_reg).hasMatch(_emailText)){
+    //     _showMyDialog(
+    //         title: "이메일",
+    //         desc: "이메일을 확인해주세요.",
+    //         func: () => _emailFocus.requestFocus()
+    //     );
+    //     return;
+    //   }
+    //
+    //   if(_contentText.isEmpty || _contentText.length < _contentMin){
+    //     _showMyDialog(
+    //         title: "내용",
+    //         desc: "내용을 확인해주세요.\n$_contentMin자 이상 작성해주세요.",
+    //         func: () => _contentFocus.requestFocus()
+    //     );
+    //     return;
+    //   }
+    //
+    //   final message = Message()
+    //     ..from = Address(postUser, _emailText)
+    //     ..recipients.add(postUser)
+    //     ..subject = '[MUME] 문의_${_selectCategory}'
+    //   // ..subject = '[MUME] 문의_${_selectCategory} - ${_contentText.length >= 10 ? _contentText.substring(0, 9) + "..." : _contentText}'
+    //     ..text = _contentText;
+    //
+    //   if(_file != null && _file!.path.isNotEmpty){
+    //     message.attachments = [FileAttachment(File(_file!.path))];
+    //   }
+    //
+    //   setState(() => _isLoading = true);
+    //   send(message, smtpServer).then((rsp) =>{
+    //     setState((){ _isLoading = false; }),
+    //     _showMyDialog(
+    //       title: "문의 완료",
+    //       desc: "성공적으로 전송하였습니다.",
+    //       func: () => Navigator.pop(context)
+    //     ),
+    //   }).catchError((e) {
+    //     debugPrint("main error == ${e.toString()}");
+    //     setState(() => _isLoading = false);
+    //   });
+    // } on Exception catch (e){
+    //   _showMyDialog(
+    //       title: "오류",
+    //       desc: "잠시 후 다시 시도해주세요.");
+    //    debugPrint("error == " + e.toString());
+    //   debugPrint("main error == ${e.toString()}");
+    //   setState(() => _isLoading = false);
+    // }
   }
 
   Widget _appBar() {

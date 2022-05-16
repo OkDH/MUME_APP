@@ -46,6 +46,9 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> with 
                 bottom: TabBar(
                   tabs: MumePageTabType.values.map((e) => Tab(text: e.label)).toList(),
                   controller: _tabController,
+                  labelColor: Colors.black,
+                  indicatorColor: Colors.purple,
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ];

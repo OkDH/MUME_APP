@@ -85,6 +85,14 @@ class MyApp extends StatelessWidget {
           textButtonTheme: TextButtonThemeData(
             style: TextButton.styleFrom(fixedSize: const Size.fromHeight(Sizes.btnHeight)),
           ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.black),
+            actionsIconTheme: IconThemeData(color: Colors.black),
+            centerTitle: false,
+            elevation: 0.0,
+            titleTextStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)
+          )
         ),
         debugShowCheckedModeBanner: false,
         home: const SplashPage(),
