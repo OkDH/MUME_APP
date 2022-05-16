@@ -181,11 +181,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.holdingQuantity!.toString(), style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.holdingQuantity!), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.averagePrice!.toStringAsFixed(2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.averagePrice!, decimal: 2), style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -211,11 +211,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.stockDetail!.priceClose!.toStringAsFixed(2), style: getValueTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.stockDetail!.priceClose!, decimal: 2), style: getValueTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                       ],
                     ),
@@ -226,11 +226,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.stockDetail!.chgp!) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.stockDetail!.chgp!, decimal: 2) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.incomePer!))
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
@@ -299,11 +299,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.seed!.toString(), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.seed!), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text( widget.infiniteDetail!.divisions!.toString() + " 분할", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.divisions!) + " 분할", style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -329,11 +329,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.oneBuySeed!.toStringAsFixed(2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.oneBuySeed!, decimal: 2), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(widget.infiniteDetail!.oneBuyQuantity!.toStringAsFixed(0) + "주", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.oneBuyQuantity!) + "주", style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -372,11 +372,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.buyPrice!.toStringAsFixed(2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.buyPrice!, decimal: 2), style: getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + widget.infiniteDetail!.evalPrice!.toStringAsFixed(2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.evalPrice!, decimal: 2), style: getValueTextStyle())
                         ),
                       ],
                     ),
@@ -402,11 +402,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!) + "%", style: getValueTextStyle(value: widget.infiniteDetail!.incomePer!))
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%", style: getValueTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
