@@ -3,6 +3,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
 import 'package:mume/helper/print_format_helper.dart';
+import 'package:mume/helper/text_style_helper.dart';
 
 class InfiniteDetailPage extends StatefulWidget {
 
@@ -156,7 +157,7 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
               ),
             ),
             getDivider(),
-             Container(
+            Container(
               padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
               child: Column(
                 children: [
@@ -166,11 +167,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("보유수", style: getSubTitleTextStyle())
+                          child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("평단가", style: getSubTitleTextStyle())
+                          child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                       ],
                     ),
@@ -181,26 +182,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.holdingQuantity!), style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.averagePrice!, decimal: 2), style: getValueTextStyle())
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: Text("현재가", style: getSubTitleTextStyle())
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Text("평가손익", style: getSubTitleTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
                         ),
                       ],
                     ),
@@ -211,11 +197,26 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.stockDetail!.priceClose!, decimal: 2), style: getValueTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
+                          child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
+                          child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                       ],
                     ),
@@ -226,11 +227,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.stockDetail!.chgp!, decimal: 2) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.stockDetail!.chgp!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: widget.infiniteDetail!.stockDetail!.chgp!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%)", style: getSubTitleTextStyle(value: widget.infiniteDetail!.incomePer!))
+                          child: Text("(" + PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
@@ -254,41 +255,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("시작일자", style: getSubTitleTextStyle())
+                          child: Text("시작일자", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("자동기록", style: getSubTitleTextStyle())
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: Text(widget.infiniteDetail!.startedDate!, style: getValueTextStyle())
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Text(widget.infiniteDetail!.isAutoTrade! == true ? "ON" : "OFF", style: getValueTextStyle())
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: Text("배정원금", style: getSubTitleTextStyle())
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: Text("원금분할", style: getSubTitleTextStyle())
+                          child: Text("자동기록", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                       ],
                     ),
@@ -299,11 +270,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.seed!), style: getValueTextStyle())
+                          child: Text(widget.infiniteDetail!.startedDate!, style: TextStyleHelper.getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.divisions!) + " 분할", style: getValueTextStyle())
+                          child: Text(widget.infiniteDetail!.isAutoTrade! == true ? "ON" : "OFF", style: TextStyleHelper.getValueTextStyle())
                         ),
                       ],
                     ),
@@ -314,11 +285,41 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("1회 매수금액", style: getSubTitleTextStyle())
+                          child: Text("배정원금", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("1회 매수량", style: getSubTitleTextStyle())
+                          child: Text("원금분할", style: TextStyleHelper.getSubTitleTextStyle())
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.seed!), style: TextStyleHelper.getValueTextStyle())
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.divisions!) + " 분할", style: TextStyleHelper.getValueTextStyle())
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(bottom: 5),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 5,
+                          child: Text("1회 매수금액", style: TextStyleHelper.getSubTitleTextStyle())
+                        ),
+                        Expanded(
+                          flex: 5,
+                          child: Text("1회 매수량", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                       ],
                     ),
@@ -329,11 +330,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.oneBuySeed!, decimal: 2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.oneBuySeed!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.oneBuyQuantity!) + "주", style: getValueTextStyle())
+                          child: Text(PrintFormatHelper.comma(widget.infiniteDetail!.oneBuyQuantity!) + "주", style: TextStyleHelper.getValueTextStyle())
                         ),
                       ],
                     ),
@@ -357,11 +358,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("매입금액", style: getSubTitleTextStyle())
+                          child: Text("매입금액", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("평가금액", style: getSubTitleTextStyle())
+                          child: Text("평가금액", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                       ],
                     ),
@@ -372,11 +373,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.buyPrice!, decimal: 2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.buyPrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.evalPrice!, decimal: 2), style: getValueTextStyle())
+                          child: Text("\$" + PrintFormatHelper.comma(widget.infiniteDetail!.evalPrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
                         ),
                       ],
                     ),
@@ -387,11 +388,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text("평가손익", style: getSubTitleTextStyle())
+                          child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text("수익률", style: getSubTitleTextStyle())
+                          child: Text("수익률", style: TextStyleHelper.getSubTitleTextStyle())
                         ),
                       ],
                     ),
@@ -402,11 +403,11 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
                       children: [
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: getValueTextStyle(value: widget.infiniteDetail!.income!))
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: widget.infiniteDetail!.income!))
                         ),
                         Expanded(
                           flex: 5,
-                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%", style: getValueTextStyle(value: widget.infiniteDetail!.incomePer!))
+                          child: Text(PrintFormatHelper.appendPulMa(widget.infiniteDetail!.incomePer!, decimal: 2) + "%", style: TextStyleHelper.getValueTextStyle(value: widget.infiniteDetail!.incomePer!))
                         ),
                       ],
                     ),
@@ -517,34 +518,6 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
         ),
       ),
     );
-  }
-
-  // 메인 제목 텍스트
-  TextStyle getMainTitleTextStyle(){
-    return const TextStyle(fontSize: 20, fontWeight: FontWeight.w600);
-  }
-
-  // 회색 작은 텍스트
-  TextStyle getSubTitleTextStyle({dynamic value}){
-    if(value != null){
-      if(value >= 0)
-        return const TextStyle(color: Colors.red);
-      else 
-         return const TextStyle(color: Colors.blue);
-    }
-    return const TextStyle(color: Colors.black54);
-  }
-
-  // 값 출력 텍스트
-  TextStyle getValueTextStyle({dynamic value}){
-    if(value != null){
-      if(value >= 0)
-        return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.red);
-      else 
-         return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.blue);
-    }
-
-    return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
   }
 
    // 구분선

@@ -68,7 +68,8 @@ dependencies:
   badges: ^2.0.2
 
   # number format
-  intl: ^0.16.1
+# dependency_overrides:
+  # intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

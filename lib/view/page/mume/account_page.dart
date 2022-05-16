@@ -8,6 +8,7 @@ import 'package:mume/viewmodel/mume/account_page_bloc.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:badges/badges.dart';
 import 'package:mume/helper/print_format_helper.dart';
+import 'package:mume/helper/text_style_helper.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -185,7 +186,24 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                     children: [
                       Container(
                         margin: EdgeInsets.only(right: 5),
-                        child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16),),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(right: 5),
+                              child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                            ),
+                            Container(
+                              child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                            ),
+                            if(bloc.stockList[index]!.infiniteType! == "TLP")
+                                Container(
+                                  child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                                ),
+                            Container(
+                              child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                            ),
+                          ],
+                        ),
                       ),
                       Container(
                         child: Badge(
@@ -203,7 +221,6 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                       ),
                     ],
                   ),
-                  //Container(width: 500, child: Divider(color: Colors.black26, thickness: 0.3)),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 12, 0, 8),
                     padding: EdgeInsets.all(8),
@@ -216,20 +233,63 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                     ),
                     child: Column(
                       children : [
-                        Row(
-                          children: [
-                            Container(
-                              child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 10)),
+                        Container(
+                          child: Row(children: [
+                            Expanded(
+                              flex: 5,
+                              child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
                             ),
-                            if(bloc.stockList[index]!.infiniteType! == "TLP")
-                                Container(
-                                  child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 10)),
-                                ),
-                            Container(
-                              child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 10)),
+                            Expanded(
+                              flex: 5,
+                              child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
+                            ),
+                          ]),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: Text(PrintFormatHelper.comma(bloc.stockList[index]!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
+                              ),
+                              Expanded(
+                                flex: 5,
+                                child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
+                              ),
+                              Expanded(
+                                flex: 5,
+                                child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
+                            ),
+                            Expanded(
+                              flex: 5,
+                              child: Text(PrintFormatHelper.appendPulMa(bloc.stockList[index]!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.income!))
                             ),
                           ],
-                        )
+                        ),
+                      ),
                       ]
                     )
                   ),
