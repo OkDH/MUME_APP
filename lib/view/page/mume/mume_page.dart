@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mume/enums/mume_page_tab_type.dart';
 import 'package:mume/view/component/button.dart';
 import 'package:mume/view/component/require_login_widget.dart';
-import 'package:mume/view/component/text.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/strings.dart';
@@ -42,7 +41,7 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> with 
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: const MyText("무한매수"),
+                title: const Text("무한매수"),
                 pinned: true,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,

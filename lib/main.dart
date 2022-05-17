@@ -91,7 +91,10 @@ class MyApp extends StatelessWidget {
             actionsIconTheme: IconThemeData(color: MyColor.textColor),
             centerTitle: false,
             elevation: 0.0,
-            titleTextStyle: TextStyle(color: MyColor.textColor, fontSize: 20, fontWeight: FontWeight.bold)
+            titleTextStyle: TextStyle(color: MyColor.textColor, fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          textTheme: const TextTheme(
+            bodyText2: TextStyle(color: MyColor.textColor),
           )
         ),
         debugShowCheckedModeBanner: false,

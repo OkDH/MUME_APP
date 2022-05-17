@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
-import 'package:mume/view/component/text.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
 

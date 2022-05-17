@@ -8,7 +8,6 @@ import 'package:mume/viewmodel/mume/account_page_bloc.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
-import 'package:mume/view/component/text.dart';
 import 'package:badges/badges.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
@@ -50,8 +49,8 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    MyText(bloc.query["accountId"] == "ALL" ? "계좌 전체" : bloc.accountNames[int.parse(bloc.query["accountId"])] ?? "",
-                      fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600),
+                    Text(bloc.query["accountId"] == "ALL" ? "계좌 전체" : bloc.accountNames[int.parse(bloc.query["accountId"])] ?? "",
+                      style: const TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600)),
                     Container(
                       child: Row(
                           children: [
@@ -145,7 +144,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
               Container(
                 margin: EdgeInsets.fromLTRB(0, Sizes.paddingBody, 0, 0),
                 alignment: Alignment.bottomLeft,
-                child: MyText("보유종목", fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,),
+                child: Text("보유종목", style: TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,)),
               ),
               printStockListView(),
             ],
