@@ -11,6 +11,7 @@ import 'package:mume/view/resource/sizes.dart';
 import 'package:badges/badges.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -190,11 +191,11 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                margin: EdgeInsets.only(right: 5),
+                                margin: const EdgeInsets.only(right: 5),
                                 child: Row(
                                   children: [
                                     Container(
-                                      margin: EdgeInsets.only(right: 5),
+                                      margin: const EdgeInsets.only(right: 5),
                                       child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
                                     ),
                                     Container(
@@ -219,7 +220,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                                   bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
                                   bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
                                   ),
-                                  padding: EdgeInsets.fromLTRB(10, 4, 10, 4),
+                                  padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
                                   borderRadius: BorderRadius.circular(12),
                                   badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
                                 ),
@@ -227,102 +228,109 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             ],
                           ),
                           Container(
-                              margin: EdgeInsets.fromLTRB(0, 12, 0, 8),
-                              padding: EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                border: Border.all(
-                                    width: 0.7,
-                                    color: Colors.black12
-                                ),
-                              ),
-                              child: Column(
-                                  children : [
-                                    Container(
-                                      child: Row(children: [
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
-                                        ),
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
-                                        ),
-                                      ]),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(bottom: 10),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text(PrintFormatHelper.comma(bloc.stockList[index]!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
-                                          ),
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(bottom: 5),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
-                                          ),
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      padding: EdgeInsets.only(bottom: 5),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
-                                          ),
-                                          Expanded(
-                                              flex: 5,
-                                              child: Text(PrintFormatHelper.appendPulMa(bloc.stockList[index]!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.income!))
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ]
-                              )
-                          ),
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: EdgeInsets.fromLTRB(0, 5, 0, 8),
+                            padding: const EdgeInsets.all(Sizes.paddingSideRatio),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("진행률"),
-                                Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: TextStyle(fontWeight: FontWeight.w600))
+                                Container(
+                                  margin: const EdgeInsets.only(right: 20),
+                                  child : CircularStepProgressIndicator(
+                                    child: Container(
+                                      alignment: Alignment.center, 
+                                      child: Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: const TextStyle(fontWeight: FontWeight.bold),),
+                                    ),
+                                    totalSteps: 100,
+                                    currentStep: bloc.stockList[index]!.progressPer!.round(),
+                                    stepSize: 10,
+                                    selectedColor: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
+                                      bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : MyColor.primary,
+                                    unselectedColor: Colors.grey[200],
+                                    padding: 0,
+                                    width: 120,
+                                    height: 120,
+                                    selectedStepSize: 12,
+                                    roundedCap: (_, __) => true,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    children : [
+                                      Container(
+                                        child: Row(children: [
+                                          Expanded(
+                                              flex: 5,
+                                              child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
+                                          ),
+                                          Expanded(
+                                              flex: 5,
+                                              child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
+                                          ),
+                                        ]),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.only(bottom: 10),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text(PrintFormatHelper.comma(bloc.stockList[index]!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
+                                            ),
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.only(bottom: 5),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
+                                            ),
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.only(bottom: 5),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
+                                            ),
+                                            Expanded(
+                                                flex: 5,
+                                                child: Text(PrintFormatHelper.appendPulMa(bloc.stockList[index]!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.income!))
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 5,
+                                              child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.stockDetail!.chgp!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
+                                            ),
+                                            Expanded(
+                                              flex: 5,
+                                              child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.incomePer!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.incomePer!))
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]
+                                  ),
+                                )
                               ],
-                            ),
+                            )
                           ),
-                          Container(
-                            // padding: EdgeInsets.only(bottom: 8),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(6),
-                              child: LinearProgressIndicator(
-                                value: bloc.stockList[index]!.progressPer!/100,
-                                backgroundColor: Colors.grey[100],
-                                color: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
-                                bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
-                                minHeight: 12,
-                              ),
-                            ),
-                          ),
-
                         ],
                       ),
                     )

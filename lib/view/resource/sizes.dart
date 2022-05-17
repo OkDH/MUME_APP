@@ -10,7 +10,7 @@ class Sizes {
   static const double _s40 = 40.0;
   static const double _s50 = 50.0;
 
-  static const double _p06 = 0.06;
+  static const double _p06 = 6.0;
 
   ///text
   static const double textDefault = _s16;
