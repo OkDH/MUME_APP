@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mume/enums/bottom_menu_item_type.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/color.dart';
+import 'package:mume/view/resource/sizes.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/home_page_bloc.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
@@ -42,17 +43,34 @@ class _HomePageState extends BasePageState<String, HomePageBloc, HomePage> {
               .map((e) => e.page)
               .toList(),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: MyColor.background,
-          selectedItemColor: MyColor.primary,
-          unselectedItemColor: MyColor.disableDark,
-          unselectedLabelStyle: const TextStyle(color: MyColor.disableDark),
-          onTap: (iconIndex) => bloc.clickBottomMenuItem(iconIndex),
-          currentIndex: bloc.currentPageIndex,
-          items: BottomMenuItemType.values
-              .map((e) => BottomNavigationBarItem(icon: e.icon, label: e.label))
-              .toList(),
-        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(    
+            borderRadius: const BorderRadius.only(                                           
+              topRight: Radius.circular(Sizes.circular), topLeft: Radius.circular(Sizes.circular)
+            ),            
+            boxShadow: [                                                               
+              BoxShadow(color: MyColor.primary.withOpacity(0.6), spreadRadius: 0, blurRadius: 5, offset: const Offset(0, 2)),       
+            ],                                                                         
+          ),                                                                           
+          child: ClipRRect(        
+            borderRadius: const BorderRadius.only(                                           
+              topLeft: Radius.circular(Sizes.circular),                                            
+              topRight: Radius.circular(Sizes.circular),                                           
+            ),                                                                         
+            child: BottomNavigationBar(        
+              selectedItemColor: MyColor.primary,
+              unselectedItemColor: MyColor.disableDark,   
+              unselectedLabelStyle: const TextStyle(color: MyColor.disableDark),     
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.white,       
+              onTap: (iconIndex) => bloc.clickBottomMenuItem(iconIndex),      
+              currentIndex: bloc.currentPageIndex,               
+              items: BottomMenuItemType.values
+                .map((e) => BottomNavigationBarItem(icon: e.icon, label: e.label, backgroundColor: Colors.white))
+                .toList(),                                                                       
+            ),
+          ), 
+        )
       ),
     );
   }

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
+import 'package:mume/view/component/text.dart';
+import 'package:mume/view/resource/color.dart';
+import 'package:mume/view/resource/sizes.dart';
 
 class InfiniteDetailPage extends StatefulWidget {
 
@@ -35,6 +38,8 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // title: MyText(widget.infiniteDetail!.symbol!),
+        // centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -55,10 +60,10 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
         ],
       ),
       body: SingleChildScrollView(
+        padding: const EdgeInsets.all(Sizes.paddingBody),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
               child: Column(
                 children: [
                   Container(

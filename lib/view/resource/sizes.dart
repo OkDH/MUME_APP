@@ -1,4 +1,3 @@
-
 class Sizes {
   static const double _s10 = 10.0;
   static const double _s12 = 12.0;
@@ -16,7 +15,8 @@ class Sizes {
   ///text
   static const double textDefault = _s16;
   static const double textSmall = _s12;
-  static const double textTitle = _s20;
+  static const double textMiddle = _s18;
+  static const double textLarge = _s20;
 
   static const double btnTextDefault = _s16;
 
@@ -24,6 +24,10 @@ class Sizes {
   static const double btnHeight = _s50;
 
   ///padding
-  static const double paddingDefault = _s10;
+  static const double paddingDefault = _s16;
   static const double paddingSideRatio = _p06;
+  static const double paddingBody = _s20;
+
+  ///radius
+  static const double circular = _s16;
 }

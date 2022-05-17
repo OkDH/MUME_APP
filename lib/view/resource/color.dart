@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MyColor {
-  static const Color primary = Color(_purple);
+  static const Color primary = Color(_blue);
   static const Color onPrimary = Colors.white;
   static const Color disableLight = Color(_grayLight);
   static const Color disableDark = Color(_grayDark);
-  static const Color background = Colors.white;
+  static const Color background = Color(_blueLight);
+  static const Color textColor = Color(_blueDark);
+  
 
   //TODO 추후 legacy 삭제
   static const Color appBarBackground = Color(_grayLight);
@@ -15,12 +17,16 @@ class MyColor {
   static const Color accent = Color(_yellow);
 
 
-
+  static const int _blue = 0xFF3A81F7;
+  // static const int _blueLight = 0xFFF6F7FC;
+  static const int _blueLight = 0xFFEDF1FD;
+  static const int _blueDark = 0xFF192444;
+  
 
   static const int _yellow = 0xFFF6C23D;
 
   static const int _gray = 0xFF595C68;
-  static const int _grayLight = 0xFFF6F7F9;
+  static const int _grayLight = 0xFFFAFAFA;
   static const int _grayLight100 = 0xffe3e6f0;
 
   static const int _grayDark = 0xFF858896;

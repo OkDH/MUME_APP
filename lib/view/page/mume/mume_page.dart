@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mume/enums/mume_page_tab_type.dart';
-import 'package:mume/view/componont/button.dart';
-import 'package:mume/view/componont/require_login_widget.dart';
+import 'package:mume/view/component/button.dart';
+import 'package:mume/view/component/require_login_widget.dart';
+import 'package:mume/view/component/text.dart';
 import 'package:mume/view/page/base_page.dart';
+import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
+
 
 class MumePage extends StatefulWidget {
   const MumePage({Key? key}) : super(key: key);
@@ -39,15 +42,16 @@ class _MumePageState extends BasePageState<String, MumePageBloc, MumePage> with 
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: Text(MumePage.routeName),
+                title: const MyText("무한매수"),
                 pinned: true,
                 floating: true,
                 forceElevated: innerBoxIsScrolled,
+                backgroundColor: MyColor.background,
                 bottom: TabBar(
                   tabs: MumePageTabType.values.map((e) => Tab(text: e.label)).toList(),
                   controller: _tabController,
-                  labelColor: Colors.black,
-                  indicatorColor: Colors.purple,
+                  labelColor: MyColor.textColor,
+                  indicatorColor: MyColor.primary,
                   labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

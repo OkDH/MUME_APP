@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:mume/enums/login_type.dart';
-import 'package:mume/view/componont/button.dart';
+import 'package:mume/view/component/button.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';

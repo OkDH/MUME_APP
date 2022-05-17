@@ -6,6 +6,9 @@ import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
+import 'package:mume/view/resource/color.dart';
+import 'package:mume/view/resource/sizes.dart';
+import 'package:mume/view/component/text.dart';
 import 'package:badges/badges.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
@@ -33,119 +36,120 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
-    debugPrint("buildPage AccountPageBloc");
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 241, 238, 252),
+      backgroundColor: MyColor.background,
       body: SingleChildScrollView (
         controller: _scrollController,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(28, 12, 28, 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(bloc.query["accountId"] == "ALL" ? "계좌 전체" : bloc.accountNames[int.parse(bloc.query["accountId"])] ?? "",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
-                  Container(
-                    child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {showStocksBottomSheet(context);},
-                            child: Icon(Icons.add),
-                            style: ElevatedButton.styleFrom(
-                              // primary: Colors.white,
-                              // onPrimary: Colors.blue,
-                              shape: CircleBorder(),
-                              padding: EdgeInsets.all(2),
+        child: Container(
+          padding: const EdgeInsets.all(Sizes.paddingBody),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    MyText(bloc.query["accountId"] == "ALL" ? "계좌 전체" : bloc.accountNames[int.parse(bloc.query["accountId"])] ?? "",
+                      fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600),
+                    Container(
+                      child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {showStocksBottomSheet(context);},
+                              child: Icon(Icons.add),
+                              style: ElevatedButton.styleFrom(
+                                primary: MyColor.primary,
+                                onPrimary: MyColor.onPrimary,
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(2),
+                              ),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {showFilterBottomSheet(context);},
-                            child: Icon(Icons.filter_alt_rounded),
-                            style: ElevatedButton.styleFrom(
-                              // primary: Colors.white,
-                              // onPrimary: Colors.blue,
-                              shape: CircleBorder(),
-                              padding: EdgeInsets.all(2),
+                            ElevatedButton(
+                              onPressed: () {showFilterBottomSheet(context);},
+                              child: Icon(Icons.filter_alt_rounded),
+                              style: ElevatedButton.styleFrom(
+                                primary: MyColor.primary,
+                                onPrimary: MyColor.onPrimary,
+                                shape: CircleBorder(),
+                                padding: EdgeInsets.all(2),
+                              ),
                             ),
-                          ),
-                        ]
+                          ]
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                // margin: EdgeInsets.fromLTRB(28, 0, 28, 28),
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Sizes.circular),
+                  color: MyColor.primary,
+                  boxShadow: [
+                    BoxShadow(
+                      color: MyColor.primary.withOpacity(0.6),
+                      spreadRadius: 0,
+                      blurRadius: 5.0,
+                      offset: Offset(0, 2), // changes position of shadow
                     ),
-                  )
-                ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                      child: Row(children: [
+                        Expanded(
+                            flex: 5,
+                            child: Center(
+                              child: Column(children: [
+                                Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumAccountSeed ?? 0.0), style: TextStyle(color: Colors.white)),
+                                Text("투자원금", style: TextStyle(fontSize: 10, color: Colors.white)),
+                              ]),
+                            )
+                        ),
+                        Expanded(
+                            flex: 5,
+                            child: Center(
+                              child: Column(children: [
+                                Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteSeed ?? 0.0), style: TextStyle(color: Colors.white)),
+                                Text("배정씨드", style: TextStyle(fontSize: 10, color: Colors.white)),
+                              ]),
+                            )
+                        ),
+                        Expanded(
+                            flex: 5,
+                            child: Center(
+                              child: Column(children: [
+                                Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteBuyPrice ?? 0.0, decimal: 2), style: TextStyle(color: Colors.white)),
+                                Text("총 매수금액", style: TextStyle(fontSize: 10, color: Colors.white)),
+                              ]),
+                            )
+                        ),
+                        Expanded(
+                            flex: 5,
+                            child: Center(
+                              child: Column(children: [
+                                Text(PrintFormatHelper.comma(bloc.accountState.ingInfiniteCount ?? 0), style: TextStyle(color: Colors.white)),
+                                Text("보유종목수", style: TextStyle(fontSize: 10, color: Colors.white)),
+                              ]),
+                            )
+                        ),
+                      ]),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(28, 0, 28, 28),
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 121, 102, 255),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.6),
-                    spreadRadius: 0,
-                    blurRadius: 5.0,
-                    offset: Offset(0, 2), // changes position of shadow
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.fromLTRB(0, Sizes.paddingBody, 0, 0),
+                alignment: Alignment.bottomLeft,
+                child: MyText("보유종목", fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,),
               ),
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
-                    child: Row(children: [
-                      Expanded(
-                          flex: 5,
-                          child: Center(
-                            child: Column(children: [
-                              Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumAccountSeed ?? 0.0), style: TextStyle(color: Colors.white)),
-                              Text("투자원금", style: TextStyle(fontSize: 10, color: Colors.white)),
-                            ]),
-                          )
-                      ),
-                      Expanded(
-                          flex: 5,
-                          child: Center(
-                            child: Column(children: [
-                              Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteSeed ?? 0.0), style: TextStyle(color: Colors.white)),
-                              Text("배정씨드", style: TextStyle(fontSize: 10, color: Colors.white)),
-                            ]),
-                          )
-                      ),
-                      Expanded(
-                          flex: 5,
-                          child: Center(
-                            child: Column(children: [
-                              Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteBuyPrice ?? 0.0, decimal: 2), style: TextStyle(color: Colors.white)),
-                              Text("총 매수금액", style: TextStyle(fontSize: 10, color: Colors.white)),
-                            ]),
-                          )
-                      ),
-                      Expanded(
-                          flex: 5,
-                          child: Center(
-                            child: Column(children: [
-                              Text(PrintFormatHelper.comma(bloc.accountState.ingInfiniteCount ?? 0), style: TextStyle(color: Colors.white)),
-                              Text("보유종목수", style: TextStyle(fontSize: 10, color: Colors.white)),
-                            ]),
-                          )
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.fromLTRB(28, 0, 0, 12),
-              alignment: Alignment.bottomLeft,
-              child: Text("보유종목", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-            ),
-            printStockListView(),
-          ],
+              printStockListView(),
+            ],
+          ),
         ),
       ),
     );
@@ -162,20 +166,14 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
           shrinkWrap: true,
           itemCount: bloc.stockList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-                margin: EdgeInsets.fromLTRB(28, 12, 28, 12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 0,
-                      blurRadius: 0.2,
-                      offset: Offset(0, 0.5), // changes position of shadow
-                    ),
-                  ],
+            return Card(
+                // shadowColor: MyColor.primary.withOpacity(0.6),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color: Colors.white),
+                  borderRadius: BorderRadius.circular(Sizes.circular),
                 ),
+                elevation: 0.0,
+                margin: const EdgeInsets.fromLTRB(0, Sizes.paddingDefault, 0, 8),
                 child: InkWell(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -186,7 +184,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                       ));
                     },
                     child: Container(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(Sizes.paddingDefault),
                       child : Column(
                         children: [
                           Row(
@@ -318,7 +316,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                               borderRadius: BorderRadius.circular(6),
                               child: LinearProgressIndicator(
                                 value: bloc.stockList[index]!.progressPer!/100,
-                                backgroundColor: Colors.black12,
+                                backgroundColor: Colors.grey[100],
                                 color: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
                                 bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : Colors.blue[700]!,
                                 minHeight: 12,

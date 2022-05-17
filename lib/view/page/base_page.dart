@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mume/enums/navigate_type.dart';
-import 'package:mume/view/componont/alert.dart';
-import 'package:mume/view/componont/loading.dart';
+import 'package:mume/view/component/alert.dart';
+import 'package:mume/view/component/loading.dart';
 import 'package:mume/view/page/login_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';

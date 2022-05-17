@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mume/model/data_source/local/shared_preferences.dart';
 import 'package:mume/model/dto/oauth_token.dart';
-import 'package:mume/view/componont/button.dart';
+import 'package:mume/view/component/button.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/resource/assets.dart';
 import 'package:mume/view/resource/strings.dart';

@@ -87,11 +87,11 @@ class MyApp extends StatelessWidget {
           ),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
-            actionsIconTheme: IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: MyColor.textColor),
+            actionsIconTheme: IconThemeData(color: MyColor.textColor),
             centerTitle: false,
             elevation: 0.0,
-            titleTextStyle: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold)
+            titleTextStyle: TextStyle(color: MyColor.textColor, fontSize: 20, fontWeight: FontWeight.bold)
           )
         ),
         debugShowCheckedModeBanner: false,
