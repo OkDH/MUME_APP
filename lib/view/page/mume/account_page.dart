@@ -37,7 +37,6 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
     return Scaffold(
-      backgroundColor: MyColor.background,
       body: SingleChildScrollView (
         controller: _scrollController,
         child: Container(
@@ -82,8 +81,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                 ),
               ),
               Container(
-                // margin: EdgeInsets.fromLTRB(28, 0, 28, 28),
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(Sizes.paddingDefault),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Sizes.circular),
                   color: MyColor.primary,
@@ -99,14 +97,14 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                      padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                       child: Row(children: [
                         Expanded(
                             flex: 5,
                             child: Center(
                               child: Column(children: [
                                 Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumAccountSeed ?? 0.0), style: TextStyle(color: Colors.white)),
-                                Text("투자원금", style: TextStyle(fontSize: 10, color: Colors.white)),
+                                const Text("투자원금", style: TextStyle(fontSize: 10, color: Colors.white)),
                               ]),
                             )
                         ),
@@ -115,7 +113,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             child: Center(
                               child: Column(children: [
                                 Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteSeed ?? 0.0), style: TextStyle(color: Colors.white)),
-                                Text("배정씨드", style: TextStyle(fontSize: 10, color: Colors.white)),
+                                const Text("배정씨드", style: TextStyle(fontSize: 10, color: Colors.white)),
                               ]),
                             )
                         ),
@@ -124,7 +122,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             child: Center(
                               child: Column(children: [
                                 Text("\$" + PrintFormatHelper.comma(bloc.accountState.sumInfiniteBuyPrice ?? 0.0, decimal: 2), style: TextStyle(color: Colors.white)),
-                                Text("총 매수금액", style: TextStyle(fontSize: 10, color: Colors.white)),
+                                const Text("총 매수금액", style: TextStyle(fontSize: 10, color: Colors.white)),
                               ]),
                             )
                         ),
@@ -133,7 +131,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             child: Center(
                               child: Column(children: [
                                 Text(PrintFormatHelper.comma(bloc.accountState.ingInfiniteCount ?? 0), style: TextStyle(color: Colors.white)),
-                                Text("보유종목수", style: TextStyle(fontSize: 10, color: Colors.white)),
+                                const Text("보유종목수", style: TextStyle(fontSize: 10, color: Colors.white)),
                               ]),
                             )
                         ),
