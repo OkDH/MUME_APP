@@ -143,9 +143,9 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, Sizes.paddingBody, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, Sizes.paddingBody, 0, 0),
                 alignment: Alignment.bottomLeft,
-                child: Text("보유종목", style: TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,)),
+                child: const Text("보유종목", style: TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,)),
               ),
               printStockListView(),
             ],
@@ -167,7 +167,6 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
           itemCount: bloc.stockList.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
-                // shadowColor: MyColor.primary.withOpacity(0.6),
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(color: Colors.white),
                   borderRadius: BorderRadius.circular(Sizes.circular),
@@ -196,17 +195,17 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                                   children: [
                                     Container(
                                       margin: const EdgeInsets.only(right: 5),
-                                      child: Text(bloc.stockList[index].symbol, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                                      child: Text(bloc.stockList[index].symbol, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
                                     ),
                                     Container(
-                                      child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                                      child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
                                     ),
                                     if(bloc.stockList[index]!.infiniteType! == "TLP")
                                       Container(
-                                        child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                                        child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
                                       ),
                                     Container(
-                                      child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: TextStyle(fontSize: 10, color: Colors.black54)),
+                                      child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
                                     ),
                                   ],
                                 ),

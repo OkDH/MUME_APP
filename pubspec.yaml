@@ -73,6 +73,9 @@ dependencies:
   # progress
   step_progress_indicator: ^1.0.2
 
+  # silver
+  draggable_home: ^1.0.3
+
 
 
 dev_dependencies:
