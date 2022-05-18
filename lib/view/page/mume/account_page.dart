@@ -56,7 +56,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                           children: [
                             ElevatedButton(
                               onPressed: () {showStocksBottomSheet(context);},
-                              child: Icon(Icons.add),
+                              child: const Icon(Icons.add),
                               style: ElevatedButton.styleFrom(
                                 primary: MyColor.primary,
                                 onPrimary: MyColor.onPrimary,
@@ -66,7 +66,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                             ),
                             ElevatedButton(
                               onPressed: () {showFilterBottomSheet(context);},
-                              child: Icon(Icons.filter_alt_rounded),
+                              child: const Icon(Icons.filter_alt_rounded),
                               style: ElevatedButton.styleFrom(
                                 primary: MyColor.primary,
                                 onPrimary: MyColor.onPrimary,

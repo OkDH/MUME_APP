@@ -8,6 +8,9 @@ import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
+import 'package:mume/model/dto/market_index.dart';
+import 'package:mume/model/dto/stock.dart';
+
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -41,7 +44,26 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: [
-                        
+                        // _getMarketIndexCart(bloc.marketIndex!.dji!),
+                        // _getMarketIndexCart(bloc.marketIndex!.ixic!),
+                        // _getMarketIndexCart(bloc.marketIndex!.gspc!),
+                        // _getMarketIndexCart(bloc.marketIndex!.sox!),
+                        // _getMarketIndexCart(bloc.marketIndex!.ymf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.nqf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.esf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.rtyf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.krwx!),
+                        // _getMarketIndexCart(bloc.marketIndex!.clf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.gcf!),
+                        // _getMarketIndexCart(bloc.marketIndex!.sif!),
+                        // _getMarketIndexCart(bloc.marketIndex!.tnx!),
+                        // _getMarketIndexCart(bloc.marketIndex!.vix!),
+                        // _getMarketIndexCart(bloc.marketIndex!.ks11!),
+                        // _getMarketIndexCart(bloc.marketIndex!.kq11!),
+                        // _getMarketIndexCart(bloc.marketIndex!.cnss!),
+                        // _getMarketIndexCart(bloc.marketIndex!.n225!),
+                        // _getMarketIndexCart(bloc.marketIndex!.stoxx!),
+                        // _getMarketIndexCart(bloc.marketIndex!.btckrw!),
                       ],
                     ),
                   )
@@ -54,8 +76,27 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
     );
   }
 
+  Card _getMarketIndexCart(Stock stock){
+    return Card(
+      shape: RoundedRectangleBorder(
+        // side: const BorderSide(color: Colors.white),
+        borderRadius: BorderRadius.circular(Sizes.circular),
+      ),
+      margin: EdgeInsets.only(right: Sizes.paddingSideRatio),
+      child: Container(
+        padding: EdgeInsets.all(Sizes.paddingDefault),
+        child: Column(
+          children: [
+            Text(stock.priceClose.toString())
+          ],
+        ),
+      )
+    );
+  }
+
   @override
   void onChangeStateListener(BuildContext context, BaseState state, Size windowSize) {
     super.onChangeStateListener(context, state, windowSize);
   }
+
 }
