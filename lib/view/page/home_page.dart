@@ -37,12 +37,15 @@ class _HomePageState extends BasePageState<String, HomePageBloc, HomePage> {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        body: IndexedStack(
-          index: bloc.currentPageIndex,
-          children: BottomMenuItemType.values
-              .map((e) => e.page)
-              .toList(),
-        ),
+        // body: IndexedStack(
+        //   index: bloc.currentPageIndex,
+        //   children: BottomMenuItemType.values
+        //       .map((e) => e.page)
+        //       .toList(),
+        // ),
+        body: BottomMenuItemType.values
+                .map((e) => e.page)
+                .toList()[bloc.currentPageIndex],
         bottomNavigationBar: Container(
           decoration: BoxDecoration(    
             borderRadius: const BorderRadius.only(                                           
