@@ -30,4 +30,5 @@ class Sizes {
 
   ///radius
   static const double circular = _s16;
+  static const double circularSmall = _s10;
 }

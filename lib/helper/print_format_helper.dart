@@ -20,10 +20,10 @@ class PrintFormatHelper {
   static String appendUpDown(dynamic value, {int? decimal}){
     String strValue = _getNumberFormat(decimal: decimal).format(value);
     if(value > 0)
-      return "▲" + strValue;
+      return "▲ " + strValue;
     else if(value < 0)
-      return "▼" + strValue.replaceAll("-", "");
-    return "-" + strValue;
+      return "▼ " + strValue.replaceAll("-", "");
+    return strValue;
   }
 
   static NumberFormat _getNumberFormat({int? decimal}){

@@ -1,15 +1,18 @@
 import 'package:flutter/foundation.dart';
+import 'dart:collection';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
 import 'package:mume/model/dto/market_index.dart';
+import 'package:mume/model/dto/stock.dart';
 
 class MainPageBloc extends LoginBloc<Object>{
   final MarketIndexRepository _repository;
 
-  late MumeStockMarketIndex? mumeStockMarketIndex;
-  late MarketIndex marketIndex;
+  late MarketIndex marketIndex = MarketIndex();
+  late MumeStockMarketIndex mumeStockMarketIndex = MumeStockMarketIndex();
+  List<Stock> etfList = List.empty(growable: true);
 
   MainPageBloc(
       this._repository,
@@ -44,8 +47,7 @@ class MainPageBloc extends LoginBloc<Object>{
   void loadMarketIndex() {
     _repository.getMarketIndex()
       .then((rsp) {
-        debugPrint("loadMarketIndex getStockMarketIndex success == ${rsp.response.data}");
-        marketIndex = rsp.response.data;
+        marketIndex = rsp.data;
         debugPrint("loadMarketIndex getStockMarketIndex success == ${rsp.response.statusCode}");
       })
       .then((_) => emit(ReBuildPage()))
@@ -55,6 +57,8 @@ class MainPageBloc extends LoginBloc<Object>{
 
     _repository.getMumeStockMarketIndex()
       .then((rsp) {
+        mumeStockMarketIndex = rsp.data;
+        etfList = rsp.data.toJson().entries.map((e) => Stock.fromJson(e.value)).toList();
         debugPrint("loadMarketIndex getStockMarketIndexMume success == ${rsp.response.statusCode}");
       })
       .then((_) => emit(ReBuildPage()))

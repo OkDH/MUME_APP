@@ -20,14 +20,14 @@ class TextStyleHelper {
   }
 
   // 값 출력 텍스트
-  static TextStyle getValueTextStyle({dynamic value}){
+  static TextStyle getValueTextStyle({dynamic value, double fontSize = Sizes.textDefault}){
     if(value != null){
       if(value >= 0)
-        return const TextStyle(fontSize: Sizes.textDefault, fontWeight: FontWeight.w600, color: Colors.red);
+        return TextStyle(fontSize: fontSize, fontWeight: FontWeight.w600, color: Colors.red);
       else 
-         return const TextStyle(fontSize: Sizes.textDefault, fontWeight: FontWeight.w600, color: Colors.blue);
+         return TextStyle(fontSize: fontSize, fontWeight: FontWeight.w600, color: Colors.blue);
     }
 
-    return const TextStyle(fontSize: Sizes.textDefault, fontWeight: FontWeight.w600);
+    return TextStyle(fontSize: fontSize, fontWeight: FontWeight.w600);
   }
 }
