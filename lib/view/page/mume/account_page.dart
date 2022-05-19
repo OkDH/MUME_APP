@@ -12,6 +12,7 @@ import 'package:badges/badges.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
+import 'package:mume/view/component/stock_item.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -161,179 +162,179 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
         return false;
       },
       child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: bloc.stockList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Card(
-              shape: RoundedRectangleBorder(
-                side: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(Sizes.circular),
-              ),
-              elevation: 0.0,
-              margin: const EdgeInsets.fromLTRB(0, Sizes.paddingDefault, 0, 8),
-              child: InkWell(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (BuildContext context){
-                        return InfiniteDetailPage(infiniteDetail: bloc.stockList[index], accountName: bloc.accountNames[bloc.stockList[index].accountId]);
-                      }
-                  ));
-                },
-                child: Container(
-                  padding: const EdgeInsets.all(Sizes.paddingDefault),
-                  child : Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        shrinkWrap: true,
+        itemCount: bloc.stockList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+            shape: RoundedRectangleBorder(
+              side: const BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(Sizes.circular),
+            ),
+            elevation: 0.0,
+            margin: const EdgeInsets.fromLTRB(0, Sizes.paddingDefault, 0, 8),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (BuildContext context){
+                      return InfiniteDetailPage(infiniteDetail: bloc.stockList[index], accountName: bloc.accountNames[bloc.stockList[index].accountId]);
+                    }
+                ));
+              },
+              child: Container(
+                padding: const EdgeInsets.all(Sizes.paddingDefault),
+                child : Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(right: 5),
+                          child: Row(
+                            children: [
+                              Container(
+                                margin: const EdgeInsets.only(right: 5),
+                                child: Text(bloc.stockList[index].symbol, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                              ),
+                              Container(
+                                child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
+                              ),
+                              if(bloc.stockList[index]!.infiniteType! == "TLP")
+                                Container(
+                                  child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
+                                ),
+                              Container(
+                                child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          child: Badge(
+                            toAnimate: false,
+                            shape: BadgeShape.square,
+                            elevation: 0,
+                            badgeColor: (bloc.stockList[index]!.infiniteState! == "진행중" ? Colors.blue[700]! :
+                            bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
+                            bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
+                            ),
+                            padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                            borderRadius: BorderRadius.circular(12),
+                            badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(Sizes.paddingSideRatio),
+                      child: Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(right: 5),
-                            child: Row(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(right: 5),
-                                  child: Text(bloc.stockList[index].symbol, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
-                                ),
-                                Container(
-                                  child: Text(bloc.accountNames[bloc.stockList[index].accountId]!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
-                                ),
-                                if(bloc.stockList[index]!.infiniteType! == "TLP")
-                                  Container(
-                                    child: Text(" | " + bloc.stockList[index]!.infiniteType!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
-                                  ),
-                                Container(
-                                  child: Text(" | " + bloc.stockList[index]!.infiniteVersion!, style: const TextStyle(fontSize: 10, color: Colors.black54)),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Badge(
-                              toAnimate: false,
-                              shape: BadgeShape.square,
-                              elevation: 0,
-                              badgeColor: (bloc.stockList[index]!.infiniteState! == "진행중" ? Colors.blue[700]! :
-                              bloc.stockList[index]!.infiniteState! == "매도완료" ? Colors.green :
-                              bloc.stockList[index]!.infiniteState! == "매도중지" ? Colors.orange : Colors.red
+                            margin: const EdgeInsets.only(right: 20),
+                            child : CircularStepProgressIndicator(
+                              child: Container(
+                                alignment: Alignment.center, 
+                                child: Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: const TextStyle(fontWeight: FontWeight.bold),),
                               ),
-                              padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-                              borderRadius: BorderRadius.circular(12),
-                              badgeContent: Text(bloc.stockList[index]!.infiniteState!, style: TextStyle(fontSize: 12, color: Colors.white)),
+                              totalSteps: 100,
+                              currentStep: bloc.stockList[index]!.progressPer!.round(),
+                              stepSize: 10,
+                              selectedColor: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
+                                bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : MyColor.primary,
+                              unselectedColor: Colors.grey[200],
+                              padding: 0,
+                              width: 120,
+                              height: 120,
+                              selectedStepSize: 12,
+                              roundedCap: (_, __) => true,
                             ),
                           ),
+                          Expanded(
+                            child: Column(
+                              children : [
+                                Container(
+                                  child: Row(children: [
+                                    Expanded(
+                                        flex: 5,
+                                        child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
+                                    ),
+                                    Expanded(
+                                        flex: 5,
+                                        child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
+                                    ),
+                                  ]),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(bottom: 10),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text(PrintFormatHelper.comma(bloc.stockList[index]!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
+                                      ),
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
+                                      ),
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
+                                      ),
+                                      Expanded(
+                                          flex: 5,
+                                          child: Text(PrintFormatHelper.appendPulMa(bloc.stockList[index]!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.income!))
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 5,
+                                        child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.stockDetail!.chgp!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
+                                      ),
+                                      Expanded(
+                                        flex: 5,
+                                        child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.incomePer!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.incomePer!))
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]
+                            ),
+                          )
                         ],
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(Sizes.paddingSideRatio),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(right: 20),
-                              child : CircularStepProgressIndicator(
-                                child: Container(
-                                  alignment: Alignment.center, 
-                                  child: Text(bloc.stockList[index]!.progressPer!.toStringAsFixed(2) + "%", style: const TextStyle(fontWeight: FontWeight.bold),),
-                                ),
-                                totalSteps: 100,
-                                currentStep: bloc.stockList[index]!.progressPer!.round(),
-                                stepSize: 10,
-                                selectedColor: (bloc.stockList[index]!.infiniteState! == "원금소진" || bloc.stockList[index]!.progressPer! >= 100) ? Colors.red :
-                                  bloc.stockList[index]!.progressPer! >= 50 ? Colors.orange : MyColor.primary,
-                                unselectedColor: Colors.grey[200],
-                                padding: 0,
-                                width: 120,
-                                height: 120,
-                                selectedStepSize: 12,
-                                roundedCap: (_, __) => true,
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                children : [
-                                  Container(
-                                    child: Row(children: [
-                                      Expanded(
-                                          flex: 5,
-                                          child: Text("보유수", style: TextStyleHelper.getSubTitleTextStyle())
-                                      ),
-                                      Expanded(
-                                          flex: 5,
-                                          child: Text("평단가", style: TextStyleHelper.getSubTitleTextStyle())
-                                      ),
-                                    ]),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(bottom: 10),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text(PrintFormatHelper.comma(bloc.stockList[index]!.holdingQuantity!), style: TextStyleHelper.getValueTextStyle())
-                                        ),
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.averagePrice!, decimal: 2), style: TextStyleHelper.getValueTextStyle())
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("현재가", style: TextStyleHelper.getSubTitleTextStyle())
-                                        ),
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("평가손익", style: TextStyleHelper.getSubTitleTextStyle())
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.only(bottom: 5),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text("\$" + PrintFormatHelper.comma(bloc.stockList[index]!.stockDetail!.priceClose!, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
-                                        ),
-                                        Expanded(
-                                            flex: 5,
-                                            child: Text(PrintFormatHelper.appendPulMa(bloc.stockList[index]!.income!, decimal: 2) + "\$", style: TextStyleHelper.getValueTextStyle(value: bloc.stockList[index]!.income!))
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 5,
-                                          child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.stockDetail!.chgp!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.stockDetail!.chgp!))
-                                        ),
-                                        Expanded(
-                                          flex: 5,
-                                          child: Text("(" + PrintFormatHelper.appendPulMa(bloc.stockList[index]!.incomePer!, decimal: 2) + "%)", style: TextStyleHelper.getSubTitleTextStyle(value: bloc.stockList[index]!.incomePer!))
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ]
-                              ),
-                            )
-                          ],
-                        )
-                      ),
-                    ],
-                  ),
-                )
+                      )
+                    ),
+                  ],
+                ),
               )
-            );
-          }
+            )
+          );
+        }
       ),
     );
   }
@@ -493,7 +494,6 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                           )
                         ],
                       )
-
                     ],
                   ),
                 ),
@@ -504,40 +504,84 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
     );
   }
 
+bool _showSecond = false;
   // 추가 종목 리스트 bottom sheet
   void showStocksBottomSheet(BuildContext context){
 
     bloc.getEtfList();
 
+    _showSecond = false;
+
     showModalBottomSheet<void>(
         context: context,
         isScrollControlled: true,
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25.0),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
         ),
         builder: (BuildContext context){
-          return SizedBox(
-              height: 800,
-              child: Center(
-                  child: Column(
-                      children: <Widget>[
-                        const Text("종목 선택", style: TextStyle(fontSize: 20)),
-                        ListView(
-                          padding: const EdgeInsets.all(8),
-                          shrinkWrap: true,
+          return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+              return AnimatedContainer(
+                padding: const EdgeInsets.all(Sizes.paddingBody),
+                duration: const Duration(milliseconds: 400),
+                child: AnimatedCrossFade(
+                  duration: const Duration(milliseconds: 400),
+                  crossFadeState: _showSecond
+                          ? CrossFadeState.showSecond
+                          : CrossFadeState.showFirst,
+                  firstChild: Container(
+                    height: MediaQuery.of(context).size.height - 100,
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(bottom: Sizes.paddingDefault),
+                          child: const Text("종목 선택", style: TextStyle(fontSize: Sizes.textLarge, fontWeight: FontWeight.bold)),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: bloc.etfList.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                margin: const EdgeInsets.only(bottom: Sizes.paddingDefault),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(Sizes.circularSmall),
+                                ),
+                                elevation: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    setState(() => _showSecond = true);
+                                  },
+                                  child: StockItem(bloc.etfList[index]),
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      ]
+                    ),
+                  ),
+                  secondChild: Container(
+                    height: MediaQuery.of(context).size.height - 200,
+                    child: Column(
+                      children: [
+                        Row(
                           children: [
-                            Card(
-                                child: ListTile(
-                                  title:Text("TQQQ") ,
-                                )
+                            Container(
+                              child: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => setState(() => _showSecond = false),),
+                            ),
+                            Container(
+                              child: const Text("종목 추가", style: TextStyle(fontSize: Sizes.textLarge, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
                             ),
                           ],
                         ),
+                        
                       ]
-                  )
-              )
+                    ),
+                  ),
+                ),
+              );
+            },
           );
         }
     );
@@ -555,7 +599,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
         ),
         builder: (BuildContext context){
           return SizedBox(
-              height: 500,
+              height: 200,
               child: Center(
                   child: Column(
                       children: <Widget>[

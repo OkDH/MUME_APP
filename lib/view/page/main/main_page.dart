@@ -9,9 +9,8 @@ import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
 import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
-import 'package:mume/model/dto/market_index.dart';
+import 'package:mume/view/component/stock_item.dart';
 import 'package:mume/model/dto/stock.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 
 class MainPage extends StatefulWidget {
@@ -160,6 +159,7 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
                       return false;
                     },
                     child : ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: bloc.etfList.length,
                       itemBuilder: (context, index) {
@@ -169,102 +169,7 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
                             borderRadius: BorderRadius.circular(Sizes.circularSmall),
                           ),
                           elevation: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(Sizes.paddingDefault),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      margin: const EdgeInsets.only(right: Sizes.paddingDefault),
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: SfRadialGauge(
-                                          axes: <RadialAxis>[
-                                            RadialAxis(
-                                              minimum: 0,
-                                              maximum: 100,
-                                              showLabels: false,
-                                              showTicks: false,
-                                              axisLineStyle: const AxisLineStyle(
-                                                thickness: 0.2,
-                                                cornerStyle: CornerStyle.bothCurve,
-                                                color: Colors.black12,
-                                                thicknessUnit: GaugeSizeUnit.factor,
-                                              ),
-                                              pointers: <GaugePointer>[
-                                                RangePointer(
-                                                  enableAnimation: true,
-                                                  value: bloc.etfList[index].rsi!,
-                                                  cornerStyle: CornerStyle.bothCurve,
-                                                  width: 0.2,
-                                                  sizeUnit: GaugeSizeUnit.factor,
-                                                  color: bloc.etfList[index].gapRsi! >= 0 ? Colors.red : bloc.etfList[index].gapRsi! > -5 ? Colors.orange : MyColor.primary
-                                                ),
-                                                MarkerPointer(
-                                                  enableAnimation: true,
-                                                  value: bloc.etfList[index].baseRsi!,
-                                                  markerType: MarkerType.invertedTriangle,
-                                                  color: bloc.etfList[index].gapRsi! >= 0 ? Colors.red : bloc.etfList[index].gapRsi! > -5 ? Colors.orange : MyColor.primary,
-                                                  markerWidth: 8,
-                                                  markerHeight: 8,
-                                                  markerOffset: -7,
-                                                )
-                                              ],
-                                              annotations: <GaugeAnnotation>[
-                                                GaugeAnnotation(
-                                                  positionFactor: 0.1,
-                                                  angle: 90,
-                                                  widget: Text(bloc.etfList[index].rsi!.toStringAsFixed(2), style: const TextStyle(fontSize: Sizes.textSmall, fontWeight: FontWeight.bold),)
-                                                )
-                                              ]
-                                            )
-                                          ]
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: Text(bloc.etfList[index].symbol!, style: TextStyle(fontSize: Sizes.textMiddle),)
-                                          ),
-                                          Container(
-                                            child: Text(bloc.etfList[index].sectorName!, style: TextStyle(fontSize: Sizes.textSmall, color: Colors.black54),)
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        child: Text("\$" + PrintFormatHelper.comma(bloc.etfList[index].priceClose, decimal: 2), style: TextStyle(fontSize: Sizes.textMiddle),),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            margin: const EdgeInsets.only(right: 2),
-                                            child: Text(PrintFormatHelper.appendUpDown(bloc.etfList[index].chg, decimal: 2), style: TextStyleHelper.getValueTextStyle(value: bloc.etfList[index].chg, fontSize: Sizes.textSmall),),
-                                          ),
-                                          Container(
-                                            child: Text("(" + PrintFormatHelper.appendPulMa(bloc.etfList[index].chgp, decimal: 2) + "%)", style: TextStyleHelper.getValueTextStyle(value: bloc.etfList[index].chgp, fontSize: Sizes.textSmall),)
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                          ,
+                          child: StockItem(bloc.etfList[index]),
                         );
                       },
                     ),

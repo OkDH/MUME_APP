@@ -8,6 +8,7 @@ import 'package:mume/viewmodel/login_page_bloc.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/model/repository/mume/account_repository.dart';
 import 'package:mume/model/repository/mume/stock_repository.dart';
+import 'package:mume/model/dto/stock.dart';
 
 class AccountPageBloc extends LoginBloc<Object> {
 
@@ -23,7 +24,8 @@ class AccountPageBloc extends LoginBloc<Object> {
   ) : super(loginRepository);
 
   // ETF 리스트
-  MumeStockMarketIndex mumeStockIndex = MumeStockMarketIndex();
+  late MumeStockMarketIndex mumeStockMarketIndex = MumeStockMarketIndex();
+  List<Stock> etfList = List.empty(growable: true);
 
   // 내 계좌 리스트
   List accountList = List.empty(growable: true);
@@ -154,7 +156,11 @@ class AccountPageBloc extends LoginBloc<Object> {
   // 무한매수 ETF 리스트 가져오기
   void getEtfList(){
     _marketIndexRepository.getMumeStockMarketIndex()
-      .then((value) => mumeStockIndex = value.data)
+      .then((value) {
+        mumeStockMarketIndex = value.data;
+        etfList = value.data.toJson().entries.map((e) => Stock.fromJson(e.value)).toList();
+        etfList.sort((a, b) => a.gapRsi!.compareTo(b.gapRsi!));
+      })
       .then((_) => emit(ReBuildPage()))
       .catchError((e) {
         debugPrint("getEtfList error == $e");
