@@ -59,6 +59,7 @@ class MainPageBloc extends LoginBloc<Object>{
       .then((rsp) {
         mumeStockMarketIndex = rsp.data;
         etfList = rsp.data.toJson().entries.map((e) => Stock.fromJson(e.value)).toList();
+        etfList.sort((a, b) => a.gapRsi!.compareTo(b.gapRsi!));
         debugPrint("loadMarketIndex getStockMarketIndexMume success == ${rsp.response.statusCode}");
       })
       .then((_) => emit(ReBuildPage()))
