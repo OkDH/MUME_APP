@@ -2,23 +2,24 @@ import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:mume/model/dto/market_index.dart';
-import 'package:mume/model/repository/login_repository.dart';
+import 'package:mume/model/dto/stock.dart';
+import 'package:mume/model/dto/mume/account.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/login_page_bloc.dart';
+import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/model/repository/mume/account_repository.dart';
-import 'package:mume/model/repository/mume/stock_repository.dart';
-import 'package:mume/model/dto/stock.dart';
+import 'package:mume/model/repository/mume/infinite_repository.dart';
 
 class AccountPageBloc extends LoginBloc<Object> {
 
   final AccountRepository _accountRepository;
-  final StockRepository _stockRepository;
+  final InfiniteRepository _infiniteRepository;
   final MarketIndexRepository _marketIndexRepository;
 
   AccountPageBloc(
     this._accountRepository,
-    this._stockRepository,
+    this._infiniteRepository,
     this._marketIndexRepository,
     LoginRepository loginRepository,
   ) : super(loginRepository);
@@ -28,7 +29,7 @@ class AccountPageBloc extends LoginBloc<Object> {
   List<Stock> etfList = List.empty(growable: true);
 
   // 내 계좌 리스트
-  List accountList = List.empty(growable: true);
+  List<Account> accountList = List.empty(growable: true);
   Map<int, String> accountNames = {};
 
   // 계좌 현황
@@ -77,6 +78,7 @@ class AccountPageBloc extends LoginBloc<Object> {
   onInitState() {
     getMyAccountList();
     getStocks(0);
+    getEtfList();
   }
 
   @override
@@ -95,7 +97,7 @@ class AccountPageBloc extends LoginBloc<Object> {
         .then((value) {
           accountList = value.data;
           accountList.forEach((e) {
-            accountNames[e.accountId] = e.accountAlias;
+            accountNames[e.accountId!] = e.accountAlias!;
           });
         })
         .then((_) => emit(ReBuildPage()))
@@ -136,13 +138,13 @@ class AccountPageBloc extends LoginBloc<Object> {
     filter["infiniteVersion"].forEach((v) => v["value"] ? query["infiniteVersion"].add(v["name"]) : "");
 
     // 정렬
-		// query["orderBy"] = filter["order"]["value"];/
+		query["orderBy"] = filter["order"]["value"];
     filter["orderValue"].forEach((v) => v["value"] ? query["orderBy"] = v["orderQuery"] : "");
 
     debugPrint("getStocks query == $query");
 
     // 조회
-    _stockRepository
+    _infiniteRepository
         .getStocks(query)
         .then((value) => stockList = value.data)
         .then((_) => emit(ReBuildPage()))

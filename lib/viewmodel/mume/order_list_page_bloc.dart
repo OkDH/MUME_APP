@@ -1,10 +1,10 @@
 import 'package:mume/main.dart';
 import 'package:mume/model/dto/mume/infinite_detail.dart';
-import 'package:mume/model/repository/mume/stock_repository.dart';
+import 'package:mume/model/repository/mume/infinite_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 
 class OrderListPageBloc extends BaseBloc<Object>{
-  final StockRepository _stockRepository;
+  final InfiniteRepository _infiniteRepository;
 
   // 계좌 내 종목 검색 쿼리
   Map<String, dynamic> query = {
@@ -17,7 +17,7 @@ class OrderListPageBloc extends BaseBloc<Object>{
     "limit": 8
   };
 
-  OrderListPageBloc(this._stockRepository);
+  OrderListPageBloc(this._infiniteRepository);
 
   // 계좌 내 종목 리스트
   List<InfiniteDetail> stockList = List.empty(growable: true);
@@ -26,7 +26,7 @@ class OrderListPageBloc extends BaseBloc<Object>{
   onInitState() {
 
     // 조회
-    _stockRepository
+    _infiniteRepository
         .getStocks(query)
         .then((value) => stockList = value.data)
         .then((_) => emit(ReBuildPage()))

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mume/model/repository/mume/account_repository.dart';
-import 'package:mume/model/repository/mume/stock_repository.dart';
+import 'package:mume/model/repository/mume/infinite_repository.dart';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/model/repository/splash_repository.dart';
@@ -21,6 +21,7 @@ import 'package:mume/viewmodel/login_page_bloc.dart';
 import 'package:mume/viewmodel/main/main_page_bloc.dart';
 import 'package:mume/viewmodel/more/more_page_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
+import 'package:mume/viewmodel/mume/infinite_modify_page_bloc.dart';
 import 'package:mume/viewmodel/mume/dash_board_page_bloc.dart';
 import 'package:mume/viewmodel/mume/income_page_bloc.dart';
 import 'package:mume/viewmodel/mume/mume_page_bloc.dart';
@@ -60,8 +61,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ///Mume sub page
         BlocProvider(create: (BuildContext context) => DashBoardPageBloc(),),
-        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), StockRepository(), MarketIndexRepository(), loginRepo),),
-        BlocProvider(create: (BuildContext context) => OrderListPageBloc(StockRepository()),),
+        BlocProvider(create: (BuildContext context) => AccountPageBloc(AccountRepository(), InfiniteRepository(), MarketIndexRepository(), loginRepo),),
+        BlocProvider(create: (BuildContext context) => InfiniteModifyPageBloc(InfiniteRepository(), MarketIndexRepository(), loginRepo),),
+        BlocProvider(create: (BuildContext context) => OrderListPageBloc(InfiniteRepository()),),
         BlocProvider(create: (BuildContext context) => IncomePageBloc(),),
 
         ///home bottomSheet
@@ -79,32 +81,38 @@ class MyApp extends StatelessWidget {
           context.read<MorePageBloc>(),
         ),),
       ],
-      child: MaterialApp(
-        theme: ThemeData(
-          scaffoldBackgroundColor: MyColor.background,
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(fixedSize: const Size.fromHeight(Sizes.btnHeight)),
-          ),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: MyColor.textColor),
-            actionsIconTheme: IconThemeData(color: MyColor.textColor),
-            centerTitle: false,
-            elevation: 0.0,
-            titleTextStyle: TextStyle(color: MyColor.textColor, fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          textTheme: const TextTheme(
-            bodyText2: TextStyle(color: MyColor.textColor),
-          )
-        ),
-        debugShowCheckedModeBanner: false,
-        home: const SplashPage(),
-        routes: {
-          SplashPage.routeName: (context) => const SplashPage(),
-          LoginPage.routeName: (context) => const LoginPage(),
-          HomePage.routeName: (context) => const HomePage(),
+      child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
         },
-      ),
+        child: MaterialApp(
+          theme: ThemeData(
+            scaffoldBackgroundColor: MyColor.background,
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(fixedSize: const Size.fromHeight(Sizes.btnHeight)),
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+              iconTheme: IconThemeData(color: MyColor.textColor),
+              actionsIconTheme: IconThemeData(color: MyColor.textColor),
+              centerTitle: false,
+              elevation: 0.0,
+              titleTextStyle: TextStyle(color: MyColor.textColor, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            textTheme: const TextTheme(
+              bodyText2: TextStyle(color: MyColor.textColor),
+            )
+          ),
+          debugShowCheckedModeBanner: false,
+          home: const SplashPage(),
+          routes: {
+            SplashPage.routeName: (context) => const SplashPage(),
+            LoginPage.routeName: (context) => const LoginPage(),
+            HomePage.routeName: (context) => const HomePage(),
+          },
+        ),
+      )
+      
     );
   }
 }

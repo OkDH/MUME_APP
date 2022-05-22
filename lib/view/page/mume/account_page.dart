@@ -1,11 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mume/model/dto/mume/account.dart';
 import 'package:mume/view/page/base_page.dart';
 import 'package:mume/view/page/mume/infinite_detail_page.dart';
+import 'package:mume/view/page/mume/infinite_modify_page.dart';
 import 'package:mume/view/resource/strings.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
 import 'package:mume/viewmodel/mume/account_page_bloc.dart';
-import 'package:mume/model/dto/mume/state_map.dart';
 import 'package:mume/view/resource/color.dart';
 import 'package:mume/view/resource/sizes.dart';
 import 'package:badges/badges.dart';
@@ -56,7 +56,16 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                       child: Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {showStocksBottomSheet(context);},
+                              onPressed: () {
+                                // 종목 추가 페이지 이동
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    fullscreenDialog: true,
+                                    builder: (BuildContext context){
+                                      return InfiniteModifyPage(selectedAccountId: bloc.query["accountId"], accountList: bloc.accountList,);
+                                    }
+                                ));
+                                // showStocksBottomSheet(context);
+                              },
                               child: const Icon(Icons.add),
                               style: ElevatedButton.styleFrom(
                                 primary: MyColor.primary,
@@ -174,6 +183,7 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
             margin: const EdgeInsets.fromLTRB(0, Sizes.paddingDefault, 0, 8),
             child: InkWell(
               onTap: () {
+                // 상세페이지 이동
                 Navigator.of(context).push(MaterialPageRoute(
                     fullscreenDialog: true,
                     builder: (BuildContext context){
@@ -345,9 +355,9 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
 
     // 계좌 리스트
     List<DropdownMenuItem<String>> accountItemList = bloc.accountList.map(
-            (value) {
-          return DropdownMenuItem<String>(value: value.accountId.toString(), child: Text(value.accountAlias));
-        }
+      (value) {
+        return DropdownMenuItem<String>(value: value.accountId.toString(), child: Text(value.accountAlias!));
+      }
     ).toList();
     accountItemList.insert(0, DropdownMenuItem<String>(value: "ALL", child: Text("전체"))); // 전체 추가
 
@@ -383,64 +393,64 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                       const Text("검색 조건", style: TextStyle(fontSize: 20)),
                       const Text("계좌", style: TextStyle(fontSize: 16)),
                       DropdownButton(
-                          value: selectedAccount,
-                          items: accountItemList,
-                          onChanged: (value){
-                            setState(() {
-                              selectedAccount = value.toString();
-                            });
-                          }
+                        value: selectedAccount,
+                        items: accountItemList,
+                        onChanged: (value){
+                          setState(() {
+                            selectedAccount = value.toString();
+                          });
+                        }
                       ),
                       const Text("진행상태", style: TextStyle(fontSize: 16)),
                       ToggleButtons(
-                          children: List.generate(bloc.filter["infiniteState"].length,
-                                  (index) {
-                                return Padding(
-                                    padding: EdgeInsets.all(2),
-                                    child: Text(bloc.filter["infiniteState"][index]["name"])
-                                );
-                              }
-                          ),
-                          onPressed: (int index) {
-                            setState(() {
-                              isInfiniteState[index] = !isInfiniteState[index];
-                            });
-                          },
-                          isSelected: isInfiniteState
+                        children: List.generate(bloc.filter["infiniteState"].length,
+                          (index) {
+                            return Padding(
+                                padding: EdgeInsets.all(2),
+                                child: Text(bloc.filter["infiniteState"][index]["name"])
+                            );
+                          }
+                        ),
+                        onPressed: (int index) {
+                          setState(() {
+                            isInfiniteState[index] = !isInfiniteState[index];
+                          });
+                        },
+                        isSelected: isInfiniteState
                       ),
                       const Text("타입", style: TextStyle(fontSize: 16)),
                       ToggleButtons(
-                          children: List.generate(bloc.filter["infiniteType"].length,
-                                  (index) {
-                                return Padding(
-                                    padding: EdgeInsets.all(2),
-                                    child: Text(bloc.filter["infiniteType"][index]["name"])
-                                );
-                              }
-                          ),
-                          onPressed: (int index) {
-                            setState(() {
-                              isInfiniteType[index] = !isInfiniteType[index];
-                            });
-                          },
-                          isSelected: isInfiniteType
+                        children: List.generate(bloc.filter["infiniteType"].length,
+                          (index) {
+                            return Padding(
+                                padding: EdgeInsets.all(2),
+                                child: Text(bloc.filter["infiniteType"][index]["name"])
+                            );
+                          }
+                        ),
+                        onPressed: (int index) {
+                          setState(() {
+                            isInfiniteType[index] = !isInfiniteType[index];
+                          });
+                        },
+                        isSelected: isInfiniteType
                       ),
                       const Text("버전", style: TextStyle(fontSize: 16)),
                       ToggleButtons(
-                          children: List.generate(bloc.filter["infiniteVersion"].length,
-                                  (index) {
-                                return Padding(
-                                    padding: EdgeInsets.all(2),
-                                    child: Text(bloc.filter["infiniteVersion"][index]["name"])
-                                );
-                              }
-                          ),
-                          onPressed: (int index) {
-                            setState(() {
-                              isInfiniteVersion[index] = !isInfiniteVersion[index];
-                            });
-                          },
-                          isSelected: isInfiniteVersion
+                        children: List.generate(bloc.filter["infiniteVersion"].length,
+                                (index) {
+                              return Padding(
+                                  padding: EdgeInsets.all(2),
+                                  child: Text(bloc.filter["infiniteVersion"][index]["name"])
+                              );
+                            }
+                        ),
+                        onPressed: (int index) {
+                          setState(() {
+                            isInfiniteVersion[index] = !isInfiniteVersion[index];
+                          });
+                        },
+                        isSelected: isInfiniteVersion
                       ),
                       const Text("정렬", style: TextStyle(fontSize: 16)),
                       ToggleButtons(
@@ -504,13 +514,30 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
     );
   }
 
-bool _showSecond = false;
-  // 추가 종목 리스트 bottom sheet
+  // 종목 추가 바텀 시트 관련 변수
+  bool _isShowSecond = false;
+  String addSelectedSymbol = "";
+  int addSelectedAccount = 0;
+
+  // 종목 추가 bottom sheet
   void showStocksBottomSheet(BuildContext context){
 
     bloc.getEtfList();
 
-    _showSecond = false;
+    _isShowSecond = false;
+    addSelectedSymbol = "";
+
+    // 현재 활성화 된 계좌 ID가 ALL이라면 첫번째 계좌
+    if(bloc.query["accountId"] == "ALL") {
+      addSelectedAccount = 0;
+    } else { // 아니라면 해당 계좌의 index값 찾기
+      for(int i = 0; i < bloc.accountList.length; i++){
+        if(bloc.accountList[i].accountId.toString() == bloc.query["accountId"]){
+          addSelectedAccount = i;
+          break;
+        }
+      }
+    }
 
     showModalBottomSheet<void>(
         context: context,
@@ -522,11 +549,11 @@ bool _showSecond = false;
           return StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {
               return AnimatedContainer(
-                padding: const EdgeInsets.all(Sizes.paddingBody),
+                padding: const EdgeInsets.all(Sizes.paddingDefault),
                 duration: const Duration(milliseconds: 400),
                 child: AnimatedCrossFade(
                   duration: const Duration(milliseconds: 400),
-                  crossFadeState: _showSecond
+                  crossFadeState: _isShowSecond
                           ? CrossFadeState.showSecond
                           : CrossFadeState.showFirst,
                   firstChild: Container(
@@ -550,7 +577,10 @@ bool _showSecond = false;
                                 elevation: 0,
                                 child: InkWell(
                                   onTap: () {
-                                    setState(() => _showSecond = true);
+                                    setState(() { 
+                                      _isShowSecond = true; 
+                                      addSelectedSymbol = bloc.etfList[index].symbol!;
+                                    });
                                   },
                                   child: StockItem(bloc.etfList[index]),
                                 ),
@@ -568,14 +598,105 @@ bool _showSecond = false;
                         Row(
                           children: [
                             Container(
-                              child: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => setState(() => _showSecond = false),),
+                              child: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => setState(() => _isShowSecond = false),),
                             ),
                             Container(
-                              child: const Text("종목 추가", style: TextStyle(fontSize: Sizes.textLarge, fontWeight: FontWeight.bold), textAlign: TextAlign.center),
+                              child: Text(addSelectedSymbol + " 추가", style: const TextStyle(fontSize: Sizes.textLarge, fontWeight: FontWeight.bold)),
                             ),
                           ],
                         ),
-                        
+                        Container(
+                          margin: const EdgeInsets.only(top: Sizes.paddingSideRatio),
+                          padding: const EdgeInsets.all(Sizes.paddingDefault),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(Sizes.circularSmall))
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text("계좌", style: TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.bold),),
+                                    CupertinoButton(
+                                      child: Text(bloc.accountList[addSelectedAccount].accountAlias!), 
+                                      onPressed: () async {
+                                        await showCupertinoModalPopup(
+                                          context: context,
+                                          builder: (context) => Column(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                decoration: const BoxDecoration(
+                                                  color: Color(0xffffffff),
+                                                  border: Border(
+                                                    bottom: BorderSide(
+                                                      color: Color(0xff999999),
+                                                      width: 0.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      child: Text('계좌', style: Theme.of(context).textTheme.bodyText2),
+                                                      padding: const EdgeInsets.symmetric(
+                                                        horizontal: 16.0,
+                                                        vertical: 5.0,
+                                                      ),
+                                                    ),
+                                                    CupertinoButton(
+                                                      child: const Text('확인'),
+                                                      onPressed: () {Navigator.of(context).pop();},
+                                                      padding: const EdgeInsets.symmetric(
+                                                        horizontal: 16.0,
+                                                        vertical: 5.0,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 200,
+                                                child: CupertinoPicker(
+                                                  backgroundColor: Colors.white,
+                                                  itemExtent: 30,
+                                                  scrollController: FixedExtentScrollController(initialItem: addSelectedAccount),
+                                                  onSelectedItemChanged: (int index){
+                                                    setState(() { addSelectedAccount = index; });
+                                                  },
+                                                  children: bloc.accountList.map((e) => Text(e.accountAlias!)).toList(),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        );
+                                      }
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(width: 1),
+                                        borderRadius: const BorderRadius.all(Radius.circular(Sizes.circular))
+                                      ),
+                                      child: Text("날짜"),
+                                    ),
+                                    Container(),
+                                    Container(),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ]
                     ),
                   ),
@@ -585,37 +706,6 @@ bool _showSecond = false;
           );
         }
     );
-  }
-
-  // 추가 bottom sheet
-  void showAddBottomSheet(BuildContext context){
-    showModalBottomSheet<void>(
-        context: context,
-        isScrollControlled: true,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(25.0),
-          ),
-        ),
-        builder: (BuildContext context){
-          return SizedBox(
-              height: 200,
-              child: Center(
-                  child: Column(
-                      children: <Widget>[
-                        const Text("종목 추가", style: TextStyle(fontSize: 20)),
-                        // 계좌
-                        // 무한매수/TLP, 버전,
-                        // 배정원금, 원금분할,
-                        // 평단가, 수량,
-                        // 매수시작일, 자동기록 여부
-                      ]
-                  )
-              )
-          );
-        }
-    );
-
   }
 
   @override

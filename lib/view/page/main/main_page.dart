@@ -30,22 +30,23 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(Sizes.paddingBody),
               decoration: const BoxDecoration(
                 color: MyColor.primary,
               ),
               child: Column(
                 children: [
                   Container(
+                    padding: const EdgeInsets.all(Sizes.paddingBody),
                     child: const Text("MUME", style: TextStyle(fontSize: Sizes.textLarge, color: Colors.white, fontWeight: FontWeight.bold),),
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: Sizes.paddingDefault),
+                    margin: const EdgeInsets.only(bottom: 30),
                     height: 100,
                     child: ListView(
                       // shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: [
+                        const Padding(padding: EdgeInsets.only(left: Sizes.paddingBody)),
                         _getMarketIndexCard(
                           name: "다우산업",
                           stock: bloc.marketIndex.dji, 

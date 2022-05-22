@@ -8,10 +8,10 @@ import 'package:mume/view/resource/sizes.dart';
 import 'package:draggable_home/draggable_home.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-
 class InfiniteDetailPage extends StatefulWidget {
 
   final InfiniteDetail? infiniteDetail;
+  //계좌명 출력용 변수
   final String? accountName;
 
   InfiniteDetailPage({this.infiniteDetail, this.accountName});

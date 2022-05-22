@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'dart:collection';
 import 'package:mume/model/repository/login_repository.dart';
 import 'package:mume/model/repository/market_index_repository.dart';
 import 'package:mume/viewmodel/base_bloc.dart';
@@ -10,7 +9,9 @@ import 'package:mume/model/dto/stock.dart';
 class MainPageBloc extends LoginBloc<Object>{
   final MarketIndexRepository _repository;
 
+  // 시장지수
   late MarketIndex marketIndex = MarketIndex();
+  // mume etf 리스트
   late MumeStockMarketIndex mumeStockMarketIndex = MumeStockMarketIndex();
   List<Stock> etfList = List.empty(growable: true);
 
