@@ -80,6 +80,9 @@ dependencies:
   # datepicker
   syncfusion_flutter_datepicker: ^19.3.43
 
+  # toast
+  fluttertoast: ^8.0.9
+
 
 
 dev_dependencies:

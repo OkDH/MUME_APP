@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mume/view/page/base_page.dart';
@@ -42,9 +44,17 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
   // 시작날짜
   String? _selectedStartDate = null;
   String _strStartDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
-  
+  // 시드
+  double? _seed = 0;
+  // 분할 수
+  int? _divisions = 40;
+  // 평단가
+  double? _unitPrice = 0;
+  // 수량
+  int _quantity = 0;
 
   final formKey = GlobalKey<FormState>();
+  InfiniteDetail infiniteDetail = new InfiniteDetail();
 
   @override
   Widget buildPage(BuildContext context, Size windowSize) {
@@ -171,8 +181,8 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                                             }
                                             return null;
                                           },
-                                          onEditingComplete: (){
-                                            print("Complete");
+                                          onChanged: (val){
+                                            _unitPrice = double.parse(val);
                                           },
                                         ),
                                       )
@@ -209,8 +219,8 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                                             }
                                             return null;
                                           },
-                                          onEditingComplete: (){
-                                            print("Complete");
+                                          onChanged: (val){
+                                            _quantity = int.parse(val);
                                           },
                                         ),
                                       )
@@ -318,8 +328,8 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                                             }
                                             return null;
                                           },
-                                          onEditingComplete: (){
-                                            print("Complete");
+                                          onChanged: (val){
+                                            _seed = double.parse(val);
                                           },
                                         ),
                                       )
@@ -356,8 +366,8 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                                             }
                                             return null;
                                           },
-                                          onEditingComplete: (){
-                                            print("Complete");
+                                          onChanged: (val){
+                                            _divisions = int.parse(val);
                                           },
                                         ),
                                       )
@@ -476,8 +486,34 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                         ),
                         onPressed: () async {
                           if(this.formKey.currentState!.validate()){
-                            // validation 이 성공하면 true 가 리턴돼요!
-                            debugPrint("추가하기");
+
+                            Map<String, dynamic> params = HashMap();
+                            
+                            // params.infiniteId; // TODO UPDATE
+                            params["accountId"] = widget.accountList![_selectedIndex].accountId;
+                            params["symbol"] = _selectedSymbol;
+                            params["startedDate"] = _strStartDate;
+                            params["seed"] = _seed;
+                            params["infiniteState"] = InfiniteState.ing.label; // TODO UPDATE
+                            params["infiniteType"] = InfiniteType.values[_selectedType].name;
+                            params["infiniteVersion"] = InfiniteVersion.values[_selectedVersion].label;
+                            params["divisions"] = _divisions;
+                            params["isAutoTrade"] = _isAutoTrade;
+                            params["unitPrice"] = _unitPrice;
+                            params["quantity"] = _quantity;
+                            //params.doneDate = ""; // TODO UPDATE
+
+                            // 서버에 요청
+                            await bloc.addStock(params);
+
+                            Navigator.pop(context);
+
+                            // import 'package:fluttertoast/fluttertoast.dart';
+                            // Fluttertoast.showToast(
+                            //     msg: "This is a Toast message",  // message
+                            //     toastLength: Toast.LENGTH_SHORT, // length
+                            //     gravity: ToastGravity.CENTER             // duration
+                            // );
                           }
                         },
                         child: const Text('추가', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -596,5 +632,4 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
       )
     );
   }
-  
 }

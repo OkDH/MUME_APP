@@ -194,7 +194,7 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
         // side: const BorderSide(color: Colors.white),
         borderRadius: BorderRadius.circular(Sizes.circularSmall),
       ),
-      margin: const EdgeInsets.only(right: Sizes.paddingSideRatio),
+      margin: const EdgeInsets.only(right: Sizes.paddingDefault),
       child: Container(
         width: 160,
         padding: const EdgeInsets.all(Sizes.paddingDefault),

@@ -60,7 +60,7 @@ class _InfiniteDetailState extends State<InfiniteDetailPage> with SingleTickerPr
       ],
       headerWidget: Container(
         margin: const EdgeInsets.only(top: kToolbarHeight),
-        padding: const EdgeInsets.fromLTRB(Sizes.paddingBody, 0, Sizes.paddingBody, 0),
+        padding: const EdgeInsets.fromLTRB(Sizes.paddingBody, Sizes.paddingDefault, Sizes.paddingBody, 0),
         child: Column(
           children: [
             Row(

@@ -54,4 +54,13 @@ class InfiniteModifyPageBloc extends LoginBloc<Object> {
       }
     );
   }
+
+  // 무한매수 종목 추가
+  Future addStock(Map<String, dynamic> params){
+    return _infiniteRepository.addStock(params)
+      .then((value) {
+        debugPrint(value.toString());
+      }
+    );
+  }
 }

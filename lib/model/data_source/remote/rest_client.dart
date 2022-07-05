@@ -48,6 +48,10 @@ abstract class RestClient {
   @POST("/infinite/stocks")
   Future<HttpResponse<List<InfiniteDetail>>> getStocks(@Body() Map<String, dynamic> params);
 
+  ///종목추가
+  @POST("/infinite/stock/add")
+  Future<HttpResponse<void>> addStock(@Body() Map<String, dynamic> params);
+
   // ----------------
 
 }
