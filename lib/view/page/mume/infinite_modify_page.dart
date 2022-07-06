@@ -80,7 +80,7 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pop(context, false);
           },
         ),
       ),
@@ -506,14 +506,8 @@ class _InfiniteModifyState extends BasePageState<String, InfiniteModifyPageBloc,
                             // 서버에 요청
                             await bloc.addStock(params);
 
-                            Navigator.pop(context);
-
-                            // import 'package:fluttertoast/fluttertoast.dart';
-                            // Fluttertoast.showToast(
-                            //     msg: "This is a Toast message",  // message
-                            //     toastLength: Toast.LENGTH_SHORT, // length
-                            //     gravity: ToastGravity.CENTER             // duration
-                            // );
+                            // true 리턴 시 account_page에서 받아서 다음 처리함.
+                            Navigator.pop(context, true);
                           }
                         },
                         child: const Text('추가', style: TextStyle(fontWeight: FontWeight.bold),),

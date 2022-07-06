@@ -13,6 +13,7 @@ import 'package:mume/helper/print_format_helper.dart';
 import 'package:mume/helper/text_style_helper.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:mume/view/component/stock_item.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -56,14 +57,26 @@ class _AccountPageState extends BasePageState<String, AccountPageBloc, AccountPa
                       child: Row(
                           children: [
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 // 종목 추가 페이지 이동
-                                Navigator.of(context).push(MaterialPageRoute(
+                                bool isAddResult = await Navigator.of(context).push(MaterialPageRoute(
                                     fullscreenDialog: true,
                                     builder: (BuildContext context){
                                       return InfiniteModifyPage(selectedAccountId: bloc.query["accountId"], accountList: bloc.accountList,);
                                     }
                                 ));
+
+                                debugPrint("isAddResult : " + isAddResult.toString());
+
+                                if(isAddResult == false){
+                                  bloc.getStocks(0); // 리스트 조회
+                                  Fluttertoast.showToast(
+                                    msg: "종목이 추가되었습니다.",  // message
+                                    toastLength: Toast.LENGTH_SHORT, // length
+                                    gravity: ToastGravity.BOTTOM             // duration
+                                  );
+                                }
+
                                 // showStocksBottomSheet(context);
                               },
                               child: const Icon(Icons.add),
