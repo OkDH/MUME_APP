@@ -150,7 +150,7 @@ class _MainPageState extends BasePageState<String, MainPageBloc, MainPage> {
                     children: [ 
                       const Text("무한매수 종목", style: TextStyle(fontSize: Sizes.textMiddle, fontWeight: FontWeight.w600,)),
                       if(bloc.etfList.isNotEmpty)
-                        Text("마지막 업테이트 : " + DateFormat("yyyy-MM-dd hh:mm").format(DateTime.parse(bloc.etfList[0].updateTime!)),
+                        Text("마지막 업데이트 : " + DateFormat("yyyy-MM-dd hh:mm").format(DateTime.parse(bloc.etfList[0].updateTime!)),
                           style: const TextStyle(fontSize: Sizes.textSmall, color: Colors.black54)),
                     ],
                   ),
